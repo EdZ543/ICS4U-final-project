@@ -1,23 +1,32 @@
-<mxfile host="app.diagrams.net" modified="2022-12-26T22:27:38.609Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="YjjVNAmr9wIHrKWJyzXy" version="20.7.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-12-26T22:48:57.504Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36" etag="MbFJyrfeF1NfFJ9BEd3o" version="20.7.4" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
     <mxGraphModel dx="2074" dy="846" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="b_qrke7oka-_pSYDX-qw-0" value="BirdSnake" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="180" y="180" width="120" height="60" as="geometry" />
+          <mxGeometry x="210" y="180" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b_qrke7oka-_pSYDX-qw-1" value="Portal" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="320" y="180" width="120" height="60" as="geometry" />
+          <mxGeometry x="470" y="290" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b_qrke7oka-_pSYDX-qw-2" value="Block" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="470" y="180" width="120" height="60" as="geometry" />
+          <mxGeometry x="370" y="180" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b_qrke7oka-_pSYDX-qw-4" value="Fruit" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="620" y="180" width="120" height="60" as="geometry" />
+          <mxGeometry x="620" y="290" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="b_qrke7oka-_pSYDX-qw-5" value="BirdSnakePiece" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="30" y="180" width="130" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="b_qrke7oka-_pSYDX-qw-13" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=default;fontSize=12;endArrow=open;startSize=14;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="b_qrke7oka-_pSYDX-qw-6" target="b_qrke7oka-_pSYDX-qw-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_qrke7oka-_pSYDX-qw-14" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=default;fontSize=12;endArrow=open;startSize=14;endSize=14;sourcePerimeterSpacing=8;targetPerimeterSpacing=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="b_qrke7oka-_pSYDX-qw-6" target="b_qrke7oka-_pSYDX-qw-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="b_qrke7oka-_pSYDX-qw-6" value="InteractiveObject" style="rounded=0;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="530" y="180" width="150" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
