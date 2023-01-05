@@ -17,7 +17,7 @@ public class WelcomeWorld extends World
     public WelcomeWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+        super(1100, 720, 1);
         
         titleLabel = new Label("BirdSnake!", 80);
         addObject(titleLabel, getWidth()/2, 100);
