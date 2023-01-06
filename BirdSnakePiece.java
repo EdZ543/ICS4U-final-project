@@ -6,14 +6,48 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BirdSnakePiece extends Actor
+public class BirdSnakePiece extends GridItem
 {
-    /**
-     * Act - do whatever the BirdSnakePiece wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public BirdSnakePiece(int cellX, int cellY) {
+        super(cellX, cellY);
+    }
     public void act()
     {
         // Add your action code here.
+    }
+    public void moveRight() {
+        
+    }
+    
+    public void moveLeft() {
+        
+    }
+    
+    public void moveUp() {
+        
+    }
+    
+    public void moveDown() {
+        
+    }
+    // sliding "animation" instead of pieces teleporting btwn cells
+    public void slideToTargetCell(int targetCellX, int targetCellY) {
+        
+    }
+    /**
+     * Compare this piece with an adjacent piece.
+     * Example:
+     * [n] = one piece
+     * 
+     * [D][C]
+     *    [B][A] 
+     *  A.directionFromPiece(B) --> "r"
+     *  B.directionFromPiece(A) --> "l"
+     *  B.directionFromPiece(C) --> "d"
+     *  
+     *  Useful method to (hopefully) determine the physics of how the pieces move
+     */
+    public String directionFromPiece(BirdSnakePiece other) { // return "u","d","l","r" for up down left right
+        return "";
     }
 }

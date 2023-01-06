@@ -32,8 +32,8 @@ public class Outline extends Actor
             getImage().setTransparency(0);
         } else {
             getImage().setTransparency(255);
-            int posX = Grid.getXAdjustedCoordinate(cursor.getX());
-            int posY = Grid.getYAdjustedCoordinate(cursor.getY());
+            int posX = Grid.getCoordinateX(Grid.getCellX(cursor.getX()));
+            int posY = Grid.getCoordinateY(Grid.getCellY(cursor.getY()));
             // int[] pos = Grid.getCellXY(cursor.getX(), cursor.getY(), false);
             setLocation(posX, posY);
         }

@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Write a description of class BirdSnake here.
  * 
@@ -8,12 +8,37 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BirdSnake extends Actor
 {
-    /**
-     * Act - do whatever the BirdSnake wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    ArrayList<BirdSnakePiece> bsPieces;
+    public BirdSnake() {
+        bsPieces = new ArrayList<BirdSnakePiece>();
+        // bsPieces.add(new BirdSnakeHead());
+    }
     public void act()
     {
         // Add your action code here.
+    }
+    
+    public int getBSLength() {
+        return 0;
+    }
+    
+    public void handleKeyboard() {
+        
+    }
+    
+    public void moveRight() {
+        
+    }
+    
+    public void moveLeft() {
+        
+    }
+    
+    public void moveUp() {
+        
+    }
+    
+    public void moveDown() {
+        
     }
 }

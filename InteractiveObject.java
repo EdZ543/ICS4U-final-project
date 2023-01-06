@@ -6,12 +6,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class InteractiveObject extends Actor
+public abstract class InteractiveObject extends GridItem
 {
+    public InteractiveObject(int cellX, int cellY) {
+        super(cellX, cellY);
+    }
     /**
-     * Act - do whatever the InteractiveObject wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * What happens when birdsnake hits this object
+     * @param birdsnake         The BirdSnake that is touching this object
      */
+    public abstract void collide(BirdSnake birdsnake);
+    
     public void act()
     {
         // Add your action code here.

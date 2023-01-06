@@ -14,10 +14,22 @@ public class Level1 extends Grid
      * 
      */
     private Outline gridTester;
+    
     public Level1()
     {
-        super(0, 0);
-        gridTester = new Outline(Color.GREEN);
+        super();
+        buildLevelGrid();
+        gridTester = new Outline(Color.CYAN);
         addObject(gridTester, 10, 20);
+        
+        TestBlock testBlock = new TestBlock(1, 0);
+        addObject(testBlock, 0, 0);
+    }
+    
+    public void buildLevelGrid() {
+        grid = new int[][] // level grid
+        {
+                
+        };
     }
 }
