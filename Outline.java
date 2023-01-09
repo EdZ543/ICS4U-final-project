@@ -14,14 +14,14 @@ public class Outline extends Actor
     private GreenfootImage image;
     private boolean trackPosition;
     
-    public Outline(Color color) {
-        size = Grid.getBlockSize();
+    public Outline(int size, Color color) {
+        this.size = size;
         image = new GreenfootImage(size, size);
         image.setColor(color);
         image.fillRect(0, 0, size-1, size-1);
         setImage(image);
         update(null);
-        trackPosition = true;
+        trackPosition = false;
     }
     public void act() {
         if(!Greenfoot.mouseMoved(this)) {
@@ -35,16 +35,16 @@ public class Outline extends Actor
                 System.out.println(clickedItem.getID());
                 System.out.println("X: " + clickedItem.getCellX()  + ", Y: " + clickedItem.getCellY());
             }
-            // System.out.println("X: " + Grid.getCellX(cursor.getX()) + ", Y: " + Grid.getCellY(cursor.getY()));
         }
     }
     public void update(MouseInfo cursor) {
+        Grid g = (Grid)getWorld();
         if(cursor == null) {
             getImage().setTransparency(0);
         } else {
             getImage().setTransparency(255);
-            int posX = Grid.getCoordinateX(Grid.getCellX(cursor.getX()));
-            int posY = Grid.getCoordinateY(Grid.getCellY(cursor.getY()));
+            int posX = g.getCoordinateX(g.getCellX(cursor.getX()));
+            int posY = g.getCoordinateY(g.getCellY(cursor.getY()));
             // int[] pos = Grid.getCellXY(cursor.getX(), cursor.getY(), false);
             setLocation(posX, posY);
         }

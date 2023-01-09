@@ -9,7 +9,7 @@ import java.util.HashMap;
 public abstract class Grid extends World 
 {
     protected int[][] grid;
-    private static int blockSize = 50;  // non-final, in case we want levels with smaller/bigger block sizes for whatever funky reason : D
+    private int cellSize;  // non-final, in case we want levels with smaller/bigger block sizes for whatever funky reason : D
     // blockSize = 50 for earlier levels, when map is smaller; blockSize = 40 for later levels, when map gets 'bigger'
     private final static int X_OFFSET = 0;
     private final static int Y_OFFSET = 0;
@@ -19,6 +19,7 @@ public abstract class Grid extends World
     private static HashMap<Integer, Class> objectIDs; // integers represent block types, fruit types, portal, etc
     public Grid() {
         super(WORLD_W, WORLD_H, 1);
+        cellSize = 50;  // default
         setPaintOrder(Outline.class);
     }
     /**
@@ -59,32 +60,32 @@ public abstract class Grid extends World
      * @param cellNumber        row number pertaining to the grid
      * @return int              x-coordinate in Greenfoot world pertaining to given row number
      */
-    public static int getCoordinateX (int cellNumber){
-        return (cellNumber * blockSize) + X_OFFSET + blockSize/2;
+    public int getCoordinateX (int cellNumber){
+        return (cellNumber * cellSize) + X_OFFSET + cellSize/2;
     }
     
     /**
      * @param coordinate        x-coordinate in the Greenfoot world
      * @return int              row number where the x-coordinate is located
      */
-    public static int getCellX(int coordinate){
-        return (coordinate - X_OFFSET) / blockSize;
+    public int getCellX(int coordinate){
+        return (coordinate - X_OFFSET) / cellSize;
     }
     
     /**
      * @param cellNumber        column number pertaining to the grid
      * @return int              y-coordinate in Greenfoot world pertaining to given column number
      */
-    public static int getCoordinateY (int cellNumber){
-        return (cellNumber * blockSize) + Y_OFFSET + blockSize/2;
+    public int getCoordinateY (int cellNumber){
+        return (cellNumber * cellSize) + Y_OFFSET + cellSize/2;
     }
     
     /**
      * @param coordinate        y-coordinate in the Greenfoot world
      * @return int              column number where the y-coordinate is located
      */
-    public static int getCellY(int coordinate){
-        return (coordinate - Y_OFFSET) / blockSize;
+    public int getCellY(int coordinate){
+        return (coordinate - Y_OFFSET) / cellSize;
     }
     
     /**
@@ -104,14 +105,14 @@ public abstract class Grid extends World
     /**
      * @return int          Block size
      */
-    public static int getBlockSize() {
-        return blockSize;
+    public int getCellSize() {
+        return cellSize;
     }
     
     /**
      * @param size          Block size
      */
-    public static void setBlockSize(int size) {
-        blockSize = size;
+    public void setCellSize(int size) {
+        cellSize = size;
     }
 }

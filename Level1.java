@@ -19,7 +19,7 @@ public class Level1 extends Grid
     {
         super();
         buildLevelGrid();
-        gridTester = new Outline(Color.CYAN);
+        gridTester = new Outline(getCellSize(), Color.CYAN);
         addObject(gridTester, 10, 20);
         
         // TestBlock testBlock = new TestBlock(1, 0);

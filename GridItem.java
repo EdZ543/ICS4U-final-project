@@ -23,7 +23,11 @@ public abstract class GridItem extends Actor
     {
     }
     public void updateLocation() {
-        setLocation(Grid.getCoordinateX(cellX), Grid.getCoordinateY(cellY));
+        Grid myGrid = (Grid)getWorld();
+        updateLocation(myGrid);
+    }
+    public void updateLocation(Grid w) {
+        setLocation(w.getCoordinateX(cellX), w.getCoordinateY(cellY));
     }
     public int getID() {
         return LevelBuilder.getID(this.getClass());

@@ -37,9 +37,9 @@ public class LevelBuilder extends Grid
     public LevelBuilder()
     {    
         super();
-        grid = new int[getWorldW()/getBlockSize()][getWorldH()/getBlockSize()];
+        grid = new int[getWorldW()/getCellSize()][getWorldH()/getCellSize()];
         currentID = 1;
-        gridOutline = new Outline(Color.CYAN);
+        gridOutline = new Outline(getCellSize(), Color.CYAN);
         addObject(gridOutline, 10, 20);
         // grid = loadLevel("levels/NewLevel.txt");
         // buildLevelWorld();
@@ -169,7 +169,7 @@ public class LevelBuilder extends Grid
     }
     
     public static void saveLevelToFile(String fileName, Grid myGrid) {
-        saveLevelToFile(fileName, myGrid.getGrid(), myGrid.getBlockSize());
+        saveLevelToFile(fileName, myGrid.getGrid(), myGrid.getCellSize());
     }
     public static void saveLevelToFile(String fileName, int[][] grid, int blockSize) {
         try {
