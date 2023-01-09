@@ -8,14 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BirdSnakePiece extends GridItem
 {
-    // private static final int MY_ID = 1;
     public BirdSnakePiece(int cellX, int cellY) {
         super(cellX, cellY);
     }
-    // // Different id for snake head
-    // public BirdSnakePiece(int cellX, int cellY, int id) {
-        // super(cellX, cellY, id);
-    // }
     public void act()
     {
         // Add your action code here.

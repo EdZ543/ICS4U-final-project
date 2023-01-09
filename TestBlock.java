@@ -14,6 +14,13 @@ public class TestBlock extends Block
      */
     public TestBlock(int cellX, int cellY) {
         super(cellX, cellY);
+        // image = new GreenfootImage(width, width);
+        // image.setColor(Color.BLUE);
+        // image.fill();
+        // setImage(image);
+    }
+    public void addedToWorld(World w) {
+        super.addedToWorld(w);
         image = new GreenfootImage(width, width);
         image.setColor(Color.BLUE);
         image.fill();

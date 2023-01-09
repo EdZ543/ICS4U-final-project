@@ -21,14 +21,14 @@ public class Outline extends Actor
         image.fillRect(0, 0, size-1, size-1);
         setImage(image);
         update(null);
-        trackPosition = false;
+        trackPosition = true;
     }
     public void act() {
         if(!Greenfoot.mouseMoved(this)) {
             MouseInfo cursor = Greenfoot.getMouseInfo();
             update(cursor);
         }
-        if(trackPosition && Greenfoot.mousePressed(this)) {
+        if(Greenfoot.mousePressed(this)) {
             MouseInfo cursor = Greenfoot.getMouseInfo();
             GridItem clickedItem = (GridItem)getOneIntersectingObject(GridItem.class);
             if(clickedItem != null) {

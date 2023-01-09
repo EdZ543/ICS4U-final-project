@@ -8,19 +8,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level1 extends Grid
 {
-
+    GreenfootImage bg;
     /**
      * Constructor for objects of class Level1.
      * 
      */
     private Outline gridTester;
-    
     public Level1()
     {
         super();
-        buildLevelGrid();
+        // bg = new GreenfootImage("temp/bg.png");
+        // setBackground(bg);
+        // buildLevelGrid();
         gridTester = new Outline(getCellSize(), Color.CYAN);
-        addObject(gridTester, 10, 20);
+        addObject(gridTester, 0, 0);
         
         // TestBlock testBlock = new TestBlock(1, 0);
         // Test

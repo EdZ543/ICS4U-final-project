@@ -14,11 +14,8 @@ public abstract class Block extends GridItem
         super(cellX, cellY);
     }
     public void addedToWorld(World w) {
+        super.addedToWorld(w);
         width = ((Grid)w).getCellSize();
-    }
-    public void act()
-    {
-        // Add your action code here.
     }
     
     public int getWidth() {

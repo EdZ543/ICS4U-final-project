@@ -47,12 +47,13 @@ public class LevelBuilder extends Grid
     
     public void act() {
         handleKeys();
-        // if(Greenfoot.mousePressed(gridOutline)){
-            // MouseInfo cursor = Greenfoot.getMouseInfo();
-            // if(cursor.getButton() == 1) {
-                // newGridItem(currentID, getCellX(cursor.getX()), getCellY(cursor.getY()));
-            // }
-        // }
+        if(Greenfoot.mousePressed(gridOutline)){
+            System.out.println("Hi");
+            MouseInfo cursor = Greenfoot.getMouseInfo();
+            if(cursor.getButton() == 1) {
+                newGridItem(currentID, getCellX(cursor.getX()), getCellY(cursor.getY()));
+            }
+        }
     }
     public void handleKeys() {
         if(Greenfoot.isKeyDown("n")) {

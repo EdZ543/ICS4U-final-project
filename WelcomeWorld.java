@@ -10,6 +10,7 @@ public class WelcomeWorld extends World
 {
     private StartButton startBtn;
     private Label titleLabel;
+    private GreenfootImage bg;
     /**
      * Constructor for objects of class WelcomeWorld.
      * 
@@ -18,7 +19,8 @@ public class WelcomeWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(Grid.getWorldW(), Grid.getWorldH(), 1);
-        
+        bg = new GreenfootImage("temp/bg.png");
+        setBackground(bg);
         titleLabel = new Label("BirdSnake!", 80);
         addObject(titleLabel, getWidth()/2, 100);
         startBtn = new StartButton();
