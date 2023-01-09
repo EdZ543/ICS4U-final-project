@@ -41,4 +41,16 @@ public class BirdSnake extends Actor
     public void moveDown() {
         
     }
+    /**
+     * Add piece
+     */
+    public void grow() {
+        
+    }
+    /**
+     * Remove piece
+     */
+    public void shrink() {
+        
+    }
 }

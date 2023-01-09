@@ -8,9 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BirdSnakeHead extends BirdSnakePiece
 {
-    public int facingDirection; // 0 = right, 1 = down, 2 = left, 3 = up (or something like this)
+    private int facingDirection; // 0 = right, 1 = down, 2 = left, 3 = up (or something like this)
     public BirdSnakeHead(int cellX, int cellY) {
         super(cellX, cellY);
+        // super(cellX, cellY, LevelBuilder.getGridItemIDs().get(BirdSnakeHead.class));
     }
     public void act()
     {

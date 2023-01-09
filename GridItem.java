@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.ArrayList;
 /**
  * Superclass shared among all actors that stay within the confines of the game's grid
  * 
@@ -10,7 +10,7 @@ public abstract class GridItem extends Actor
 {
     protected int cellX, cellY;
     protected GreenfootImage image;
-    
+    private boolean trackPosition = false;
     public GridItem(int cellX, int cellY) {
         this.cellX = cellX;
         this.cellY = cellY;
@@ -21,10 +21,12 @@ public abstract class GridItem extends Actor
     }
     public void act()
     {
-        // Add your action code here.
     }
     public void updateLocation() {
         setLocation(Grid.getCoordinateX(cellX), Grid.getCoordinateY(cellY));
+    }
+    public int getID() {
+        return LevelBuilder.getID(this.getClass());
     }
     public int getCellX() {
         return cellX;
@@ -39,5 +41,21 @@ public abstract class GridItem extends Actor
     public void setCellY(int cellNumber) {
         cellY = cellNumber;
         updateLocation();
+    }
+    // public GridItem checkItemRight() {
+        // Grid grid = (Grid)getWorld();
+    // }
+    // public GridItem checkItemLeft() {
+        // Grid grid = (Grid)getWorld();
+    // }
+    // public GridItem checkItemUp() {
+        // Grid grid = (Grid)getWorld();
+    // }
+    // public GridItem checkItemDown() {
+        // Grid grid = (Grid)getWorld();
+    // }
+    public ArrayList<GridItem> adjacentGridItems() {
+        ArrayList<GridItem> gridItems = new ArrayList<GridItem>();
+        return gridItems;
     }
 }

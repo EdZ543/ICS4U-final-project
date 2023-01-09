@@ -32,6 +32,29 @@ public abstract class Grid extends World
         
     }
     
+    public void addGridItem(GridItem item) {
+        addObject(item, 0, 0); // `item` will position itself in the world
+        grid[item.getCellX()][item.getCellY()] = item.getID();
+    }
+    
+    public int[][] getGrid() {
+        return grid;
+    }
+    /**
+     * Assumes that the 2-d array creates a perfect square shape
+     * return int       Number of columns in the grid (# of cells per row)
+     */
+    public int getGridXLength() {
+        return grid[0].length;
+    }
+    /**
+     * Assumes that the 2-d array creates a perfect square shape
+     * return int       Number of rows in the grid (# of cells per column)
+     */
+    public int getGridYLength() {
+        return grid.length;
+    }
+    
     /**
      * @param cellNumber        row number pertaining to the grid
      * @return int              x-coordinate in Greenfoot world pertaining to given row number
