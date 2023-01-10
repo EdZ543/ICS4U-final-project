@@ -3,10 +3,10 @@ import java.util.HashMap;
 /**
  * Class containing all fundamental values pertaining to our game (i.e. world size, grid dimensions, etc.)
  * 
- * @author (your name) 
+ * @author Eddie Zhuang
  * @version 2023.01.05
  */
-public abstract class Grid extends World 
+public abstract class Grid extends Actor 
 {
     protected int[][] grid;
     private int cellSize;  // non-final, in case we want levels with smaller/bigger block sizes for whatever funky reason : D
