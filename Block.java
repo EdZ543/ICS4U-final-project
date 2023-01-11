@@ -8,9 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Block extends GridItem
 {
-    // Basic properties
-    protected int length, width;
-
     /**
      * Class constructor.
      * 
@@ -20,19 +17,10 @@ public abstract class Block extends GridItem
      * @param height The height of the block, in cells
      */
     public Block(int cellX, int cellY, int width, int height) {
-        super(cellX, cellY);
+        super(cellX, cellY, width, height);
     }
 
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        width = ((Grid)w).getCellSize();
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int w) {
-        width = w;
     }
 }

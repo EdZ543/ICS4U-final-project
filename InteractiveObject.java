@@ -8,8 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class InteractiveObject extends GridItem
 {
-    public InteractiveObject(int cellX, int cellY) {
-        super(cellX, cellY);
+    public InteractiveObject(int cellX, int cellY, int width, int height) {
+        super(cellX, cellY, width, height);
     }
     /**
      * What happens when birdsnake hits this object

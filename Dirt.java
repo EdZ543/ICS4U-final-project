@@ -24,7 +24,7 @@ public class Dirt extends Block
 
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        image = new GreenfootImage(width, width);
+        image = new GreenfootImage(cellWidth, cellWidth);
         image.setColor(Color.BLUE);
         image.fill();
         setImage(image);

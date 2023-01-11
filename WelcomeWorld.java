@@ -18,7 +18,7 @@ public class WelcomeWorld extends World
     public WelcomeWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(Grid.getWorldW(), Grid.getWorldH(), 1);
+        super(1200, 800, 1);
         bg = new GreenfootImage("temp/bg.png");
         setBackground(bg);
         titleLabel = new Label("BirdSnake!", 80);

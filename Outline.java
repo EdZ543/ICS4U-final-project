@@ -18,7 +18,7 @@ public class Outline extends Actor
         this.size = size;
         image = new GreenfootImage(size, size);
         image.setColor(color);
-        image.fillRect(0, 0, size-1, size-1);
+        image.drawRect(0, 0, size-1, size-1);
         setImage(image);
         update(null);
         trackPosition = true;
@@ -29,23 +29,22 @@ public class Outline extends Actor
             update(cursor);
         }
         if(Greenfoot.mousePressed(this)) {
+            LevelWorld w = (LevelWorld)getWorld();
             MouseInfo cursor = Greenfoot.getMouseInfo();
             GridItem clickedItem = (GridItem)getOneIntersectingObject(GridItem.class);
             if(clickedItem != null) {
-                System.out.println(clickedItem.getID());
-                System.out.println("X: " + clickedItem.getCellX()  + ", Y: " + clickedItem.getCellY());
+                System.out.println("X: " + w.getCellX(cursor.getX())  + ", Y: " + w.getCellY(cursor.getY()));
             }
         }
     }
     public void update(MouseInfo cursor) {
-        Grid g = (Grid)getWorld();
+        LevelWorld w = (LevelWorld)getWorld();
         if(cursor == null) {
             getImage().setTransparency(0);
         } else {
             getImage().setTransparency(255);
-            int posX = g.getCoordinateX(g.getCellX(cursor.getX()));
-            int posY = g.getCoordinateY(g.getCellY(cursor.getY()));
-            // int[] pos = Grid.getCellXY(cursor.getX(), cursor.getY(), false);
+            int posX = w.getCoordinateX(w.getCellX(cursor.getX()));
+            int posY = w.getCoordinateY(w.getCellY(cursor.getY()));
             setLocation(posX, posY);
         }
     }

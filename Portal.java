@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Portal extends InteractiveObject
 {
     public Portal(int cellX, int cellY) {
-        super(cellX, cellY);
+        super(cellX, cellY, 1, 1);
     }
     /**
      * Act - do whatever the Portal wants to do. This method is called whenever

@@ -12,11 +12,11 @@ public class BirdSnakeHead extends BirdSnakePiece
     public BirdSnakeHead(int cellX, int cellY) {
         super(cellX, cellY);
         image = new GreenfootImage("temp/birdsnakehead.png");
-        // super(cellX, cellY, LevelBuilder.getGridItemIDs().get(BirdSnakeHead.class));
     }
+    
     public void addedToWorld(World w) {
-        int size = ((Grid)w).getCellSize();
-        image.scale(size, size);
+        super.addedToWorld(w);
+        image.scale(cellWidth, cellWidth);
         setImage(image);
     }
     public void act()
@@ -33,4 +33,5 @@ public class BirdSnakeHead extends BirdSnakePiece
     public void updateSprite(int facingDirection) {
         
     }
+    
 }

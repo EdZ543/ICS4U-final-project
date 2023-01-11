@@ -9,11 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BirdSnakePiece extends GridItem
 {
     public BirdSnakePiece(int cellX, int cellY) {
-        super(cellX, cellY);
+        super(cellX, cellY, 1, 1);
     }
-    public void act()
-    {
-        // Add your action code here.
+    public void act() {
+        
+    }
+    public void addedToWorld(World w) {
+        super.addedToWorld(w);
     }
     public void moveRight() {
         

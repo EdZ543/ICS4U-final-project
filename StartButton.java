@@ -23,7 +23,7 @@ public class StartButton extends MenuButton
      * When startButton is clicked, start the simulation.
      */
     public void clicked() {
-        Greenfoot.setWorld(new Level1());
+        Greenfoot.setWorld(new LevelWorld());
     }
     public void checkHover() {
         super.checkHover();

@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Fruit extends InteractiveObject
 {
     public Fruit(int cellX, int cellY) {
-        super(cellX, cellY);
+        super(cellX, cellY, 1, 1);
     }
     public abstract void collide(BirdSnake birdsnake);
     /**
