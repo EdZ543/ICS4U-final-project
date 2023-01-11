@@ -1,7 +1,7 @@
 /**
  * Arrays of all levels in the game
  * 
- * @author (your name) 
+ * @author Eddie Zhuang, Caden Chan
  * @version (a version number or a date)
  */
 public class Levels  
