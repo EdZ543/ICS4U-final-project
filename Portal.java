@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Goal of each level, lets bird snake go to the next level.
+ * Goal of each level, lets bird snake go to the next level. All fruits must be eaten before it opens.
  * 
  * @author Eddie Zhuang
  * @version (a version number or a date)

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Eddie Zhuang
  * @version (a version number or a date)
  */
-public abstract  class GridItem extends Actor
+public abstract class GridItem extends Actor
 {
     protected int cellX, cellY;
     protected GreenfootImage image;
