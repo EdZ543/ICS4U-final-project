@@ -27,8 +27,16 @@ public class LevelWorld extends World
         addObject(gridTracker, 0, 0);
     }
     
-    public GridItem[][] getGrid() {
-        return grid;
+    // public GridItem[][] getGrid() {
+        // return grid;
+    // }
+    /**
+     * @param cellX             The x-position, in cells, of the item
+     * @param cellY             The y-position, in cells, of the item
+     * @return GridItem         The item at the position; returns null if no item exists there.
+     */
+    public GridItem getItem(int cellX, int cellY) {
+        return grid[cellY][cellX];
     }
     /**
      * Assumes that the 2-d array creates a perfect square shape
