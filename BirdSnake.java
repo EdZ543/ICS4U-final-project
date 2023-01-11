@@ -1,16 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.Stack;
 import java.util.ArrayList;
 /**
  * Write a description of class BirdSnake here.
  * 
- * @author (your name) 
+ * @author Caden Chan
  * @version (a version number or a date)
  */
 public class BirdSnake extends Actor
 {
-    ArrayList<BirdSnakePiece> bsPieces;
+    // ArrayList<BirdSnakePiece> bsPieces;
+    Stack<BirdSnakePiece> bsPieces;
     public BirdSnake() {
-        bsPieces = new ArrayList<BirdSnakePiece>();
+        bsPieces = new Stack<BirdSnakePiece>();
+        // bsPieces = new ArrayList<BirdSnakePiece>();
         // bsPieces.add(new BirdSnakeHead());
     }
     public void act()
@@ -18,11 +21,15 @@ public class BirdSnake extends Actor
         // Add your action code here.
     }
     
+    /**
+     * Get the length of the BirdSnake
+     */
     public int getBSLength() {
         return 0;
     }
     
-    public void handleKeyboard() {
+    
+    public void handleKeys() {
         
     }
     
