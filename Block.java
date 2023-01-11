@@ -13,11 +13,9 @@ public abstract class Block extends GridItem
      * 
      * @param cellX  The x-position
      * @param cellY  The y-position
-     * @param width  The width of the block, in cells
-     * @param height The height of the block, in cells
      */
-    public Block(int cellX, int cellY, int width, int height) {
-        super(cellX, cellY, width, height);
+    public Block(int cellX, int cellY) {
+        super(cellX, cellY);
     }
 
     public void addedToWorld(World w) {

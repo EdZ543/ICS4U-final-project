@@ -15,27 +15,16 @@ public class Dirt extends Block
      * @param cellY 
      */
     public Dirt(int cellX, int cellY) {
-        super(cellX, cellY, 1, 1);
-        // image = new GreenfootImage(width, width);
-        // image.setColor(Color.BLUE);
-        // image.fill();
-        // setImage(image);
+        super(cellX, cellY);
     }
 
     public void addedToWorld(World w) {
         super.addedToWorld(w);
+        
+        // Draw image
         image = new GreenfootImage(cellWidth, cellWidth);
-        image.setColor(Color.BLUE);
+        image.setColor(Color.BROWN);
         image.fill();
         setImage(image);
-    }
-
-    /**
-     * Act - do whatever the TestBlock wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
     }
 }
