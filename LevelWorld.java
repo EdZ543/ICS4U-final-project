@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class LevelWorld here.
  * 
- * @author (your name) 
+ * @author Caden Chan, Eddie Zhuang
  * @version (a version number or a date)
  */
 public class LevelWorld extends World
@@ -12,7 +12,6 @@ public class LevelWorld extends World
     private GridItem[][] grid;
     private int cellWidth, gridXOffset, gridYOffset;
     private int level;
-    private Label b;
     Outline gridTracker;
     public LevelWorld()
     {    
