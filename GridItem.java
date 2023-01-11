@@ -1,53 +1,67 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Grid here.
+ * An item that is locked into a grid
  * 
- * @author (your name) 
+ * @author Eddie Zhuang
  * @version (a version number or a date)
  */
 public abstract  class GridItem extends Actor
 {
-    protected int cellX, cellY, cellWidth;
+    protected int cellX, cellY;
     protected GreenfootImage image;
-    public void act()
-    {
-        // Add your action code here.
-    }
     
     /**
      * GridItem constructor
      * @param cellX The x position of the item
      * @param cellY The y position of the item
-     * @param width The width of the item, in cells
-     * @param height The height of the item, in cells
      */
-    public GridItem(int cellX, int cellY, int width, int height) {
+    public GridItem(int cellX, int cellY) {
         this.cellX = cellX;
         this.cellY = cellY;
     }
     
     public void addedToWorld(World w) {
         updateLocation();
-        cellWidth = ((LevelWorld)w).getCellWidth();
     }
+    
+    /**
+     * Update location in grid based on cellX and cellY
+     */
     public void updateLocation() {
         LevelWorld lw = (LevelWorld)getWorld();
         setLocation(lw.getCoordinateX(cellX), lw.getCoordinateY(cellY));
     }
     
+    /**
+     * Returns x coordinate in grid
+     * @return y location in terms of grid coordinates
+     */
     public int getCellX() {
         return cellX;
     }
     
+    /**
+     * Returns y coordinate in grid
+     * @return y location in terms of grid coordinates
+     */
     public int getCellY() {
         return cellY;
     }
     
+    /**
+     * Sets x coordinate in grid
+     * @param cellNumber y location in terms of grid coordinates
+     */
     public void setCellX(int cellNumber) {
         cellX = cellNumber;
         updateLocation();
     }
+    
+    /**
+     * Sets y coordinate in grid
+     * @param cellNumber y location in terms of grid coordinates
+     */
     public void setCellY(int cellNumber) {
         cellY = cellNumber;
         updateLocation();

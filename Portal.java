@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Portal here.
  * 
- * @author (your name) 
+ * @author Eddie Zhuang
  * @version (a version number or a date)
  */
 public class Portal extends InteractiveObject
