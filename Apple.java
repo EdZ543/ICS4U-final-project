@@ -1,27 +1,26 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Apple here.
+ * The most basic fruit. It causes the bird snake's length to increase by 1.
  * 
  * @author Eddie Zhuang
  * @version (a version number or a date)
  */
 public class Apple extends Fruit
 {
-    private static final int MY_ID = 4;
+    /**
+     * Class constructor.
+     * 
+     * @param cellX The x-coordinate in the grid
+     * @param cellY The y-coordinate in the grid
+     */
     public Apple(int cellX, int cellY) {
         super(cellX, cellY);
     }
+
     /**
-     * Act - do whatever the Apple wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * What happens when birdsnake hits this object
+     * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
-    public void act()
-    {
-        // Add your action code here.
-    }
-    
-    public void collide(BirdSnake birdsnake) {
-        
-    }
+    public void collide(BirdSnakePiece birdSnakePiece) {}
 }

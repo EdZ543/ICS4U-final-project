@@ -1,24 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class InteractiveObject here.
+ * Object that the bird snake can interact with.
  * 
  * @author Eddie Zhuang
  * @version (a version number or a date)
  */
 public abstract class InteractiveObject extends GridItem
 {
-    public InteractiveObject(int cellX, int cellY, int width, int height) {
-        super(cellX, cellY, width, height);
+    public InteractiveObject(int cellX, int cellY) {
+        super(cellX, cellY);
     }
+    
     /**
      * What happens when birdsnake hits this object
-     * @param birdsnake         The BirdSnake that is touching this object
+     * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
-    public abstract void collide(BirdSnake birdsnake);
-    
-    public void act()
-    {
-        // Add your action code here.
-    }
+    public abstract void collide(BirdSnakePiece birdsnake);
 }

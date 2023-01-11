@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Portal here.
+ * Goal of each level, lets bird snake go to the next level.
  * 
  * @author Eddie Zhuang
  * @version (a version number or a date)
@@ -9,18 +9,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Portal extends InteractiveObject
 {
     public Portal(int cellX, int cellY) {
-        super(cellX, cellY, 1, 1);
-    }
-    /**
-     * Act - do whatever the Portal wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+        super(cellX, cellY);
     }
     
-    public void collide(BirdSnake birdsnake) {
-        
-    }
+    /**
+     * What happens when birdsnake hits this object
+     * @param birdSnakePiece         The BirdSnakePiece that is touching this object
+     */
+    public void collide(BirdSnakePiece birdSnakePiece) {}
 }
