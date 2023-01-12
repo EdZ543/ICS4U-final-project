@@ -16,5 +16,5 @@ public abstract class InteractiveObject extends GridItem
      * What happens when birdsnake hits this object
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
-    public abstract void collide(BirdSnakePiece birdsnake);
+    public abstract void collide(BirdSnakePiece birdSnakePiece);
 }

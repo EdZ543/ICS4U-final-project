@@ -8,27 +8,68 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LevelWorld extends World
 {
-
     private GridItem[][] grid;
-    private int cellWidth, gridXOffset, gridYOffset;
-    private int level;
+    private int cellSize, gridXOffset, gridYOffset;
+    private int level = 0;
     Outline gridTracker;
+    
     public LevelWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1200, 800, 1); 
-        // Setting critical values;
-        cellWidth = 50;
-        gridXOffset = 0;
-        gridYOffset = 0;
+        super(1200, 800, 1);
         
-        gridTracker = new Outline(cellWidth, Color.CYAN);
-        addObject(gridTracker, 0, 0);
+        setLevel(level);
     }
     
-    // public GridItem[][] getGrid() {
-        // return grid;
-    // }
+    /**
+     * Changes the level
+     * 
+     * @param level The new level number
+     */
+    public void setLevel(int level) {
+        this.level = level;
+        createLevel(Levels.CELL_SIZES[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+    }
+    
+    /**
+     * Builds the world based on a 2D array representation
+     * 
+     * @param levelArray The 2D array
+     */
+    public void createLevel(int cellSize, int gridXOffset, int gridYOffset, String[] levelArray) {
+        this.cellSize = cellSize;
+        this.gridXOffset = gridXOffset;
+        this.gridYOffset = gridYOffset;
+        
+        grid = new GridItem[levelArray.length][levelArray[0].length()];
+        
+        for (int y = 0; y < levelArray.length; y++) {
+            for (int x = 0; x < levelArray[y].length(); x++) {
+                GridItem gridItem = null;
+                
+                switch(levelArray[y].charAt(x)) {
+                    case '#':
+                        gridItem = new Dirt(x, y);
+                        break;
+                    case '<':
+                        break;
+                    case '>':
+                        break;
+                    case '^':
+                        break;
+                    case 'v':
+                        break;
+                    case 'p':
+                        gridItem = new Portal(x, y);
+                        break;
+                }
+                
+                if (gridItem != null) addObject(gridItem, 0, 0);
+                grid[y][x] = gridItem;
+            }
+        }
+    }
+    
     /**
      * @param cellX             The x-position, in cells, of the item
      * @param cellY             The y-position, in cells, of the item
@@ -69,7 +110,7 @@ public class LevelWorld extends World
      * @return int              x-coordinate in Greenfoot world pertaining to given row number
      */
     public int getCoordinateX (int cellNumber){
-        return (cellNumber * cellWidth) + gridXOffset + cellWidth/2;
+        return (cellNumber * cellSize) + gridXOffset + cellSize/2;
     }
     
     /**
@@ -77,7 +118,7 @@ public class LevelWorld extends World
      * @return int              row number where the x-coordinate is located
      */
     public int getCellX(int coordinate){
-        return (coordinate - gridXOffset) / cellWidth;
+        return (coordinate - gridXOffset) / cellSize;
     }
     
     /**
@@ -85,7 +126,7 @@ public class LevelWorld extends World
      * @return int              y-coordinate in Greenfoot world pertaining to given column number
      */
     public int getCoordinateY (int cellNumber){
-        return (cellNumber * cellWidth) + gridYOffset + cellWidth/2;
+        return (cellNumber * cellSize) + gridYOffset + cellSize/2;
     }
     
     /**
@@ -93,20 +134,13 @@ public class LevelWorld extends World
      * @return int              column number where the y-coordinate is located
      */
     public int getCellY(int coordinate){
-        return (coordinate - gridYOffset) / cellWidth;
+        return (coordinate - gridYOffset) / cellSize;
     }
     
     /**
      * @return int          Cell width
      */
-    public int getCellWidth() {
-        return cellWidth;
-    }
-    
-    /**
-     * @param size          Cell width
-     */
-    public void setCellWidth(int w) {
-        cellWidth = w;
+    public int getCellSize() {
+        return cellSize;
     }
 }

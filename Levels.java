@@ -6,11 +6,22 @@
  */
 public class Levels  
 {
+    // Level arrays
     public static final String[][] LEVELS = {
-        {"p    "},
-        {"d    "},
-        {" >>v "},
-        {">^dv "},
-        {"ddddd"},
+        {
+            "p         ",
+            "#         ",
+            " >>v      ",
+            ">^#v      ",
+            "##########",
+        }
+    };
+    
+    public static final int[][] LEVEL_OFFSETS = {
+        {20, 20},
+    };
+    
+    public static final int[] CELL_SIZES = {
+        50
     };
 }

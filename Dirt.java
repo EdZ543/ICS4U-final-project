@@ -23,7 +23,7 @@ public class Dirt extends Block
         LevelWorld lw = (LevelWorld)w;
         
         // Draw image
-        image = new GreenfootImage(lw.getCellWidth(), lw.getCellWidth());
+        image = new GreenfootImage(lw.getCellSize(), lw.getCellSize());
         image.setColor(Color.BLUE);
         image.fill();
         setImage(image);
