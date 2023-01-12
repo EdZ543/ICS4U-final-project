@@ -15,7 +15,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class LevelWorld extends World
 {
     private GridItem[][] grid;
-    private int cellSize, gridXOffset, gridYOffset;
+    private int cellWidth, gridXOffset, gridYOffset;
     private int level = 0;
     Outline gridTracker;
     
@@ -25,6 +25,7 @@ public class LevelWorld extends World
         super(1200, 800, 1);
         
         setLevel(level);
+        
     }
     
     /**
@@ -42,8 +43,8 @@ public class LevelWorld extends World
      * 
      * @param levelArray The 2D array
      */
-    public void createLevel(int cellSize, int gridXOffset, int gridYOffset, String[] levelArray) {
-        this.cellSize = cellSize;
+    public void createLevel(int cellWidth, int gridXOffset, int gridYOffset, String[] levelArray) {
+        this.cellWidth = cellWidth;
         this.gridXOffset = gridXOffset;
         this.gridYOffset = gridYOffset;
         
@@ -122,7 +123,7 @@ public class LevelWorld extends World
      * @return int              x-coordinate in Greenfoot world pertaining to given row number
      */
     public int getCoordinateX (int cellNumber){
-        return (cellNumber * cellSize) + gridXOffset + cellSize/2;
+        return (cellNumber * cellWidth) + gridXOffset + cellWidth/2;
     }
     
     /**
@@ -130,7 +131,7 @@ public class LevelWorld extends World
      * @return int              row number where the x-coordinate is located
      */
     public int getCellX(int coordinate){
-        return (coordinate - gridXOffset) / cellSize;
+        return (coordinate - gridXOffset) / cellWidth;
     }
     
     /**
@@ -138,7 +139,7 @@ public class LevelWorld extends World
      * @return int              y-coordinate in Greenfoot world pertaining to given column number
      */
     public int getCoordinateY (int cellNumber){
-        return (cellNumber * cellSize) + gridYOffset + cellSize/2;
+        return (cellNumber * cellWidth) + gridYOffset + cellWidth/2;
     }
     
     /**
@@ -146,13 +147,13 @@ public class LevelWorld extends World
      * @return int              column number where the y-coordinate is located
      */
     public int getCellY(int coordinate){
-        return (coordinate - gridYOffset) / cellSize;
+        return (coordinate - gridYOffset) / cellWidth;
     }
     
     /**
      * @return int          Cell width
      */
-    public int getCellSize() {
-        return cellSize;
+    public int getCellWidth() {
+        return cellWidth;
     }
 }
