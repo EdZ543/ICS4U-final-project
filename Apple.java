@@ -17,6 +17,12 @@ public class Apple extends Fruit
     public Apple(int cellX, int cellY) {
         super(cellX, cellY);
     }
+    
+    protected GreenfootImage drawImage(int cellSize) {
+        image = new GreenfootImage("images/apple.png");
+        image.scale(cellSize, cellSize);
+        return image;
+    }
 
     /**
      * What happens when birdsnake hits this object

@@ -17,6 +17,12 @@ public class Crate extends Block
         super(cellX, cellY);
     }
     
+    protected GreenfootImage drawImage(int cellSize) {
+        image = new GreenfootImage("images/crate.jpeg");
+        image.scale(cellSize, cellSize);
+        return image;
+    }
+    
     /**
      * Act - do whatever the Crate wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.

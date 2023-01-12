@@ -12,6 +12,12 @@ public class Portal extends InteractiveObject
         super(cellX, cellY);
     }
     
+    protected GreenfootImage drawImage(int cellSize) {
+        image = new GreenfootImage("images/portal.png");
+        image.scale(cellSize, cellSize);
+        return image;
+    }
+    
     /**
      * What happens when birdsnake hits this object
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object

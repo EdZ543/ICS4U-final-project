@@ -22,8 +22,14 @@ public abstract class GridItem extends Actor
     }
 
     public void addedToWorld(World w) {
+        LevelWorld lw = (LevelWorld)w;
+        
         updateLocation();
+        image = drawImage(lw.getCellSize());
+        setImage(image);
     }
+    
+    protected abstract GreenfootImage drawImage(int cellSize);
 
     /**
      * Update location in grid based on cellX and cellY

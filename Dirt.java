@@ -21,11 +21,12 @@ public class Dirt extends Block
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         LevelWorld lw = (LevelWorld)w;
-        
-        // Draw image
-        image = new GreenfootImage(lw.getCellSize(), lw.getCellSize());
+    }
+    
+    protected GreenfootImage drawImage(int cellSize) {
+        image = new GreenfootImage(cellSize, cellSize);
         image.setColor(Color.BLUE);
         image.fill();
-        setImage(image);
+        return image;
     }
 }

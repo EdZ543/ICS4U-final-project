@@ -9,11 +9,13 @@ public class Levels
     // Level arrays
     public static final String[][] LEVELS = {
         {
-            "p         ",
-            "#         ",
-            " >>v      ",
-            ">^#v      ",
-            "##########",
+            "   P  ",
+            "      ",
+            "#    #",
+            "A  #A#",
+            "      ",
+            " #>>  ",
+            " #####",
         }
     };
     

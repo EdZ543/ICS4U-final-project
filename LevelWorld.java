@@ -3,6 +3,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class LevelWorld here.
  * 
+ * Credits
+ * - Images
+ *      - apple.png: From https://creazilla.com/nodes/3170476-apple-clipart, by Clker-Free-Vector-Images on Pixabay
+ *      - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
+ *      - crate.jpeg: From http://clipart-library.com/clipart/810972.htm, by Clipart Library
+ * 
  * @author Caden Chan, Eddie Zhuang
  * @version (a version number or a date)
  */
@@ -59,8 +65,14 @@ public class LevelWorld extends World
                         break;
                     case 'v':
                         break;
-                    case 'p':
+                    case 'P':
                         gridItem = new Portal(x, y);
+                        break;
+                    case 'A':
+                        gridItem = new Apple(x, y);
+                        break;
+                    case 'C':
+                        gridItem = new Crate(x, y);
                         break;
                 }
                 
