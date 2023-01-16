@@ -100,7 +100,7 @@ public class BirdSnakePiece extends Block
      */
     public boolean moveLeft() {
         LevelWorld lw = (LevelWorld)getWorld();
-        if(lw.getGridXLength()-1 <= 0) return false;
+        if(getCellX() <= 0) return false;
         startSlideToTargetCell(getCellX()-1, getCellY(), speed);
         return true;
     }
@@ -110,7 +110,7 @@ public class BirdSnakePiece extends Block
      */
     public boolean moveUp() {
         LevelWorld lw = (LevelWorld)getWorld();
-        if(lw.getGridYLength()-1 <= 0) return false;
+        if(getCellY() <= 0) return false;
         startSlideToTargetCell(getCellX(), getCellY()-1, speed);
         return true;
     }
