@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Stack;
+import java.util.ArrayList;
 /**
  * Write a description of class BirdSnakeHead here.
  * 
@@ -11,7 +12,7 @@ public class BirdSnakeHead extends BirdSnakePiece
     // private int facingDirection; 
     private int clickCldwn;
     private boolean moving;
-    private Stack<BirdSnakePiece> bodyPieces;
+    private ArrayList<BirdSnakePiece> bodyPieces;
     /**
      * @param cellX         The x-position of the head
      * @param cellY         The y-position of the head
@@ -20,7 +21,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         super(cellX, cellY);
         // this.facingDirection = facingDirection;
         setFacingDirection(facingDirection);
-        bodyPieces = new Stack<BirdSnakePiece>();
+        bodyPieces = new ArrayList<BirdSnakePiece>();
         clickCldwn = 0;
         moving = false;
     }
@@ -47,8 +48,11 @@ public class BirdSnakeHead extends BirdSnakePiece
         } else if(!sliding){
             if(right) {
                 setFacingDirection('r');
-                moving = moveRight();
+                // moving = moveRight();
                 clickCldwn = 10;
+                for(int i=bodyPieces.size()-1;i>=0;i--) {
+                    
+                }
             } else if(down) {
                 setFacingDirection('d');
                 moving = moveDown();
@@ -70,6 +74,10 @@ public class BirdSnakeHead extends BirdSnakePiece
         
     }
     
+    // public boolean initBirdSnake() {
+        
+    // }
+    
     public boolean isMoving() {
         return moving;
     }
@@ -82,7 +90,11 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     
     public BirdSnakePiece getLastPiece() {
-        return getBodyLength() == 0 ? this : bodyPieces.peek();
+        return getBodyLength() == 0 ? this : bodyPieces.get(bodyPieces.size()-1);
+    }
+    
+    public void addPiece(BirdSnakePiece piece) {
+        bodyPieces.add(piece);
     }
     /**
      * Add piece
@@ -93,8 +105,8 @@ public class BirdSnakeHead extends BirdSnakePiece
         BirdSnakePiece last = getLastPiece();
         int[] pos = getOffsetFromDirection(last.getFacingDirection());
         
-        BirdSnakePiece piece = new BirdSnakePiece(last.getCellX()-pos[0], last.getCellY()-pos[1], this, last);
-        bodyPieces.push(piece);
+        BirdSnakePiece piece = new BirdSnakePiece(last.getCellX()-pos[0], last.getCellY()-pos[1]);//, this, last);
+        bodyPieces.add(piece);
         getWorld().addObject(piece, 0, 0);
     }
     /**
@@ -102,10 +114,10 @@ public class BirdSnakeHead extends BirdSnakePiece
      */
     public void shrink() {
         if(bodyPieces.size() == 0) return;
-        getWorld().removeObject(bodyPieces.pop());
+        getWorld().removeObject(bodyPieces.remove(bodyPieces.size()-1));
     }
     
-    public Stack<BirdSnakePiece> getPieces() {
+    public ArrayList<BirdSnakePiece> getPieces() {
         return bodyPieces;
     }
     

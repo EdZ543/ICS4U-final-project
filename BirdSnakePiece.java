@@ -25,31 +25,31 @@ public class BirdSnakePiece extends Block
         followPiece = null;
         speed = 5;
     }
-    /**
-     * @param cellX                 The x-position of the piece
-     * @param cellY                 The y-position of the piece
-     * @param headPiece             The BirdSnakeHead to which this piece belongs
-     * @param followPiece           The BirdSnakePiece that this piece is behind
-     */
-    public BirdSnakePiece(int cellX, int cellY, BirdSnakeHead headPiece, BirdSnakePiece followPiece) {
-        super(cellX, cellY);
-        this.headPiece = headPiece;
-        this.followPiece = followPiece;
-        facingDirection = directionToAdjacentPiece(followPiece);
-        speed = 8;
-    }
+    // /**
+     // * @param cellX                 The x-position of the piece
+     // * @param cellY                 The y-position of the piece
+     // * @param headPiece             The BirdSnakeHead to which this piece belongs
+     // * @param followPiece           The BirdSnakePiece that this piece is behind
+     // */
+    // public BirdSnakePiece(int cellX, int cellY, BirdSnakeHead headPiece, BirdSnakePiece followPiece) {
+        // super(cellX, cellY);
+        // this.headPiece = headPiece;
+        // this.followPiece = followPiece;
+        // facingDirection = directionToAdjacentPiece(followPiece);
+        // speed = 8;
+    // }
     
     protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
-        image.scale(cellWidth, cellWidth);
+        image.scale(cellWidth+1, cellWidth+1);
         return image;
     }
     public void act() {
         slideAct();
-        if(headPiece.isMoving()) {
-            int[] pos = getOffsetFromDirection(facingDirection);
-            startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
-        }
+        // if(headPiece.isMoving()) {
+            // int[] pos = getOffsetFromDirection(facingDirection);
+            // startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
+        // }
         
     }
     public void addedToWorld(World w) {
@@ -60,6 +60,10 @@ public class BirdSnakePiece extends Block
         // image.scale(cellWidth, cellWidth);
         // setImage(image);
     }
+    
+    // public void setHeadPiece(BirdSnakeHead head) {
+        // headPiece = head;
+    // }
     
     public boolean isSliding() {
         return sliding;
@@ -75,11 +79,11 @@ public class BirdSnakePiece extends Block
                 setLocation(targetX, targetY);
                 setCellX(lw.getCellX(targetX));
                 setCellY(lw.getCellY(targetY));
-                if(followPiece != null) {
-                    char a = directionToAdjacentPiece(followPiece);
-                    System.out.println(a);
-                    setFacingDirection(a);
-                }
+                // if(followPiece != null) {
+                    // char a = directionToAdjacentPiece(followPiece);
+                    // System.out.println(a);
+                    // setFacingDirection(a);
+                // }
                 
                 sliding = false;
             }
