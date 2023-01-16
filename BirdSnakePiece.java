@@ -77,18 +77,12 @@ public class BirdSnakePiece extends Block
                 setCellY(lw.getCellY(targetY));
                 if(followPiece != null) {
                     char a = directionToAdjacentPiece(followPiece);
-                    System.out.println(a);
                     setFacingDirection(a);
                 }
                 
                 sliding = false;
             }
         }
-    }
-    public GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
-        image.scale(cellWidth, cellWidth);
-        return image;
     }
     /**
      * Piece moves one cell to the right
