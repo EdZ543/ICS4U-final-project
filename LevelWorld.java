@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class LevelWorld here.
+ * The main game world.
  * 
  * Credits
  * - Images
@@ -14,10 +14,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class LevelWorld extends World
 {
+    private boolean falling = false; // Whether things are currently falling or not
     private GridItem[][] grid;
     private int cellWidth, gridXOffset, gridYOffset;
     private int level = 0;
-    Outline gridTracker;
+    private int fallingTimer = 0; // Timer for updating falling objects
+    private int fallingDelay = 30; // Delay between each downward movement of falling objects
     
     public LevelWorld()
     {    
@@ -35,7 +37,7 @@ public class LevelWorld extends World
      */
     public void setLevel(int level) {
         this.level = level;
-        createLevel(Levels.CELL_SIZES[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+        createLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
     }
     
     /**
@@ -155,5 +157,16 @@ public class LevelWorld extends World
      */
     public int getCellWidth() {
         return cellWidth;
+    }
+    
+    public void checkFalling() {
+        
+    }
+    
+    /**
+     * Returns whether or not things are falling in the world
+     */
+    public boolean getFalling() {
+        return falling;
     }
 }

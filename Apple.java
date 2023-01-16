@@ -18,9 +18,9 @@ public class Apple extends Fruit
         super(cellX, cellY);
     }
     
-    protected GreenfootImage drawImage(int cellSize) {
+    protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("images/apple.png");
-        image.scale(cellSize, cellSize);
+        image.scale(cellWidth, cellWidth);
         return image;
     }
 

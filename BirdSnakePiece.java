@@ -38,6 +38,12 @@ public class BirdSnakePiece extends Block
         facingDirection = directionToAdjacentPiece(followPiece);
         speed = 8;
     }
+    
+    protected GreenfootImage drawImage(int cellWidth) {
+        image = new GreenfootImage("images/apple.png");
+        image.scale(cellWidth, cellWidth);
+        return image;
+    }
     public void act() {
         slideAct();
         if(headPiece.isMoving()) {

@@ -23,7 +23,7 @@ public class Levels
         {20, 20},
     };
     
-    public static final int[] CELL_SIZES = {
+    public static final int[] CELL_WIDTHS = {
         50
     };
 }

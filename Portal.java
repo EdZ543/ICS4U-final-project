@@ -12,9 +12,9 @@ public class Portal extends InteractiveObject
         super(cellX, cellY);
     }
     
-    protected GreenfootImage drawImage(int cellSize) {
+    protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("images/portal.png");
-        image.scale(cellSize, cellSize);
+        image.scale(cellWidth, cellWidth);
         return image;
     }
     
