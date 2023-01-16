@@ -23,7 +23,7 @@ public class BirdSnakePiece extends Block
         super(cellX, cellY);
         headPiece = null;
         followPiece = null;
-        speed = 8;
+        speed = 5;
     }
     /**
      * @param cellX                 The x-position of the piece
@@ -40,7 +40,7 @@ public class BirdSnakePiece extends Block
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage("images/apple.png");
+        image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
         image.scale(cellWidth, cellWidth);
         return image;
     }
@@ -54,11 +54,11 @@ public class BirdSnakePiece extends Block
     }
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        if(headPiece == null)return;
-        int cellWidth = ((LevelWorld)w).getCellWidth();
-        image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
-        image.scale(cellWidth, cellWidth);
-        setImage(image);
+        // if(headPiece == null)return;
+        // int cellWidth = ((LevelWorld)w).getCellWidth();
+        // image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
+        // image.scale(cellWidth, cellWidth);
+        // setImage(image);
     }
     
     public boolean isSliding() {
@@ -77,6 +77,7 @@ public class BirdSnakePiece extends Block
                 setCellY(lw.getCellY(targetY));
                 if(followPiece != null) {
                     char a = directionToAdjacentPiece(followPiece);
+                    System.out.println(a);
                     setFacingDirection(a);
                 }
                 

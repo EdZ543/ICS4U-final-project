@@ -27,14 +27,8 @@ public class BirdSnakeHead extends BirdSnakePiece
     
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        int cellWidth = ((LevelWorld)w).getCellWidth();
-        image = new GreenfootImage("temp/birdsnakehead.png");
-        image.scale(cellWidth, cellWidth);
-        setImage(image);
-
-        grow();
     }
-    public GreenfootImage drawImage(int cellWidth) {
+    protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("temp/birdsnakehead.png");
         image.scale(cellWidth, cellWidth);
         return image;
