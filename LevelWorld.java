@@ -127,9 +127,19 @@ public class LevelWorld extends World
         connectBird(headX, headY);
     }
 
+    /**
+     * Recursive method to add all bird snake pieces to the head's arraylist.
+     * 
+     * @param x The x position of the piece in the grid
+     * @param y The y position of the piece in the grid
+     */
     private void connectBird(int x, int y) {
         String[] levelArray = Levels.LEVELS[level];
-        if (grid[y][x] != birdSnakeHead) birdSnakeHead.addPiece(grid[y][x]);
+
+        if (grid[y][x] != birdSnakeHead) {
+            BirdSnakePiece p = (BirdSnakePiece)grid[y][x];
+            birdSnakeHead.addPiece(p);
+        }
 
         switch (levelArray[y].charAt(x)) {
             case '<':
