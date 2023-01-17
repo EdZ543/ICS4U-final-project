@@ -48,21 +48,22 @@ public class BirdSnakeHead extends BirdSnakePiece
         } else if(!sliding){
             if(right) {
                 setFacingDirection('r');
-                // moving = moveRight();
+                shiftPieces();
+                moving = moveRight();
                 clickCldwn = 10;
-                for(int i=bodyPieces.size()-1;i>=0;i--) {
-                    
-                }
             } else if(down) {
                 setFacingDirection('d');
+                shiftPieces();
                 moving = moveDown();
                 clickCldwn = 10;
             } else if(left) {
                 setFacingDirection('l');
+                shiftPieces();
                 moving = moveLeft();
                 clickCldwn = 10;
             } else if(up) {
                 setFacingDirection('u');
+                shiftPieces();
                 moving = moveUp();
                 clickCldwn = 10;
             } else if(Greenfoot.isKeyDown("l")) {
@@ -73,7 +74,16 @@ public class BirdSnakeHead extends BirdSnakePiece
     
         
     }
-    
+    public void shiftPieces() {
+        for(int i=bodyPieces.size()-1;i>=0;i--) {
+            if(i==0) {
+                bodyPieces.get(i).startSlideToTargetCell(getCellX(), getCellY(), speed);
+            } else {
+                BirdSnakePiece temp = bodyPieces.get(i-1);
+                bodyPieces.get(i).startSlideToTargetCell(temp.getCellX(), temp.getCellY(), speed);
+            }
+        }
+    }
     // public boolean initBirdSnake() {
         
     // }
@@ -94,6 +104,13 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     
     public void addPiece(BirdSnakePiece piece) {
+        if(bodyPieces.size() ==0) {
+            piece.setFollowPiece(this);
+        } else {
+            piece.setFollowPiece(bodyPieces.get(bodyPieces.size()-1));
+        }
+        piece.setHeadPiece(this);   
+        System.out.println("hi");
         bodyPieces.add(piece);
     }
     /**
