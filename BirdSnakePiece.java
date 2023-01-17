@@ -40,16 +40,16 @@ public class BirdSnakePiece extends Block
     // }
     
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
+        image = new GreenfootImage("temp/birdsnakepiece1.png");
         image.scale(cellWidth+1, cellWidth+1);
         return image;
     }
     public void act() {
         slideAct();
-        // if(headPiece.isMoving()) {
-            // int[] pos = getOffsetFromDirection(facingDirection);
-            // startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
-        // }
+        if(headPiece !=null && headPiece.isMoving()) {
+            int[] pos = getOffsetFromDirection(facingDirection);
+            startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
+        }
         
     }
     public void addedToWorld(World w) {
@@ -61,9 +61,14 @@ public class BirdSnakePiece extends Block
         // setImage(image);
     }
     
-    // public void setHeadPiece(BirdSnakeHead head) {
-        // headPiece = head;
-    // }
+    public void setHeadPiece(BirdSnakeHead head) {
+        headPiece = head;
+    }
+    
+    public void setFollowPiece(BirdSnakePiece piece) {
+        followPiece = piece;
+        facingDirection = directionToAdjacentPiece(followPiece);
+    }
     
     public boolean isSliding() {
         return sliding;
@@ -79,15 +84,29 @@ public class BirdSnakePiece extends Block
                 setLocation(targetX, targetY);
                 setCellX(lw.getCellX(targetX));
                 setCellY(lw.getCellY(targetY));
-                // if(followPiece != null) {
-                    // char a = directionToAdjacentPiece(followPiece);
-                    // System.out.println(a);
-                    // setFacingDirection(a);
-                // }
+                if(followPiece != null) {
+                    char a = directionToAdjacentPiece(followPiece);
+                    System.out.println(a);
+                    setFacingDirection(a);
+                }
                 
                 sliding = false;
             }
         }
+    }
+    
+    public boolean canMoveRight() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        // if(cellX >= lw.getGridXLength()-1) return false;
+        return cellX < lw.getGridXLength()-1;
+    }
+    
+    public boolean canMoveLeft() {
+        return getCellX() > 0;
+    }
+    
+    public boolean canMoveUp() {
+        return getCellY() > 0;
     }
     /**
      * Piece moves one cell to the right
