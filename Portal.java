@@ -22,5 +22,8 @@ public class Portal extends InteractiveObject
      * What happens when birdsnake hits this object
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
-    public void collide(BirdSnakePiece birdSnakePiece) {}
+    public void collide(BirdSnakePiece birdSnakePiece) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        lw.setLevel(lw.getLevel() + 1);
+    }
 }

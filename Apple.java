@@ -29,7 +29,9 @@ public class Apple extends Fruit
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
     public void collide(BirdSnakePiece birdSnakePiece) {
-    
+        BirdSnakeHead head = birdSnakePiece.getHeadPiece();
+        head.grow();
+        getWorld().removeObject(this);
     }
     
     public boolean shouldFall() {
