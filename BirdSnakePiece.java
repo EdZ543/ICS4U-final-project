@@ -25,6 +25,18 @@ public class BirdSnakePiece extends Block
         followPiece = null;
         speed = 5;
     }
+    /**
+     * @param cellX                 The x-position of the piece
+     * @param cellY                 The y-position of the piece
+     * @param facingDirection       The direction that this piece faces
+     */
+    public BirdSnakePiece(int cellX, int cellY, char facingDirection) {
+        super(cellX, cellY);
+        headPiece = null;
+        followPiece = null;
+        speed = 5;
+        setFacingDirection(facingDirection);
+    }
     // /**
      // * @param cellX                 The x-position of the piece
      // * @param cellY                 The y-position of the piece
@@ -65,6 +77,9 @@ public class BirdSnakePiece extends Block
         headPiece = head;
     }
     
+    public BirdSnakeHead getHeadPiece() {
+        return headPiece;
+    }
     public void setFollowPiece(BirdSnakePiece piece) {
         followPiece = piece;
         facingDirection = directionToAdjacentPiece(followPiece);
@@ -107,6 +122,10 @@ public class BirdSnakePiece extends Block
     
     public boolean canMoveUp() {
         return getCellY() > 0;
+    }
+    public boolean canMoveDown() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        return cellY < lw.getGridYLength()-1;
     }
     /**
      * Piece moves one cell to the right

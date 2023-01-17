@@ -46,22 +46,22 @@ public class BirdSnakeHead extends BirdSnakePiece
             clickCldwn--;
             moving = false;
         } else if(!sliding){
-            if(right) {
+            if(right && canMoveRight()) {
                 setFacingDirection('r');
                 shiftPieces();
                 moving = moveRight();
                 clickCldwn = 10;
-            } else if(down) {
+            } else if(down && canMoveDown()) {
                 setFacingDirection('d');
                 shiftPieces();
                 moving = moveDown();
                 clickCldwn = 10;
-            } else if(left) {
+            } else if(left && canMoveLeft()) {
                 setFacingDirection('l');
                 shiftPieces();
                 moving = moveLeft();
                 clickCldwn = 10;
-            } else if(up) {
+            } else if(up && canMoveUp()) {
                 setFacingDirection('u');
                 shiftPieces();
                 moving = moveUp();
