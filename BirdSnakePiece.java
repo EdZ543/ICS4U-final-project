@@ -25,6 +25,18 @@ public class BirdSnakePiece extends Block
         followPiece = null;
         speed = 5;
     }
+    /**
+     * @param cellX                 The x-position of the piece
+     * @param cellY                 The y-position of the piece
+     * @param facingDirection       The direction that this piece faces
+     */
+    public BirdSnakePiece(int cellX, int cellY, char facingDirection) {
+        super(cellX, cellY);
+        headPiece = null;
+        followPiece = null;
+        speed = 5;
+        setFacingDirection(facingDirection);
+    }
     // /**
      // * @param cellX                 The x-position of the piece
      // * @param cellY                 The y-position of the piece
