@@ -69,57 +69,58 @@ public class LevelWorld extends World
         // Generate pieces
         for (int y = 0; y < levelArray.length; y++) {
             for (int x = 0; x < levelArray[y].length(); x++) {
-                GridItem gridItem = null;
-
+                // Add non-snake pieces
                 switch(levelArray[y].charAt(x)) {
                     case '#':
-                        gridItem = new Dirt(x, y);
+                        grid[y][x] = new Dirt(x, y);
                         break;
+                    case 'P':
+                        grid[y][x] = new Portal(x, y);
+                        break;
+                    case 'A':
+                        grid[y][x] = new Apple(x, y);
+                        break;
+                    case 'C':
+                        grid[y][x] = new Crate(x, y);
+                        break;
+                }
+                if (grid[y][x] != null) addObject(grid[y][x], 0, 0);
+                
+                // Add snake pieces
+                switch(levelArray[y].charAt(x)) {
                     case '<':
                         if (!isSnakeBlock(levelArray, x - 1, y)) {
                             birdSnakeHead = new BirdSnakeHead(x, y, 'l');
-                            gridItem = birdSnakeHead;
+                            grid[y][x] = birdSnakeHead;
                             headX = x;
                             headY = y;
-                        } else gridItem = new BirdSnakePiece(x, y);
+                        } else grid[y][x] = new BirdSnakePiece(x, y);
                         break;
                     case '>':
                         if (!isSnakeBlock(levelArray, x + 1, y)) {
                             birdSnakeHead = new BirdSnakeHead(x, y, 'r');
-                            gridItem = birdSnakeHead;
+                            grid[y][x] = birdSnakeHead;
                             headX = x;
                             headY = y;
-                        } else gridItem = new BirdSnakePiece(x, y);
+                        } else grid[y][x] = new BirdSnakePiece(x, y);
                         break;
                     case '^':
                         if (!isSnakeBlock(levelArray, x, y - 1)) {
                             birdSnakeHead = new BirdSnakeHead(x, y, 'u');
-                            gridItem = birdSnakeHead;
+                            grid[y][x] = birdSnakeHead;
                             headX = x;
                             headY = y;
-                        } else gridItem = new BirdSnakePiece(x, y);
+                        } else grid[y][x] = new BirdSnakePiece(x, y);
                         break;
                     case 'v':
                         if (!isSnakeBlock(levelArray, x, y + 1)) {
                             birdSnakeHead = new BirdSnakeHead(x, y, 'd');
-                            gridItem = birdSnakeHead;
+                            grid[y][x] = birdSnakeHead;
                             headX = x;
                             headY = y;
-                        } else gridItem = new BirdSnakePiece(x, y);
-                        break;
-                    case 'P':
-                        gridItem = new Portal(x, y);
-                        break;
-                    case 'A':
-                        gridItem = new Apple(x, y);
-                        break;
-                    case 'C':
-                        gridItem = new Crate(x, y);
+                        } else grid[y][x] = new BirdSnakePiece(x, y);
                         break;
                 }
-
-                if (gridItem != null) addObject(gridItem, 0, 0);
-                grid[y][x] = gridItem;
             }
         }
 
@@ -137,22 +138,23 @@ public class LevelWorld extends World
         String[] levelArray = Levels.LEVELS[level];
 
         if (grid[y][x] != birdSnakeHead) {
-            BirdSnakePiece p = (BirdSnakePiece)grid[y][x];
-            birdSnakeHead.addPiece(p);
+            birdSnakeHead.addPiece((BirdSnakePiece)grid[y][x]);
         }
+        
+        addObject(grid[y][x], 0, 0);
 
         switch (levelArray[y].charAt(x)) {
             case '<':
                 if (isSnakeBlock(levelArray, x + 1, y)) connectBird(x + 1, y);
                 break;
             case '>':
-                if (isSnakeBlock(levelArray, x + 1, y)) connectBird(x - 1, y);
+                if (isSnakeBlock(levelArray, x - 1, y)) connectBird(x - 1, y);
                 break;
             case '^':
-                if (isSnakeBlock(levelArray, x + 1, y)) connectBird(x, y - 1);
+                if (isSnakeBlock(levelArray, x, y + 1)) connectBird(x, y + 1);
                 break;
             case 'v':
-                if (isSnakeBlock(levelArray, x + 1, y)) connectBird(x, y + 1);
+                if (isSnakeBlock(levelArray, x, y - 1)) connectBird(x, y - 1);
                 break;
         }
     }
