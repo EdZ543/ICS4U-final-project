@@ -65,6 +65,9 @@ public class BirdSnakePiece extends Block
         headPiece = head;
     }
     
+    public BirdSnakeHead getHeadPiece() {
+        return headPiece;
+    }
     public void setFollowPiece(BirdSnakePiece piece) {
         followPiece = piece;
         facingDirection = directionToAdjacentPiece(followPiece);
@@ -107,6 +110,10 @@ public class BirdSnakePiece extends Block
     
     public boolean canMoveUp() {
         return getCellY() > 0;
+    }
+    public boolean canMoveDown() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        return cellY < lw.getGridYLength()-1;
     }
     /**
      * Piece moves one cell to the right
