@@ -48,7 +48,7 @@ public class LevelWorld extends World
      * @return Whether the character is >, <, ^, v
      */
     private boolean isSnakeBlock(String[] levelArray, int x, int y) {
-        if (y < 0 || y > levelArray.length || x < 0 || x > levelArray[y].length()) return false;
+        if (y < 0 || y >= levelArray.length || x < 0 || x >= levelArray[y].length()) return false;
         char c = levelArray[y].charAt(x);
         return c == '>' || c == '<' || c == '^' || c == 'v';
     }
