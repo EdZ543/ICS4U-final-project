@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * The main game world.
@@ -28,7 +29,6 @@ public class LevelWorld extends World
         super(1200, 800, 1);
 
         setLevel(level);
-
     }
 
     /**
@@ -85,7 +85,7 @@ public class LevelWorld extends World
                         break;
                 }
                 if (grid[y][x] != null) addObject(grid[y][x], 0, 0);
-                
+
                 // Add snake pieces
                 switch(levelArray[y].charAt(x)) {
                     case '<':
@@ -140,7 +140,7 @@ public class LevelWorld extends World
         if (grid[y][x] != birdSnakeHead) {
             birdSnakeHead.addPiece((BirdSnakePiece)grid[y][x]);
         }
-        
+
         addObject(grid[y][x], 0, 0);
 
         switch (levelArray[y].charAt(x)) {
@@ -235,8 +235,35 @@ public class LevelWorld extends World
         return cellWidth;
     }
 
+    /**
+     * Method that makes everything in the world fall
+     */
     public void checkFalling() {
+        fallingTimer = 0;
+        falling = true;
 
+        while (falling) {
+            fallingTimer++;
+            if (fallingTimer % fallingDelay == 0) {
+                ArrayList<GridItem> toFall = new ArrayList<GridItem>();
+
+                for (int y = 0; y < grid.length; y++) {
+                    for (int x = 0; x < grid[y].length; x++) {
+                        if (grid[y][x].shouldFall()) {
+                            toFall.add(grid[y][x]);
+                        }
+                    }
+                }
+
+                if (toFall.size() > 0) {
+                    for (GridItem gi : toFall) {
+                        gi.setCellY(gi.getCellY() + 1);
+                    }
+                } else {
+                    falling = false;
+                }
+            }
+        }
     }
 
     /**

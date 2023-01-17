@@ -104,4 +104,13 @@ public abstract class GridItem extends Actor
         LevelWorld lw = (LevelWorld)getWorld();
         return lw.getItem(getCellX(), getCellY() + 1);
     }
+    
+    /**
+     * Checks whether this grid item should be falling right now
+     */
+    public boolean shouldFall() {
+        GridItem below = getItemBelow();
+        if (below == null || below.shouldFall()) return true;
+        return false;
+    }
 }

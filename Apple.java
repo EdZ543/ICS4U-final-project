@@ -28,5 +28,11 @@ public class Apple extends Fruit
      * What happens when birdsnake hits this object
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
-    public void collide(BirdSnakePiece birdSnakePiece) {}
+    public void collide(BirdSnakePiece birdSnakePiece) {
+    
+    }
+    
+    public boolean shouldFall() {
+        return false;
+    }
 }

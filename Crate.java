@@ -22,15 +22,4 @@ public class Crate extends Block
         image.scale(cellWidth, cellWidth);
         return image;
     }
-    
-    /**
-     * Act - do whatever the Crate wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() {}
-    
-    /**
-     * Makes crate move down, and stop falling it if lands on something.
-     */
-    public void fall() {}
 }
