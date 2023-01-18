@@ -16,6 +16,10 @@ public class EndWorld extends World
     public EndWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(1200, 800, 1); 
+        GreenfootImage bg = new GreenfootImage("temp/bg.png");
+        setBackground(bg);
+        Label titleLabel = new Label("You Win!", 80);
+        addObject(titleLabel, getWidth()/2, 100);
     }
 }

@@ -30,6 +30,31 @@ public class LevelWorld extends World
 
         setLevel(level);
     }
+    
+    public void act() {
+        if (falling) {
+            fallingTimer++;
+            if (fallingTimer % fallingDelay == 0) {
+                ArrayList<GridItem> toFall = new ArrayList<GridItem>();
+
+                for (int y = 0; y < grid.length; y++) {
+                    for (int x = 0; x < grid[y].length; x++) {
+                        if (grid[y][x].shouldFall()) {
+                            toFall.add(grid[y][x]);
+                        }
+                    }
+                }
+
+                if (toFall.size() > 0) {
+                    for (GridItem gi : toFall) {
+                        gi.setCellY(gi.getCellY() + 1);
+                    }
+                } else {
+                    falling = false;
+                }
+            }
+        }
+    }
 
     /**
      * Changes the level
@@ -266,29 +291,6 @@ public class LevelWorld extends World
     public void checkFalling() {
         fallingTimer = 0;
         falling = true;
-
-        while (falling) {
-            fallingTimer++;
-            if (fallingTimer % fallingDelay == 0) {
-                ArrayList<GridItem> toFall = new ArrayList<GridItem>();
-
-                for (int y = 0; y < grid.length; y++) {
-                    for (int x = 0; x < grid[y].length; x++) {
-                        if (grid[y][x].shouldFall()) {
-                            toFall.add(grid[y][x]);
-                        }
-                    }
-                }
-
-                if (toFall.size() > 0) {
-                    for (GridItem gi : toFall) {
-                        gi.setCellY(gi.getCellY() + 1);
-                    }
-                } else {
-                    falling = false;
-                }
-            }
-        }
     }
 
     /**
