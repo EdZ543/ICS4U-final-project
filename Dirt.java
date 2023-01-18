@@ -33,4 +33,8 @@ public class Dirt extends Block
     public boolean shouldFall() {
         return false;
     }
+    
+    public boolean push(int offsetX, int offsetY) {
+        return false;
+    }
 }

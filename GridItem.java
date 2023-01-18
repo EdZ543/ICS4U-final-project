@@ -109,15 +109,4 @@ public abstract class GridItem extends Actor
      * Returns whether this item should currently be falling
      */
     public abstract boolean shouldFall();
-    
-    /**
-     * Attempts to move the item in a certain direction
-     * 
-     * @param offsetX The number of cells to change the x position by
-     * @param offsetY The number of cells to change the y position by
-     * @return Whether the item was able to be pushed         
-     */
-    public boolean push(int offsetX, int offsetY) {
-        return false;
-    }
 }

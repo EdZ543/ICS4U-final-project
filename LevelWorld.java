@@ -39,7 +39,12 @@ public class LevelWorld extends World
 
                 for (int y = 0; y < grid.length; y++) {
                     for (int x = 0; x < grid[y].length; x++) {
-                        if (grid[y][x].shouldFall()) {
+                        if (grid[y][x] instanceof BirdSnakeHead) {
+                            if (((BirdSnakeHead)grid[y][x]).snakeShouldFall()) toFall.add(grid[y][x]);
+                        } else if (grid[y][x] instanceof BirdSnakePiece) {
+                           BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
+                           if (head.snakeShouldFall()) toFall.add(grid[y][x]);
+                        } if (grid[y][x].shouldFall()) {
                             toFall.add(grid[y][x]);
                         }
                     }

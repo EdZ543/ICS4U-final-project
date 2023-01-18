@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Crate extends Block
 {
-    protected boolean falling = false;
-    
     /**
      * Class constructor.
      */
@@ -29,5 +27,15 @@ public class Crate extends Block
         GridItem below = getItemBelow();
         if (below == null || below.shouldFall()) return true;
         return false;
+    }
+    
+    public boolean push(int offsetX, int offsetY) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        GridItem toPush = lw.getItem(cellX + offsetX, cellY + offsetY);
+        if (toPush == null || !(toPush instanceof Block) || ((Block)toPush).push(offsetX, offsetY)) {
+            setCellX(cellX + offsetX);
+            setCellY(cellY + offsetY);
+            return true;
+        }
     }
 }

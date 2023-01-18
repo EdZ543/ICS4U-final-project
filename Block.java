@@ -21,4 +21,13 @@ public abstract class Block extends GridItem
     public void addedToWorld(World w) {
         super.addedToWorld(w);
     }
+    
+    /**
+     * Attempts to move the item in a certain direction
+     * 
+     * @param offsetX The number of cells to change the x position by
+     * @param offsetY The number of cells to change the y position by
+     * @return Whether the item was able to be pushed         
+     */
+    public abstract boolean push(int offsetX, int offsetY);
 }
