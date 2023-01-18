@@ -14,6 +14,7 @@ public class BirdSnakePiece extends Block
     // sliding - move to GridItem
     protected int targetX, targetY, speed;
     protected boolean sliding;
+    int actCount;
     /**
      * Independant piece. Used for the BirdSnakeHead subclass
      * @param cellX                 The x-position of the piece
@@ -37,6 +38,9 @@ public class BirdSnakePiece extends Block
         speed = 5;
         setFacingDirection(facingDirection);
     }
+    public boolean push(int xOffset, int yOffset) {
+        return false;
+    }
     // /**
      // * @param cellX                 The x-position of the piece
      // * @param cellY                 The y-position of the piece
@@ -58,10 +62,16 @@ public class BirdSnakePiece extends Block
     }
     public void act() {
         slideAct();
-        if(headPiece !=null && headPiece.isMoving()) {
-            int[] pos = getOffsetFromDirection(facingDirection);
-            startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
+        if(actCount <= 0) {
+            System.out.println(headPiece);
+            actCount = 60;
         }
+        // System.out.println(headPiece);
+        actCount --;
+        // if(headPiece !=null && headPiece.isMoving()) {
+            // int[] pos = getOffsetFromDirection(facingDirection);
+            // startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
+        // }
         
     }
     public void addedToWorld(World w) {
@@ -89,6 +99,14 @@ public class BirdSnakePiece extends Block
         return sliding;
     }
     
+    public boolean shouldFall() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        if (cellY == lw.getGridYLength() - 1) return false;
+        // GridItem below = getItemBelow();
+        // if (below != null && !below.shouldFall()) return false;
+        return true;
+    }
+    
     public void slideAct() {
         if(sliding) {
             int xSpeed = targetX-getX()>0 ? 1 : targetX-getX()<0 ? -1 : 0;
@@ -104,7 +122,7 @@ public class BirdSnakePiece extends Block
                     System.out.println(a);
                     setFacingDirection(a);
                 }
-                
+                lw.checkFalling();
                 sliding = false;
             }
         }
@@ -112,20 +130,24 @@ public class BirdSnakePiece extends Block
     
     public boolean canMoveRight() {
         LevelWorld lw = (LevelWorld)getWorld();
-        // if(cellX >= lw.getGridXLength()-1) return false;
-        return cellX < lw.getGridXLength()-1;
+        if(cellX >= lw.getGridXLength()-1)return false;
+        // return !(getItemRight() instanceof Dirt);
+        return true;
     }
     
     public boolean canMoveLeft() {
-        return getCellX() > 0;
+        if(getCellX() <= 0) return false;
+        return !(getItemLeft() instanceof Dirt);
     }
     
     public boolean canMoveUp() {
-        return getCellY() > 0;
+        if(getCellY() <= 0) return false;
+        return !(getItemAbove() instanceof Dirt);
     }
     public boolean canMoveDown() {
         LevelWorld lw = (LevelWorld)getWorld();
-        return cellY < lw.getGridYLength()-1;
+        if(cellY >= lw.getGridYLength()-1) return false;
+        return !(getItemBelow() instanceof Dirt);
     }
     /**
      * Piece moves one cell to the right

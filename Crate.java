@@ -37,5 +37,6 @@ public class Crate extends Block
             setCellY(cellY + offsetY);
             return true;
         }
+        return false;
     }
 }

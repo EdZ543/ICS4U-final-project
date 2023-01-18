@@ -36,7 +36,7 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     public void act()
     {
-        
+        LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
         boolean up = Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up");
         boolean down = Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down");
@@ -51,21 +51,25 @@ public class BirdSnakeHead extends BirdSnakePiece
                 shiftPieces();
                 moving = moveRight();
                 clickCldwn = 10;
+                // lw.checkFalling();
             } else if(down && canMoveDown()) {
                 setFacingDirection('d');
                 shiftPieces();
                 moving = moveDown();
                 clickCldwn = 10;
+                // lw.checkFalling();
             } else if(left && canMoveLeft()) {
                 setFacingDirection('l');
                 shiftPieces();
                 moving = moveLeft();
                 clickCldwn = 10;
+                // lw.checkFalling();
             } else if(up && canMoveUp()) {
                 setFacingDirection('u');
                 shiftPieces();
                 moving = moveUp();
                 clickCldwn = 10;
+                // lw.checkFalling();
             } else if(Greenfoot.isKeyDown("l")) {
                 grow();
                 clickCldwn = 10;
@@ -84,10 +88,15 @@ public class BirdSnakeHead extends BirdSnakePiece
             }
         }
     }
-    // public boolean initBirdSnake() {
-        
-    // }
     
+    public boolean snakeShouldFall() {
+        if(!shouldFall()) return false;
+        for(BirdSnakePiece piece : bodyPieces) {
+            if(!piece.shouldFall()) return false;
+        }
+        return true;
+    }
+   
     public boolean isMoving() {
         return moving;
     }
@@ -104,14 +113,18 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     
     public void addPiece(BirdSnakePiece piece) {
-        if(bodyPieces.size() ==0) {
-            piece.setFollowPiece(this);
-        } else {
-            piece.setFollowPiece(bodyPieces.get(bodyPieces.size()-1));
-        }
-        piece.setHeadPiece(this);   
-        System.out.println("hi");
-        bodyPieces.add(piece);
+        // if(bodyPieces.size() ==0) {
+            // piece.setFollowPiece(this);
+        // } else {
+            // piece.setFollowPiece(bodyPieces.get(bodyPieces.size()-1));
+        // }
+        piece.setHeadPiece(this);
+        System.out.println(piece.getCellX() + ", " + piece.getCellY());
+        // bodyPieces.add(piece);
+        // if(bodyPieces.size() == 0) {
+            // bodyPieces.add(piece);
+        // } el
+        bodyPieces.add(0, piece);
     }
     /**
      * Add piece
