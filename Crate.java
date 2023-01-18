@@ -22,4 +22,12 @@ public class Crate extends Block
         image.scale(cellWidth, cellWidth);
         return image;
     }
+    
+    public boolean shouldFall() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        if (cellY == lw.getGridYLength() - 1) return true;
+        GridItem below = getItemBelow();
+        if (below == null || below.shouldFall()) return true;
+        return false;
+    }
 }

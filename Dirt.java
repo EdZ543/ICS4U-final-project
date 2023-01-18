@@ -29,4 +29,8 @@ public class Dirt extends Block
         image.fill();
         return image;
     }
+    
+    public boolean shouldFall() {
+        return false;
+    }
 }

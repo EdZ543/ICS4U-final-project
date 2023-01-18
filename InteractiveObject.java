@@ -17,4 +17,8 @@ public abstract class InteractiveObject extends GridItem
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
     public abstract void collide(BirdSnakePiece birdSnakePiece);
+    
+    public boolean shouldFall() {
+        return false;
+    }
 }

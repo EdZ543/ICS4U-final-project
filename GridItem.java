@@ -106,11 +106,18 @@ public abstract class GridItem extends Actor
     }
     
     /**
-     * Checks whether this grid item should be falling right now
+     * Returns whether this item should currently be falling
      */
-    public boolean shouldFall() {
-        GridItem below = getItemBelow();
-        if (below == null || below.shouldFall()) return true;
+    public abstract boolean shouldFall();
+    
+    /**
+     * Attempts to move the item in a certain direction
+     * 
+     * @param offsetX The number of cells to change the x position by
+     * @param offsetY The number of cells to change the y position by
+     * @return Whether the item was able to be pushed         
+     */
+    public boolean push(int offsetX, int offsetY) {
         return false;
     }
 }
