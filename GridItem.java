@@ -77,7 +77,6 @@ public abstract class GridItem extends Actor
                 setCellY(lw.getCellY(slideToY));
                 
                 onSlideFinished();
-                lw.checkFalling();
                 sliding = false;
             }
         }

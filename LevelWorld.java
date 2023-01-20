@@ -33,7 +33,6 @@ public class LevelWorld extends World
     
     public void act() {
         if (falling) {
-            fallingTimer++;
             if (fallingTimer % fallingDelay == 0) {
                 ArrayList<GridItem> toFall = new ArrayList<GridItem>();
 
@@ -53,12 +52,13 @@ public class LevelWorld extends World
 
                 if (toFall.size() > 0) {
                     for (GridItem gi : toFall) {
-                        gi.setCellY(gi.getCellY() + 1);
+                        gi.startSlideToTargetCell(gi.getCellX(), gi.getCellY() + 1, 5);
                     }
                 } else {
                     falling = false;
                 }
             }
+            fallingTimer++;
         }
     }
 
