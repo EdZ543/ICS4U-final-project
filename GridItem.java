@@ -86,7 +86,7 @@ public abstract class GridItem extends Actor
      */
     protected GridItem getItemRight() {
         LevelWorld lw = (LevelWorld)getWorld();
-        return lw.getItem(getCellX(), getCellY() + 1);
+        return lw.getItem(getCellX()+1, getCellY());
     }
     
     /**
