@@ -46,10 +46,6 @@ public class BirdSnakePiece extends Block
     public void act() {
         slideAct();
         if(actCount <= 0) {
-<<<<<<< HEAD
-=======
-            // System.out.println(this);
->>>>>>> a912e98f17506ea0a585ed159286255e835f85e1
             actCount = 60;
         }
         actCount --;
@@ -79,45 +75,15 @@ public class BirdSnakePiece extends Block
     
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
-<<<<<<< HEAD
         if (cellY == lw.getGridYLength() - 1) return true;
         GridItem below = getItemBelow();
         if (below == null || below.shouldFall()) return true;
         return false;
     }
     
-    public void slideAct() {
-        if(sliding) {
-            int xSpeed = targetX-getX()>0 ? 1 : targetX-getX()<0 ? -1 : 0;
-            int ySpeed = targetY-getY()>0 ? 1 : targetY-getY()<0 ? -1 : 0;
-            slide(xSpeed*speed, ySpeed*speed);
-            if(Math.abs(targetX-getX()) <= speed && Math.abs(targetY-getY()) <= speed) {
-                LevelWorld lw = (LevelWorld)getWorld();
-                setLocation(targetX, targetY);
-                setCellX(lw.getCellX(targetX));
-                setCellY(lw.getCellY(targetY));
-                if(followPiece != null) {
-                    char a = directionToAdjacentPiece(followPiece);
-                    setFacingDirection(a);
-                }
-                lw.checkFalling();
-                sliding = false;
-            }
-        }
-    }
-=======
-        if (cellY == lw.getGridYLength() - 1) return false;
-        GridItem below = getItemBelow();
-        if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
-        return true;
-    }
-
->>>>>>> a912e98f17506ea0a585ed159286255e835f85e1
-    
     public boolean canMoveRight() {
         LevelWorld lw = (LevelWorld)getWorld();
         if(cellX >= lw.getGridXLength()-1)return false;
-        System.out.println(getItemRight());
         return !(getItemRight() instanceof Block);
     }
     
