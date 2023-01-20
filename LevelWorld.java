@@ -101,9 +101,9 @@ public class LevelWorld extends World
      * @param y the y position being checked
      */
     private boolean isTail(String[] levelArray, int x, int y) {
-        if (x - 1 > 0 && levelArray[y].charAt(x - 1) == '>') return false;
+        if (x - 1 >= 0 && levelArray[y].charAt(x - 1) == '>') return false;
         if (x + 1 < levelArray[y].length() && levelArray[y].charAt(x + 1) == '<') return false;
-        if (y - 1 > 0 && levelArray[y - 1].charAt(x) == 'v') return false;
+        if (y - 1 >= 0 && levelArray[y - 1].charAt(x) == 'v') return false;
         if (y + 1 < levelArray.length && levelArray[y + 1].charAt(x) == '^') return false;
         return true;
     }

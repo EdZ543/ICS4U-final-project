@@ -118,7 +118,7 @@ public abstract class GridItem extends Actor
      */
     protected void setCellX(int cellNumber) {
         LevelWorld lw = (LevelWorld)getWorld();
-        lw.changeGrid(cellX, cellY, null);
+        if (lw.getItem(cellX, cellY) == this) lw.changeGrid(cellX, cellY, null);
         cellX = cellNumber;
         updateLocation();
         lw.changeGrid(cellX, cellY, this);
@@ -130,7 +130,7 @@ public abstract class GridItem extends Actor
      */
     protected void setCellY(int cellNumber) {
         LevelWorld lw = (LevelWorld)getWorld();
-        lw.changeGrid(cellX, cellY, null);
+        if (lw.getItem(cellX, cellY) == this) lw.changeGrid(cellX, cellY, null);
         cellY = cellNumber;
         updateLocation();
         lw.changeGrid(cellX, cellY, this);
