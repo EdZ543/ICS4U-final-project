@@ -75,7 +75,7 @@ public abstract class GridItem extends Actor
                 setLocation(slideToX, slideToY);
                 setCellX(lw.getCellX(slideToX));
                 setCellY(lw.getCellY(slideToY));
-                
+                lw.checkFalling();
                 onSlideFinished();
                 sliding = false;
             }
