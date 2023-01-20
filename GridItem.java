@@ -41,18 +41,30 @@ public abstract class GridItem extends Actor
         setLocation(lw.getCoordinateX(cellX), lw.getCoordinateY(cellY));
     }
     
+    /**
+     * @return boolean          GridItem is sliding
+     */
     public boolean isSliding() {
         return sliding;
     }
-    
+    /**
+     * Move GridItem at an offset of speedX and speedY
+     * @param speedX            x movement
+     * @param speedY            y movement
+     */
     public void slide(int speedX, int speedY) {
         setLocation(getX() + speedX, getY() + speedY);
     }
-    
+    /**
+     * Optional method that can be overridden if GridItem needs to do something after sliding
+     */
     public void onSlideFinished() {
         return;
     }
     
+    /**
+     * Call at the start of the act of any GridItem that needs to slide
+     */
     public void slideAct() {
         if(sliding) {
             int xSpeed = slideToX-getX()>0 ? 1 : slideToX-getX()<0 ? -1 : 0;
