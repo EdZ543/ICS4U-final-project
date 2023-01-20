@@ -43,7 +43,6 @@ public class LevelWorld extends World
                         if (grid[y][x] instanceof BirdSnakeHead) {
                             if (((BirdSnakeHead)grid[y][x]).snakeShouldFall()) toFall.add(grid[y][x]);
                         } else if (grid[y][x] instanceof BirdSnakePiece) {
-                            
                            BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
                            if (head.snakeShouldFall()) toFall.add(grid[y][x]);
                         } else if (grid[y][x].shouldFall()) {
@@ -70,7 +69,7 @@ public class LevelWorld extends World
      */
     public void setLevel(int level) {
         this.level = level;
-        createLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+        renderLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
     }
     
     /**
@@ -114,7 +113,7 @@ public class LevelWorld extends World
      * 
      * @param levelArray The 2D array
      */
-    public void createLevel(int cellWidth, int gridXOffset, int gridYOffset, String[] levelArray) {
+    public void renderLevel(int cellWidth, int gridXOffset, int gridYOffset, String[] levelArray) {
         this.cellWidth = cellWidth;
         this.gridXOffset = gridXOffset;
         this.gridYOffset = gridYOffset;
@@ -305,5 +304,12 @@ public class LevelWorld extends World
      */
     public boolean getFalling() {
         return falling;
+    }
+    
+    /**
+     * Alters the grid array
+     */
+    public void changeGrid(int x, int y, GridItem item) {
+        grid[y][x] = item;
     }
 }

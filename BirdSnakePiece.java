@@ -63,7 +63,6 @@ public class BirdSnakePiece extends Block
     public void act() {
         slideAct();
         if(actCount <= 0) {
-            System.out.println(headPiece);
             actCount = 60;
         }
         // System.out.println(headPiece);
@@ -101,10 +100,10 @@ public class BirdSnakePiece extends Block
     
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
-        if (cellY == lw.getGridYLength() - 1) return false;
-        // GridItem below = getItemBelow();
-        // if (below != null && !below.shouldFall()) return false;
-        return true;
+        if (cellY == lw.getGridYLength() - 1) return true;
+        GridItem below = getItemBelow();
+        if (below == null || below.shouldFall()) return true;
+        return false;
     }
     
     public void slideAct() {
@@ -119,7 +118,6 @@ public class BirdSnakePiece extends Block
                 setCellY(lw.getCellY(targetY));
                 if(followPiece != null) {
                     char a = directionToAdjacentPiece(followPiece);
-                    System.out.println(a);
                     setFacingDirection(a);
                 }
                 lw.checkFalling();

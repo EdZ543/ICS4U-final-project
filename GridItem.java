@@ -60,8 +60,11 @@ public abstract class GridItem extends Actor
      * @param cellNumber y location in terms of grid coordinates
      */
     protected void setCellX(int cellNumber) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        lw.changeGrid(cellX, cellY, null);
         cellX = cellNumber;
         updateLocation();
+        lw.changeGrid(cellX, cellY, this);
     }
 
     /**
@@ -69,8 +72,11 @@ public abstract class GridItem extends Actor
      * @param cellNumber y location in terms of grid coordinates
      */
     protected void setCellY(int cellNumber) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        lw.changeGrid(cellX, cellY, null);
         cellY = cellNumber;
         updateLocation();
+        lw.changeGrid(cellX, cellY, this);
     }
 
     /**
