@@ -40,12 +40,22 @@ public class LevelWorld extends World
                     for (int x = 0; x < grid[y].length; x++) {
                         if(grid[y][x] == null) continue;
                         if (grid[y][x] instanceof BirdSnakeHead) {
-                            if (((BirdSnakeHead)grid[y][x]).snakeShouldFall()) toFall.add(grid[y][x]);
-                        } else if (grid[y][x] instanceof BirdSnakePiece) {
-                           BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
-                           if (head.snakeShouldFall()) toFall.add(grid[y][x]);
-                        } else if (grid[y][x].shouldFall()) {
-                            toFall.add(grid[y][x]);
+                            if (((BirdSnakeHead)grid[y][x]).snakeShouldFall()) {
+                                for(BirdSnakePiece p : ((BirdSnakeHead)grid[y][x]).getPieces()) {
+                                    toFall.add(p);
+                                }
+                                toFall.add(grid[y][x]);
+                            } else if(grid[y][x] instanceof BirdSnakePiece) {
+                                
+                            } else if(grid[y][x].shouldFall()) {
+                                toFall.add(grid[y][x]);
+                            }
+                        // } else if (grid[y][x] instanceof BirdSnakePiece) {
+                           // BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
+                           // System.out.println(head.snakeShouldFall());
+                           // if (head.snakeShouldFall()) toFall.add(grid[y][x]);
+                        // } else if (grid[y][x].shouldFall()) {
+                            // toFall.add(grid[y][x]);
                         }
                     }
                 }
