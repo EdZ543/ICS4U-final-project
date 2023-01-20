@@ -10,7 +10,9 @@ public abstract class GridItem extends Actor
 {
     protected int cellX, cellY;
     protected GreenfootImage image;
-
+    protected boolean sliding;
+    protected int slideToX, slideToY;
+    protected int speed;
     /**
      * GridItem constructor
      * @param cellX The x position of the item
@@ -37,6 +39,61 @@ public abstract class GridItem extends Actor
     public void updateLocation() {
         LevelWorld lw = (LevelWorld)getWorld();
         setLocation(lw.getCoordinateX(cellX), lw.getCoordinateY(cellY));
+    }
+    
+    /**
+     * @return boolean          GridItem is sliding
+     */
+    public boolean isSliding() {
+        return sliding;
+    }
+    /**
+     * Move GridItem at an offset of speedX and speedY
+     * @param speedX            x movement
+     * @param speedY            y movement
+     */
+    public void slide(int speedX, int speedY) {
+        setLocation(getX() + speedX, getY() + speedY);
+    }
+    /**
+     * Optional method that can be overridden if GridItem needs to do something after sliding
+     */
+    public void onSlideFinished() {
+        return;
+    }
+    
+    /**
+     * Call at the start of the act of any GridItem that needs to slide
+     */
+    public void slideAct() {
+        if(sliding) {
+            int xSpeed = slideToX-getX()>0 ? 1 : slideToX-getX()<0 ? -1 : 0;
+            int ySpeed = slideToY-getY()>0 ? 1 : slideToY-getY()<0 ? -1 : 0;
+            slide(xSpeed*speed, ySpeed*speed);
+            if(Math.abs(slideToX-getX()) <= speed && Math.abs(slideToY-getY()) <= speed) {
+                LevelWorld lw = (LevelWorld)getWorld();
+                setLocation(slideToX, slideToY);
+                setCellX(lw.getCellX(slideToX));
+                setCellY(lw.getCellY(slideToY));
+                
+                onSlideFinished();
+                lw.checkFalling();
+                sliding = false;
+            }
+        }
+    }
+    
+    /** 
+     * sliding "animation" instead of pieces teleporting btwn cells
+     * @param x        The x-position where the piece will end up
+     * @param y        The y-position where the piece will end up
+     */
+    public void startSlideToTargetCell(int x, int y, int speed) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        slideToX = lw.getCoordinateX(x);
+        slideToY = lw.getCoordinateY(y);
+        this.speed = speed;
+        sliding = true;
     }
 
     /**
