@@ -72,9 +72,10 @@ public abstract class GridItem extends Actor
             slide(xSpeed*speed, ySpeed*speed);
             if(Math.abs(slideToX-getX()) <= speed && Math.abs(slideToY-getY()) <= speed) {
                 LevelWorld lw = (LevelWorld)getWorld();
-                setLocation(slideToX, slideToY);
-                setCellX(lw.getCellX(slideToX));
-                setCellY(lw.getCellY(slideToY));
+                // setLocation(slideToX, slideToY);
+                setCellXY(lw.getCellX(slideToX), lw.getCellY(slideToY));
+                // setCellX(lw.getCellX(slideToX));
+                // setCellY(lw.getCellY(slideToY));
                 lw.checkFalling();
                 onSlideFinished();
                 sliding = false;
@@ -116,11 +117,7 @@ public abstract class GridItem extends Actor
      * @param cellNumber y location in terms of grid coordinates
      */
     protected void setCellX(int cellNumber) {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if (lw.getItem(cellX, cellY) == this) lw.changeGrid(cellX, cellY, null);
-        cellX = cellNumber;
-        updateLocation();
-        lw.changeGrid(cellX, cellY, this);
+        setCellXY(cellNumber, cellY);
     }
 
     /**
@@ -128,9 +125,18 @@ public abstract class GridItem extends Actor
      * @param cellNumber y location in terms of grid coordinates
      */
     protected void setCellY(int cellNumber) {
+        setCellXY(cellX, cellNumber);
+    }
+    /**
+     * Sets x and y coordinate in grid
+     * @param cellX     x location in terms of grid coordinates
+     * @param cellY     y location in terms of grid coordiantes
+     */
+    protected void setCellXY(int cellX, int cellY) {
         LevelWorld lw = (LevelWorld)getWorld();
-        if (lw.getItem(cellX, cellY) == this) lw.changeGrid(cellX, cellY, null);
-        cellY = cellNumber;
+        if(lw.getItem(this.cellX, this.cellY) == this) lw.changeGrid(this.cellX, this.cellY, null);
+        this.cellX = cellX;
+        this.cellY = cellY;
         updateLocation();
         lw.changeGrid(cellX, cellY, this);
     }
