@@ -119,7 +119,7 @@ public class BirdSnakeHead extends BirdSnakePiece
             // piece.setFollowPiece(bodyPieces.get(bodyPieces.size()-1));
         // }
         piece.setHeadPiece(this);
-        System.out.println(piece.getCellX() + ", " + piece.getCellY());
+        // System.out.println(piece.getCellX() + ", " + piece.getCellY());
         // bodyPieces.add(piece);
         // if(bodyPieces.size() == 0) {
             // bodyPieces.add(piece);

@@ -11,9 +11,6 @@ public class BirdSnakePiece extends Block
     private BirdSnakeHead headPiece;
     private BirdSnakePiece followPiece;
     protected char facingDirection;
-    // sliding - move to GridItem
-    protected int targetX, targetY, speed;
-    protected boolean sliding;
     int actCount;
     /**
      * Independant piece. Used for the BirdSnakeHead subclass
@@ -41,20 +38,6 @@ public class BirdSnakePiece extends Block
     public boolean push(int xOffset, int yOffset) {
         return false;
     }
-    // /**
-     // * @param cellX                 The x-position of the piece
-     // * @param cellY                 The y-position of the piece
-     // * @param headPiece             The BirdSnakeHead to which this piece belongs
-     // * @param followPiece           The BirdSnakePiece that this piece is behind
-     // */
-    // public BirdSnakePiece(int cellX, int cellY, BirdSnakeHead headPiece, BirdSnakePiece followPiece) {
-        // super(cellX, cellY);
-        // this.headPiece = headPiece;
-        // this.followPiece = followPiece;
-        // facingDirection = directionToAdjacentPiece(followPiece);
-        // speed = 8;
-    // }
-    
     protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("temp/birdsnakepiece1.png");
         image.scale(cellWidth+1, cellWidth+1);
@@ -63,26 +46,22 @@ public class BirdSnakePiece extends Block
     public void act() {
         slideAct();
         if(actCount <= 0) {
-            System.out.println(headPiece);
+            // System.out.println(this);
             actCount = 60;
         }
-        // System.out.println(headPiece);
         actCount --;
-        // if(headPiece !=null && headPiece.isMoving()) {
-            // int[] pos = getOffsetFromDirection(facingDirection);
-            // startSlideToTargetCell(followPiece.getCellX(), followPiece.getCellY(), speed);
-        // }
         
     }
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        // if(headPiece == null)return;
-        // int cellWidth = ((LevelWorld)w).getCellWidth();
-        // image = new GreenfootImage("temp/birdsnakepiece" + headPiece.getBodyLength()%2 + ".png");
-        // image.scale(cellWidth, cellWidth);
-        // setImage(image);
     }
     
+    public void onSlideFinished() {
+        if(followPiece != null) {
+            char a = directionToAdjacentPiece(followPiece);
+            setFacingDirection(a);
+        }
+    }
     public void setHeadPiece(BirdSnakeHead head) {
         headPiece = head;
     }
@@ -95,59 +74,35 @@ public class BirdSnakePiece extends Block
         facingDirection = directionToAdjacentPiece(followPiece);
     }
     
-    public boolean isSliding() {
-        return sliding;
-    }
-    
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
         if (cellY == lw.getGridYLength() - 1) return false;
-        // GridItem below = getItemBelow();
-        // if (below != null && !below.shouldFall()) return false;
+        GridItem below = getItemBelow();
+        if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
         return true;
     }
-    
-    public void slideAct() {
-        if(sliding) {
-            int xSpeed = targetX-getX()>0 ? 1 : targetX-getX()<0 ? -1 : 0;
-            int ySpeed = targetY-getY()>0 ? 1 : targetY-getY()<0 ? -1 : 0;
-            slide(xSpeed*speed, ySpeed*speed);
-            if(Math.abs(targetX-getX()) <= speed && Math.abs(targetY-getY()) <= speed) {
-                LevelWorld lw = (LevelWorld)getWorld();
-                setLocation(targetX, targetY);
-                setCellX(lw.getCellX(targetX));
-                setCellY(lw.getCellY(targetY));
-                if(followPiece != null) {
-                    char a = directionToAdjacentPiece(followPiece);
-                    System.out.println(a);
-                    setFacingDirection(a);
-                }
-                lw.checkFalling();
-                sliding = false;
-            }
-        }
-    }
+
     
     public boolean canMoveRight() {
         LevelWorld lw = (LevelWorld)getWorld();
         if(cellX >= lw.getGridXLength()-1)return false;
-        // return !(getItemRight() instanceof Dirt);
-        return true;
+        System.out.println(getItemRight());
+        return !(getItemRight() instanceof Block);
     }
     
     public boolean canMoveLeft() {
         if(getCellX() <= 0) return false;
-        return !(getItemLeft() instanceof Dirt);
+        return !(getItemLeft() instanceof Block);
     }
     
     public boolean canMoveUp() {
         if(getCellY() <= 0) return false;
-        return !(getItemAbove() instanceof Dirt);
+        return !(getItemAbove() instanceof Block);
     }
     public boolean canMoveDown() {
         LevelWorld lw = (LevelWorld)getWorld();
         if(cellY >= lw.getGridYLength()-1) return false;
-        return !(getItemBelow() instanceof Dirt);
+        return !(getItemBelow() instanceof Block);
     }
     /**
      * Piece moves one cell to the right
@@ -186,10 +141,6 @@ public class BirdSnakePiece extends Block
         if(cellY >= lw.getGridYLength()-1) return false;
         startSlideToTargetCell(getCellX(), getCellY()+1, speed);
         return true;
-    }
-    
-    public void slide(int speedX, int speedY) {
-        setLocation(getX() + speedX, getY() + speedY);
     }
     
     /**
@@ -253,18 +204,7 @@ public class BirdSnakePiece extends Block
         return pos;
     }
     
-    /** 
-     * sliding "animation" instead of pieces teleporting btwn cells
-     * @param x        The x-position where the piece will end up
-     * @param y        The y-position where the piece will end up
-     */
-    public void startSlideToTargetCell(int x, int y, int speed) {
-        LevelWorld lw = (LevelWorld)getWorld();
-        targetX = lw.getCoordinateX(x);
-        targetY = lw.getCoordinateY(y);
-        this.speed = speed;
-        sliding = true;
-    }
+    
     /**
      * OPTIONAL: effect that gives visual feedback to the player, to show that they can't move in 
      * that direction, due to some sort of obstacle
