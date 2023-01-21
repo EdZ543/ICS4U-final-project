@@ -16,7 +16,7 @@ public class Crate extends Block
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage("images/crate.jpeg");
+        image = new GreenfootImage("images/crate.png");
         image.scale(cellWidth, cellWidth);
         return image;
     }

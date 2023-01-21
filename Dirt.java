@@ -21,12 +21,27 @@ public class Dirt extends Block
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         LevelWorld lw = (LevelWorld)w;
+        if(!(getItemAbove() instanceof Dirt)){
+            Foliage grass = new Foliage(this, "grass");
+            w.addObject(grass, 0, 0);
+        }
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage(cellWidth, cellWidth);
-        image.setColor(Color.BLUE);
-        image.fill();
+        int rand = Greenfoot.getRandomNumber(100);
+        if(rand < 30) {
+            image = new GreenfootImage("dirt0.png");
+        } else if(rand<50) {
+            image = new GreenfootImage("dirt1.png");
+        } else if(rand < 60) {
+            image = new GreenfootImage("dirt2.png");
+        } else if(rand < 80){
+            image = new GreenfootImage("dirt3.png");
+        } else {
+            image = new GreenfootImage("dirt4.png");
+        }
+        
+        image.scale(cellWidth, cellWidth);
         return image;
     }
     
