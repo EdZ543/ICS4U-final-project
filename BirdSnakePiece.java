@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class BirdSnakePiece here.
  * 
  * @author Caden Chan
- * @version (a version number or a date)
+ * @version 2023.01.20
  */
 public class BirdSnakePiece extends Block
 {
@@ -45,11 +45,6 @@ public class BirdSnakePiece extends Block
     }
     public void act() {
         slideAct();
-        if(actCount <= 0) {
-            actCount = 60;
-        }
-        actCount --;
-        
     }
     public void addedToWorld(World w) {
         super.addedToWorld(w);
@@ -75,10 +70,10 @@ public class BirdSnakePiece extends Block
     
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
-        if (cellY == lw.getGridYLength() - 1) return true;
+        if (cellY == lw.getGridYLength() - 1) return false;
         GridItem below = getItemBelow();
-        if (below == null || below.shouldFall()) return true;
-        return false;
+        if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
+        return true;
     }
     
     public boolean canMoveRight() {
@@ -101,43 +96,8 @@ public class BirdSnakePiece extends Block
         if(cellY >= lw.getGridYLength()-1) return false;
         return !(getItemBelow() instanceof Block);
     }
-    /**
-     * Piece moves one cell to the right
-     */
-    public boolean moveRight() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(cellX >= lw.getGridXLength()-1) return false;
-        startSlideToTargetCell(getCellX()+1, getCellY(), speed);
-        return true;
-    }
-    
-    /**
-     * Piece moves one cell to the left
-     */
-    public boolean moveLeft() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(getCellX() <= 0) return false;
-        startSlideToTargetCell(getCellX()-1, getCellY(), speed);
-        return true;
-    }
-    
-    /**
-     * Piece moves one cell up
-     */
-    public boolean moveUp() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(getCellY() <= 0) return false;
-        startSlideToTargetCell(getCellX(), getCellY()-1, speed);
-        return true;
-    }
-    /**
-     * Piece moves one cell down
-     */
-    public boolean moveDown() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(cellY >= lw.getGridYLength()-1) return false;
-        startSlideToTargetCell(getCellX(), getCellY()+1, speed);
-        return true;
+    public void movePiece(int xOffset, int yOffset) {
+        startSlideToTargetCell(getCellX() + xOffset, getCellY() + yOffset, speed);
     }
     
     /**
