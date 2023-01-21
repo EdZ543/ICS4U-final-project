@@ -5,13 +5,13 @@ import java.util.ArrayList;
  * Write a description of class BirdSnakeHead here.
  * 
  * @author Caden Chan
- * @version (a version number or a date)
+ * @version 2023.01.20
  */
 public class BirdSnakeHead extends BirdSnakePiece
 {
     // private int facingDirection; 
     private int clickCldwn;
-    private boolean moving;
+    private final int COOLDOWN = 15;
     private ArrayList<BirdSnakePiece> bodyPieces;
     /**
      * @param cellX         The x-position of the head
@@ -19,11 +19,9 @@ public class BirdSnakeHead extends BirdSnakePiece
      */
     public BirdSnakeHead(int cellX, int cellY, char facingDirection) {
         super(cellX, cellY);
-        // this.facingDirection = facingDirection;
         setFacingDirection(facingDirection);
         bodyPieces = new ArrayList<BirdSnakePiece>();
         clickCldwn = 0;
-        moving = false;
     }
     
     public void addedToWorld(World w) {
@@ -38,44 +36,32 @@ public class BirdSnakeHead extends BirdSnakePiece
     {
         LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
-        boolean up = Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up");
-        boolean down = Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down");
-        boolean left = Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left");
-        boolean right = Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right");
         if(clickCldwn>0) {
             clickCldwn--;
-            moving = false;
         } else if(!sliding){
-            if(right && canMoveRight()) {
+            boolean up = (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) && canMoveUp();
+            boolean down = (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) && canMoveDown();
+            boolean left = (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) && canMoveLeft();
+            boolean right = (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) && canMoveRight();
+            boolean acted = up || down || left || right;
+            if(acted) {
+                shiftPieces();
+                clickCldwn = COOLDOWN;
+            }
+            if(right) {
                 setFacingDirection('r');
-                shiftPieces();
-                moving = moveRight();
-                clickCldwn = 10;
-                // lw.checkFalling();
-            } else if(down && canMoveDown()) {
+                movePiece(1, 0);
+            } else if(down) {
                 setFacingDirection('d');
-                shiftPieces();
-                moving = moveDown();
-                clickCldwn = 10;
-                // lw.checkFalling();
-            } else if(left && canMoveLeft()) {
+                movePiece(0, 1);
+            } else if(left) {
                 setFacingDirection('l');
-                shiftPieces();
-                moving = moveLeft();
-                clickCldwn = 10;
-                // lw.checkFalling();
-            } else if(up && canMoveUp()) {
+                movePiece(-1, 0);
+            } else if(up) {
                 setFacingDirection('u');
-                shiftPieces();
-                moving = moveUp();
-                clickCldwn = 10;
-                // lw.checkFalling();
-            } else if(Greenfoot.isKeyDown("l")) {
-                grow();
-                clickCldwn = 10;
+                movePiece(0, -1);
             }
         }
-    
         
     }
     public void shiftPieces() {
@@ -95,10 +81,6 @@ public class BirdSnakeHead extends BirdSnakePiece
             if(!piece.shouldFall()) return false;
         }
         return true;
-    }
-   
-    public boolean isMoving() {
-        return moving;
     }
     
     /**
