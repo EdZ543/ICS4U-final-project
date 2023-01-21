@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Caden Chan 
  * @version 2022.12.04
  */
-public abstract class MenuButton extends Actor
+public abstract class UIButton extends Actor
 {
     protected GreenfootImage image, clickedImage, hoverImage, inactiveImage;
     protected int clickCount;
@@ -16,7 +16,7 @@ public abstract class MenuButton extends Actor
      * Fully static button
      * @param image             The button's default image
      */
-    public MenuButton(GreenfootImage image) {
+    public UIButton(GreenfootImage image) {
         this(image, null, null, null);
     }
     /**
@@ -27,7 +27,7 @@ public abstract class MenuButton extends Actor
      * @param hoverImage        The button's image upon being hovered
      * @param inactiveImage     The button's image when inactive
      */
-    public MenuButton(GreenfootImage image, GreenfootImage clickedImage, GreenfootImage hoverImage, GreenfootImage inactiveImage) {
+    public UIButton(GreenfootImage image, GreenfootImage clickedImage, GreenfootImage hoverImage, GreenfootImage inactiveImage) {
         this.image = image;
         this.clickedImage = clickedImage;
         this.hoverImage = hoverImage;

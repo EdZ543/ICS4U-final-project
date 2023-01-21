@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Caden Chan 
  * @version 2022.11.21
  */
-public class StartButton extends MenuButton
+public class StartButton extends UIButton
 {
     /**
      * Button used to start the simulation
