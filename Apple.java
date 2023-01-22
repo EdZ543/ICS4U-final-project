@@ -29,7 +29,7 @@ public class Apple extends Fruit
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
     public void collide(BirdSnakePiece birdSnakePiece) {
-        BirdSnakeHead head = birdSnakePiece.getHeadPiece();
+        BirdSnakeHead head = birdSnakePiece instanceof BirdSnakeHead ? (BirdSnakeHead)birdSnakePiece : birdSnakePiece.getHeadPiece() ;
         head.grow();
         getWorld().removeObject(this);
     }

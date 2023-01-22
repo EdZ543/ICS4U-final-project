@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * 
  * Credits
  * - Images
- *      - apple.png: From https://creazilla.com/nodes/3170476-apple-clipart, by Clker-Free-Vector-Images on Pixabay
- *      - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
- *      - crate.jpeg: From http://clipart-library.com/clipart/810972.htm, by Clipart Library
+ *   - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
+ *   - bg.png:
+ *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * 
  * @author Caden Chan, Eddie Zhuang
  * @version (a version number or a date)
