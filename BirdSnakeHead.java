@@ -41,6 +41,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         
         slideAct();
         
+        // Handle falling off
         if(checkFallOff()) {
             startDying();
         }
@@ -48,7 +49,13 @@ public class BirdSnakeHead extends BirdSnakePiece
             deathTick();
             return;
         }
-
+        // Handle collisions with InteractiveObject objects
+        InteractiveObject obj = (InteractiveObject)getOneIntersectingObject(InteractiveObject.class);
+        if(obj != null) {
+            obj.collide(this);
+        }
+        
+        // Handle keys
         if(clickCldwn>0) {
             clickCldwn--;
         } else if(!sliding){
@@ -143,40 +150,45 @@ public class BirdSnakeHead extends BirdSnakePiece
     public BirdSnakePiece getLastPiece() {
         return getBodyLength() == 0 ? this : bodyPieces.get(bodyPieces.size()-1);
     }
-    
+    /**
+     * Method used by LevelWorld to build snake.
+     * NOTE: 
+     *      - Snake is built from tail --> piece-before-head.
+     *      - bodyPieces is ordered from piece-before-head --> tail
+     */
     public void addPiece(BirdSnakePiece piece) {
-        // if(bodyPieces.size() ==0) {
-            // piece.setFollowPiece(this);
-        // } else {
-            // piece.setFollowPiece(bodyPieces.get(bodyPieces.size()-1));
-        // }
         piece.setHeadPiece(this);
-        // bodyPieces.add(piece);
-        // if(bodyPieces.size() == 0) {
-            // bodyPieces.add(piece);
-        // } el
         bodyPieces.add(0, piece);
+    }
+    /**
+     * Used by grow method to create a new piece, add to appropriate
+     * data sets, and initialize its important variables.
+     */
+    private void addNewPiece(BirdSnakePiece piece) {
+        piece.setHeadPiece(this);
+        bodyPieces.add(piece);
+        LevelWorld lw = (LevelWorld)getWorld();
+        lw.changeGrid(piece.getCellX(),piece.getCellY(), piece);
+        getWorld().addObject(piece, 0, 0);
     }
     /**
      * Add piece
      */
     public void grow() {
         // BirdSnakePiece piece = new BirdSnakePiece()
-        char d = getFacingDirection();
         BirdSnakePiece last = getLastPiece();
-        int[] pos = getOffsetFromDirection(last.getFacingDirection());
-        
-        BirdSnakePiece piece = new BirdSnakePiece(last.getCellX()-pos[0], last.getCellY()-pos[1]);//, this, last);
-        bodyPieces.add(piece);
-        getWorld().addObject(piece, 0, 0);
+        // int[] pos = getOffsetFromDirection(last.getFacingDirection());
+        // BirdSnakePiece piece = new BirdSnakePiece(last.getCellX()-pos[0], last.getCellY()-pos[1]);//, this, last);
+        BirdSnakePiece piece = new BirdSnakePiece(last.getCellX(), last.getCellY());
+        addNewPiece(piece);
     }
-    /**
-     * Remove piece
-     */
-    public void shrink() {
-        if(bodyPieces.size() == 0) return;
-        getWorld().removeObject(bodyPieces.remove(bodyPieces.size()-1));
-    }
+    // /**
+     // * Remove piece
+     // */
+    // public void shrink() {
+        // if(bodyPieces.size() == 0) return;
+        // getWorld().removeObject(bodyPieces.remove(bodyPieces.size()-1));
+    // }
     
     public ArrayList<BirdSnakePiece> getPieces() {
         return bodyPieces;

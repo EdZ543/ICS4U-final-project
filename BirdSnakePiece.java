@@ -1,5 +1,4 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
 /**
  * Write a description of class BirdSnakePiece here.
  * 
@@ -50,12 +49,12 @@ public class BirdSnakePiece extends Block
         super.addedToWorld(w);
     }
     
-    public void onSlideFinished() {
-        if(followPiece != null) {
-            char a = directionToAdjacentPiece(followPiece);
-            setFacingDirection(a);
-        }
-    }
+    // public void onSlideFinished() {
+        // if(followPiece != null) {
+            // char a = directionToAdjacentPiece(followPiece);
+            // setFacingDirection(a);
+        // }
+    // }
     public void setHeadPiece(BirdSnakeHead head) {
         headPiece = head;
     }
@@ -70,7 +69,6 @@ public class BirdSnakePiece extends Block
     
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
-        // if (cellY == lw.getGridYLength() - 1) return false;
         GridItem below = getItemBelow();
         if(below == null) return true;
         if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
@@ -102,10 +100,15 @@ public class BirdSnakePiece extends Block
     }
     
     /**
-     * @return char      The direction that the BirdSnake is facing
+     * @return char      The direction that the BirdSnakePiece is facing
      */
     public char getFacingDirection() {
-        return facingDirection;
+        if(headPiece == null) return facingDirection;
+        int idx = headPiece.getPieces().indexOf(this);
+        if(idx == 0) {
+            return directionToAdjacentPiece(headPiece);
+        }
+        return directionToAdjacentPiece(headPiece.getPieces().get(idx-1));
     }
     /**
      * @param d         The direction to make the BirdSnake face.
@@ -202,5 +205,12 @@ public class BirdSnakePiece extends Block
             } 
         }
         return ' ';
+    }
+    
+    public void setColor() {
+        GreenfootImage hi = new GreenfootImage(50, 50);
+        hi.setColor(Color.RED);
+        hi.fill();
+        setImage(hi);
     }
 }
