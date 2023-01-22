@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class WelcomeWorld extends World
 {
     private StartButton startBtn;
-    private Label titleLabel;
+    private Label titleLabel, tempLabel;
     private GreenfootImage bg;
     /**
      * Constructor for objects of class WelcomeWorld.
@@ -21,7 +21,9 @@ public class WelcomeWorld extends World
         bg = new GreenfootImage("temp/bg.png");
         setBackground(bg);
         titleLabel = new Label("BirdSnake!", 80);
+        tempLabel = new Label("(temporary welcome screen)", 30);
         addObject(titleLabel, getWidth()/2, 100);
+        addObject(tempLabel, getWidth()/2, 150);
         startBtn = new StartButton();
         addObject(startBtn, getWidth()/2, getHeight()-100);
         

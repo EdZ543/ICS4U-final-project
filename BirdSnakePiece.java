@@ -70,8 +70,9 @@ public class BirdSnakePiece extends Block
     
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
-        if (cellY == lw.getGridYLength() - 1) return false;
+        // if (cellY == lw.getGridYLength() - 1) return false;
         GridItem below = getItemBelow();
+        if(below == null) return true;
         if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
         return true;
     }

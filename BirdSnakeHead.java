@@ -13,6 +13,9 @@ public class BirdSnakeHead extends BirdSnakePiece
     private int clickCldwn;
     private final int COOLDOWN = 15;
     private ArrayList<BirdSnakePiece> bodyPieces;
+    private boolean dying;
+    private int deathTimer;
+    private final int DEATH_TIME = 45;
     /**
      * @param cellX         The x-position of the head
      * @param cellY         The y-position of the head
@@ -35,7 +38,17 @@ public class BirdSnakeHead extends BirdSnakePiece
     public void act()
     {
         LevelWorld lw = (LevelWorld)getWorld();
+        
         slideAct();
+        
+        if(checkFallOff()) {
+            startDying();
+        }
+        if(dying) {
+            deathTick();
+            return;
+        }
+
         if(clickCldwn>0) {
             clickCldwn--;
         } else if(!sliding){
@@ -48,18 +61,20 @@ public class BirdSnakeHead extends BirdSnakePiece
                 shiftPieces();
                 clickCldwn = COOLDOWN;
             }
-            if(right) {
-                setFacingDirection('r');
-                movePiece(1, 0);
-            } else if(down) {
-                setFacingDirection('d');
-                movePiece(0, 1);
-            } else if(left) {
-                setFacingDirection('l');
-                movePiece(-1, 0);
-            } else if(up) {
-                setFacingDirection('u');
-                movePiece(0, -1);
+            if(!snakeShouldFall()) {
+                if(right) {
+                    setFacingDirection('r');
+                    movePiece(1, 0);
+                } else if(down) {
+                    setFacingDirection('d');
+                    movePiece(0, 1);
+                } else if(left) {
+                    setFacingDirection('l');
+                    movePiece(-1, 0);
+                } else if(up) {
+                    setFacingDirection('u');
+                    movePiece(0, -1);
+                }
             }
         }
         
@@ -76,13 +91,48 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     
     public boolean snakeShouldFall() {
+        if(dying) return false;
         if(!shouldFall()) return false;
         for(BirdSnakePiece piece : bodyPieces) {
             if(!piece.shouldFall()) return false;
         }
         return true;
     }
+    /**
+     * @return          Whether or not the BirdSnake has fallen off of the map
+     */
+    public boolean checkFallOff() {
+        if(!snakeShouldFall()) return false;
+        LevelWorld lw = (LevelWorld)getWorld();
+        int bottomY = lw.getGridYLength()-1;
+        if(getCellY() == bottomY) return true;
+        for(BirdSnakePiece piece : bodyPieces) {
+            if(piece.getCellY() >= bottomY) return true;
+        }
+        return false;
+    }
+    /**
+     * Start BirdSnake's dying sequence, located in act() method.
+     */
+    public void startDying() {
+        dying = true;
+    }
     
+    public void deathTick() {
+        if(deathTimer == DEATH_TIME) {
+            LevelWorld lw = (LevelWorld)getWorld();
+            for(BirdSnakePiece piece : bodyPieces) {
+                lw.removeObject(piece);
+            }
+            lw.removeObject(this);
+            return;
+        }
+        deathTimer ++;
+        for(BirdSnakePiece piece: bodyPieces) {
+            piece.getImage().setTransparency(255-(int)((255/DEATH_TIME)*deathTimer));
+        }
+        getImage().setTransparency(255-(int)((255/DEATH_TIME)*deathTimer));
+    }
     /**
      * Get the length of the BirdSnake
      */

@@ -56,26 +56,24 @@ public abstract class GridItem extends Actor
         setLocation(getX() + speedX, getY() + speedY);
     }
     /**
-     * Optional method that can be overridden if GridItem needs to do something after sliding
+     * Optional method that can be overridden if GridItem needs to do something as soon as sliding is finished
      */
-    public void onSlideFinished() {
-        return;
-    }
+    public void onSlideFinished() {}
     
     /**
      * Call at the start of the act of any GridItem that needs to slide
      */
     public void slideAct() {
         if(sliding) {
+            // Determine direction of sliding
             int xSpeed = slideToX-getX()>0 ? 1 : slideToX-getX()<0 ? -1 : 0;
             int ySpeed = slideToY-getY()>0 ? 1 : slideToY-getY()<0 ? -1 : 0;
+            // Slide
             slide(xSpeed*speed, ySpeed*speed);
+            // If arrived to desired x,y value
             if(Math.abs(slideToX-getX()) <= speed && Math.abs(slideToY-getY()) <= speed) {
                 LevelWorld lw = (LevelWorld)getWorld();
-                // setLocation(slideToX, slideToY);
                 setCellXY(lw.getCellX(slideToX), lw.getCellY(slideToY));
-                // setCellX(lw.getCellX(slideToX));
-                // setCellY(lw.getCellY(slideToY));
                 lw.checkFalling();
                 onSlideFinished();
                 sliding = false;

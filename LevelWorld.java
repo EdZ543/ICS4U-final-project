@@ -9,9 +9,11 @@ import java.util.ArrayList;
  *   - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
  *   - bg.png:
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
+ * - Audio
+ * 
  * 
  * @author Caden Chan, Eddie Zhuang
- * @version (a version number or a date)
+ * @version 2023.01.22
  */
 public class LevelWorld extends World
 {
@@ -40,8 +42,9 @@ public class LevelWorld extends World
                     for (int x = 0; x < grid[y].length; x++) {
                         if(grid[y][x] == null) continue;
                         if (grid[y][x] instanceof BirdSnakeHead) {
-                            if (((BirdSnakeHead)grid[y][x]).snakeShouldFall()) {
-                                for(BirdSnakePiece p : ((BirdSnakeHead)grid[y][x]).getPieces()) {
+                            BirdSnakeHead head = (BirdSnakeHead)grid[y][x];
+                            if (head.snakeShouldFall()) {
+                                for(BirdSnakePiece p : head.getPieces()) {
                                     toFall.add(p);
                                 }
                                 toFall.add(grid[y][x]);
@@ -66,6 +69,7 @@ public class LevelWorld extends World
                     }
                 } else {
                     falling = false;
+                    fallingTimer = 0;
                 }
             }
             fallingTimer++;
@@ -98,7 +102,7 @@ public class LevelWorld extends World
      * @return Whether the character is >, <, ^, v
      */
     private boolean isSnakeBlock(String[] levelArray, int x, int y) {
-        if (y < 0 || y >= levelArray.length || x < 0 || x >= levelArray[y].length()) return false;
+        if (isYOutOfBounds(levelArray, y) || isXOutOfBounds(levelArray, x)) return false;
         char c = levelArray[y].charAt(x);
         return c == '>' || c == '<' || c == '^' || c == 'v';
     }
@@ -231,6 +235,8 @@ public class LevelWorld extends World
      * @return GridItem         The item at the position; returns null if no item exists there.
      */
     public GridItem getItem(int cellX, int cellY) {
+        // check if desired x and y values are out of bounds
+        if(cellX < 0 || cellX >= getGridXLength() || cellY < 0 || cellY >= getGridYLength()) return null;
         return grid[cellY][cellX];
     }
 
@@ -299,6 +305,22 @@ public class LevelWorld extends World
      */
     public int getCellWidth() {
         return cellWidth;
+    }
+    
+    public boolean isXOutOfBounds(int x) {
+        return x < 0 || x >= getGridXLength();
+    }
+    
+    public boolean isXOutOfBounds(String[] levelArray, int x) {
+        return x < 0 || x >= levelArray[0].length();
+    }
+    
+    public boolean isYOutOfBounds(int y) {
+        return y < 0 || y >= getGridYLength();
+    }
+    
+    public boolean isYOutOfBounds(String[] levelArray, int y) {
+        return y < 0 || y >= levelArray.length;
     }
 
     /**
