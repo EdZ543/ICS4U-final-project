@@ -11,7 +11,7 @@ public abstract class GridItem extends Actor
     protected int cellX, cellY;
     protected GreenfootImage image;
     protected boolean sliding;
-    protected int slideToX, slideToY;
+    protected int slideToCellX, slideToCellY;
     protected int speed;
     /**
      * GridItem constructor
@@ -76,15 +76,18 @@ public abstract class GridItem extends Actor
      */
     public void slideAct() {
         if(sliding) {
+            LevelWorld lw = (LevelWorld)getWorld();
             // Determine direction of sliding
-            int xSpeed = slideToX-getX()>0 ? 1 : slideToX-getX()<0 ? -1 : 0;
-            int ySpeed = slideToY-getY()>0 ? 1 : slideToY-getY()<0 ? -1 : 0;
+            int sX = lw.getCoordinateX(slideToCellX);
+            int sY = lw.getCoordinateY(slideToCellY);
+            int xSpeed = sX-getX()>0 ? 1 : sX-getX()<0 ? -1 : 0;
+            int ySpeed = sY-getY()>0 ? 1 : sY-getY()<0 ? -1 : 0;
             // Slide
             slide(xSpeed*speed, ySpeed*speed);
             // If arrived to desired x,y value
-            if(Math.abs(slideToX-getX()) <= speed && Math.abs(slideToY-getY()) <= speed) {
-                LevelWorld lw = (LevelWorld)getWorld();
-                setCellXY(lw.getCellX(slideToX), lw.getCellY(slideToY));
+            if(Math.abs(sX-getX()) <= speed && Math.abs(sY-getY()) <= speed) {
+                // LevelWorld lw = (LevelWorld)getWorld();
+                setCellXY(slideToCellX, slideToCellY);
                 lw.checkFalling();
                 onSlideFinished();
                 sliding = false;
@@ -98,9 +101,8 @@ public abstract class GridItem extends Actor
      * @param y        The y-position where the piece will end up
      */
     public void startSlideToTargetCell(int x, int y, int speed) {
-        LevelWorld lw = (LevelWorld)getWorld();
-        slideToX = lw.getCoordinateX(x);
-        slideToY = lw.getCoordinateY(y);
+        slideToCellX = x;
+        slideToCellY = y;
         this.speed = speed;
         sliding = true;
     }

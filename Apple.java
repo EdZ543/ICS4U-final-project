@@ -30,9 +30,12 @@ public class Apple extends Fruit
      */
     public void collide(BirdSnakePiece birdSnakePiece) {
         LevelWorld lw = (LevelWorld)getWorld();
-        
-        BirdSnakeHead head = birdSnakePiece instanceof BirdSnakeHead ? (BirdSnakeHead)birdSnakePiece : birdSnakePiece.getHeadPiece() ;
-        head.grow();
+        // if(!(birdSnakePiece instanceof BirdSnakeHead)) return;
+        // BirdSnakeHead head = (BirdSnakeHead)birdSnakePiece;
+        // // BirdSnakeHead head = birdSnakePiece instanceof BirdSnakeHead ? (BirdSnakeHead)birdSnakePiece : birdSnakePiece.getHeadPiece() ;
+        // // BirdSnakeHead head = birdSnakePiece instanceof BirdSnakeHead ? (BirdSnakeHead)birdSnakePiece : birdSnakePiece.getHeadPiece() ;
+        // head.grow();
+        lw.getBirdSnakeHead().grow();
         lw.removeObject(this);
         lw.eatFruit();
     }

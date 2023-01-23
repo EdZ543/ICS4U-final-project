@@ -29,12 +29,26 @@ public class Outline extends Actor
             update(cursor);
         }
         if(Greenfoot.mousePressed(this)) {
-            LevelWorld w = (LevelWorld)getWorld();
+            LevelWorld lw = (LevelWorld)getWorld();
             MouseInfo cursor = Greenfoot.getMouseInfo();
             GridItem clickedItem = (GridItem)getOneIntersectingObject(GridItem.class);
-            if(clickedItem != null) {
-                System.out.println("X: " + w.getCellX(cursor.getX())  + ", Y: " + w.getCellY(cursor.getY()));
-            }
+            // lw.printGrid();
+            // int x = lw.getCellX(cursor.getX());
+            // int y = lw.getCellY(cursor.getY());
+            // GridItem gi = lw.getItem(x, y);
+            
+            // for(int i=0;i<lw.
+            // System.out.println(x + ", " + y);
+            // if(gi == null) {
+                // System.out.println("null");
+                // return;
+            // }
+            // System.out.println(gi.getCellX() + ", " + gi.getCellY());
+            // System.out.println("X: " + clickedItem.getCellX() + ", Y: " + clickedItem.getCellY());
+
+            // if(clickedItem != null) {
+                // // System.out.println("X: " + w.getCellX(cursor.getX())  + ", Y: " + w.getCellY(cursor.getY()));
+            // }
         }
     }
     public void update(MouseInfo cursor) {

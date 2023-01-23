@@ -9,27 +9,28 @@ import java.util.ArrayList;
  */
 public class BirdSnakeHead extends BirdSnakePiece
 {
-    // private int facingDirection; 
     private int clickCldwn;
     private final int COOLDOWN = 15;
-    private ArrayList<BirdSnakePiece> bodyPieces;
+    
     private boolean dying;
     private int deathTimer;
     private final int DEATH_TIME = 45;
     private char facingDirection;
+    private ArrayList<BirdSnakePiece> bodyPieces;
     /**
      * @param cellX         The x-position of the head
      * @param cellY         The y-position of the head
      */
     public BirdSnakeHead(int cellX, int cellY, char facingDirection) {
         super(cellX, cellY);
-        this.facingDirection = facingDirection;
+        setFacingDirection(facingDirection);
         bodyPieces = new ArrayList<BirdSnakePiece>();
         clickCldwn = 0;
     }
     
     public void addedToWorld(World w) {
         super.addedToWorld(w);
+        
     }
     protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("temp/birdsnakehead.png");
@@ -38,10 +39,10 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     public void act()
     {
+        yVal.setValue(getCellY());
+        yVal.setLocation(getX(), getY());
         LevelWorld lw = (LevelWorld)getWorld();
-        
         slideAct();
-        
         // Handle falling off
         if(checkFallOff()) {
             startDying();
@@ -52,7 +53,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         }
         // Handle collisions with InteractiveObject objects
         InteractiveObject obj = (InteractiveObject)getOneIntersectingObject(InteractiveObject.class);
-        if(obj != null) {
+        if(obj != null && obj.getCellX() == slideToCellX && obj.getCellY() == slideToCellY) {
             obj.collide(this);
         }
         
@@ -68,7 +69,7 @@ public class BirdSnakeHead extends BirdSnakePiece
             if(acted) {
                 shiftPieces();
                 clickCldwn = COOLDOWN;
-            }
+            } 
             if(!snakeShouldFall()) {
                 if(right) {
                     setFacingDirection('r');
@@ -96,6 +97,38 @@ public class BirdSnakeHead extends BirdSnakePiece
                 bodyPieces.get(i).startSlideToTargetCell(temp.getCellX(), temp.getCellY(), speed);
             }
         }
+    }
+    
+    /**
+     * @return boolean      Is the piece able to move rightwards
+     */
+    public boolean canMoveRight() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        if(cellX >= lw.getGridXLength()-1)return false;
+        return !(getItemRight() instanceof Block);
+    }
+    /**
+     * @return boolean      Is the piece able to move leftwards
+     */
+    public boolean canMoveLeft() {
+        if(getCellX() <= 0) return false;
+        return !(getItemLeft() instanceof Block);
+    }
+    /**
+     * @return boolean      Is the piece able to move upwards
+     */
+    public boolean canMoveUp() {
+        if(getCellY() <= 0) return false;
+        return !(getItemAbove() instanceof Block);
+    }
+    /**
+     * @return boolean      Is the piece able to move downwards
+     */
+    public boolean canMoveDown() {
+        LevelWorld lw = (LevelWorld)getWorld();
+        if(cellY + 1 == lw.getGridYLength()) startDying();
+        if(cellY >= lw.getGridYLength()-1) return false;
+        return !(getItemBelow() instanceof Block);
     }
     
     public char getFacingDirection() {
@@ -158,7 +191,9 @@ public class BirdSnakeHead extends BirdSnakePiece
     public void startDying() {
         dying = true;
     }
-    
+    public boolean isDying() {
+        return dying;
+    }
     /**
      * Death animation; call each act when the BirdSnake is dying
      */
@@ -169,7 +204,7 @@ public class BirdSnakeHead extends BirdSnakePiece
                 lw.removeObject(piece);
             }
             lw.removeObject(this);
-            return;
+            lw.setLevel(lw.getLevel());
         }
         deathTimer ++;
         for(BirdSnakePiece piece: bodyPieces) {
@@ -177,18 +212,12 @@ public class BirdSnakeHead extends BirdSnakePiece
         }
         getImage().setTransparency(255-(int)((255/DEATH_TIME)*deathTimer));
     }
-    /**
-     * Get the length of the BirdSnake
-     */
-    public int getBodyLength() {
-        return bodyPieces.size();
-    }
     
     /**
      * Get the last piece in the BirdSnake. If there are no body pieces, return the BirdSnake's head
      */
     public BirdSnakePiece getLastPiece() {
-        return getBodyLength() == 0 ? this : bodyPieces.get(bodyPieces.size()-1);
+        return bodyPieces.size() == 0 ? this : bodyPieces.get(bodyPieces.size()-1);
     }
     /**
      * Method used by LevelWorld to build snake.
@@ -197,7 +226,7 @@ public class BirdSnakeHead extends BirdSnakePiece
      *      - bodyPieces is ordered from piece-before-head --> tail
      */
     public void addPiece(BirdSnakePiece piece) {
-        piece.setHeadPiece(this);
+        // piece.setHeadPiece(this);
         bodyPieces.add(0, piece);
     }
     /**
@@ -205,9 +234,9 @@ public class BirdSnakeHead extends BirdSnakePiece
      * data sets, and initialize its important variables.
      */
     private void addNewPiece(BirdSnakePiece piece) {
-        piece.setHeadPiece(this);
         bodyPieces.add(piece);
         LevelWorld lw = (LevelWorld)getWorld();
+        
         lw.changeGrid(piece.getCellX(),piece.getCellY(), piece);
         getWorld().addObject(piece, 0, 0);
     }

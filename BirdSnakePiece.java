@@ -7,8 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BirdSnakePiece extends Block
 {
-    private BirdSnakeHead headPiece;
-    int actCount;
+    Label yVal = new Label("0", 20);
     /**
      * Independant piece. Used for the BirdSnakeHead subclass
      * @param cellX                 The x-position of the piece
@@ -16,7 +15,6 @@ public class BirdSnakePiece extends Block
      */
     public BirdSnakePiece(int cellX, int cellY) {
         super(cellX, cellY);
-        headPiece = null;
         speed = 5;
     }
     public boolean push(int xOffset, int yOffset) {
@@ -28,24 +26,18 @@ public class BirdSnakePiece extends Block
         return image;
     }
     public void act() {
+        yVal.setValue(getCellY());
+        yVal.setLocation(getX(), getY());
+        LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
+        InteractiveObject obj = (InteractiveObject)getOneIntersectingObject(InteractiveObject.class);
+        if(obj != null && obj.getCellX() == slideToCellX && obj.getCellY() == slideToCellY) {
+            obj.collide(this);
+        }
     }
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-    }
-    
-    /**
-     * @param head          Assign a head for this piece
-     */
-    public void setHeadPiece(BirdSnakeHead head) {
-        headPiece = head;
-    }
-    
-    /**
-     * @return BirdSnakeHead        the head piece to which this piece belongs
-     */
-    public BirdSnakeHead getHeadPiece() {
-        return headPiece;
+        w.addObject(yVal, 0, 0);
     }
     
     /**
@@ -59,36 +51,7 @@ public class BirdSnakePiece extends Block
         return true;
     }
     
-    /**
-     * @return boolean      Is the piece able to move rightwards
-     */
-    public boolean canMoveRight() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(cellX >= lw.getGridXLength()-1)return false;
-        return !(getItemRight() instanceof Block);
-    }
-    /**
-     * @return boolean      Is the piece able to move leftwards
-     */
-    public boolean canMoveLeft() {
-        if(getCellX() <= 0) return false;
-        return !(getItemLeft() instanceof Block);
-    }
-    /**
-     * @return boolean      Is the piece able to move upwards
-     */
-    public boolean canMoveUp() {
-        if(getCellY() <= 0) return false;
-        return !(getItemAbove() instanceof Block);
-    }
-    /**
-     * @return boolean      Is the piece able to move downwards
-     */
-    public boolean canMoveDown() {
-        LevelWorld lw = (LevelWorld)getWorld();
-        if(cellY >= lw.getGridYLength()-1) return false;
-        return !(getItemBelow() instanceof Block);
-    }
+    
     
     /**
      * Move piece to a desired cell, given an x and y offset
@@ -97,17 +60,6 @@ public class BirdSnakePiece extends Block
      */
     public void movePiece(int xOffset, int yOffset) {
         startSlideToTargetCell(getCellX() + xOffset, getCellY() + yOffset, speed);
-    }
-    
-    /**
-     * @return char      The direction that the BirdSnakePiece is facing
-     */
-    public char getFacingDirection() {
-        int idx = headPiece.getPieces().indexOf(this);
-        if(idx == 0) {
-            return directionToAdjacentPiece(headPiece);
-        }
-        return directionToAdjacentPiece(headPiece.getPieces().get(idx-1));
     }
     
     /**
@@ -140,15 +92,15 @@ public class BirdSnakePiece extends Block
     }
     
     
-    /**
-     * OPTIONAL: effect that gives visual feedback to the player, to show that they can't move in 
-     * that direction, due to some sort of obstacle
-     * @param targetCellX        The x-position that the BirdSnake is bumping into
-     * @param targetCellY        The y-position that the BirdSnake is bumping into
-     */
-    public void bumpIntoCell(int targetCellX, int targetCellY) {
+    // /**
+     // * OPTIONAL: effect that gives visual feedback to the player, to show that they can't move in 
+     // * that direction, due to some sort of obstacle
+     // * @param targetCellX        The x-position that the BirdSnake is bumping into
+     // * @param targetCellY        The y-position that the BirdSnake is bumping into
+     // */
+    // public void bumpIntoCell(int targetCellX, int targetCellY) {
         
-    }
+    // }
     /**
      * Compare this piece with an adjacent piece.
      * Example:

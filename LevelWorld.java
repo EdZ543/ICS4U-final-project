@@ -46,7 +46,6 @@ public class LevelWorld extends World
         if (falling) {
             if (fallingTimer % fallingDelay == 0) {
                 ArrayList<GridItem> toFall = new ArrayList<GridItem>();
-
                 for (int y = 0; y < grid.length; y++) {
                     for (int x = 0; x < grid[y].length; x++) {
                         if(grid[y][x] == null) continue;
@@ -57,11 +56,7 @@ public class LevelWorld extends World
                                     toFall.add(p);
                                 }
                                 toFall.add(grid[y][x]);
-                            } else if(grid[y][x] instanceof BirdSnakePiece) {
-                                
-                            } else if(grid[y][x].shouldFall()) {
-                                toFall.add(grid[y][x]);
-                            }
+                            } 
                         // } else if (grid[y][x] instanceof BirdSnakePiece) {
                            // BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
                            // System.out.println(head.snakeShouldFall());
@@ -177,6 +172,9 @@ public class LevelWorld extends World
                     case 'C':
                         grid[y][x] = new Crate(x, y);
                         break;
+                    case 'S':
+                        grid[y][x] = new Spike(x, y);
+                        break;
                 }
                 if (grid[y][x] != null) addObject(grid[y][x], 0, 0);
                 
@@ -261,7 +259,7 @@ public class LevelWorld extends World
      */
     public GridItem getItem(int cellX, int cellY) {
         // check if desired x and y values are out of bounds
-        if(cellX < 0 || cellX >= getGridXLength() || cellY < 0 || cellY >= getGridYLength()) return null;
+        if(isXOutOfBounds(cellX) ||isYOutOfBounds(cellY)) return null;
         return grid[cellY][cellX];
     }
 
@@ -378,5 +376,9 @@ public class LevelWorld extends World
         if (fruitsLeft == 0) {
             portal.activate();
         }
+    }
+    
+    public BirdSnakeHead getBirdSnakeHead() {
+        return birdSnakeHead;
     }
 }

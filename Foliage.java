@@ -28,6 +28,11 @@ public class Foliage extends Actor
     private void updateLocation() {
         setLocation(origin.getX() + xOffset, origin.getY() + yOffset);
     }
+    public void act() {
+        if(origin.getWorld() == null) {
+            getWorld().removeObject(this);
+        }
+    }
     private void setImageFromType() {
         int rand = Greenfoot.getRandomNumber(100);
         LevelWorld lw = (LevelWorld)getWorld();
