@@ -39,7 +39,7 @@ public class Foliage extends Actor
         if(type.equals("grass")) {
             if(rand < 60) {
                 image = new GreenfootImage("grass0.png");
-            } else if(rand < 20){
+            } else if(rand < 80){
                 image = new GreenfootImage("grass1.png");
             } else {
                 image = new GreenfootImage("grass2.png");
