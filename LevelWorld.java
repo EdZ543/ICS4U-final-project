@@ -91,7 +91,7 @@ public class LevelWorld extends World
     public void setLevel(int level) {
         this.level = level;
         resetLevel();
-        
+
         String[] levelArray = Levels.LEVELS[level];
         int levelHeight = levelArray.length * Levels.CELL_WIDTHS[level];
         int levelWidth = levelArray[0].length() * Levels.CELL_WIDTHS[level];
@@ -116,7 +116,7 @@ public class LevelWorld extends World
     public void resetLevel() {
         removeObject(birdSnakeHead);
         removeObject(portal);
-        
+
         if (grid == null) return;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
@@ -392,7 +392,9 @@ public class LevelWorld extends World
      * Alters the grid array
      */
     public void changeGrid(int x, int y, GridItem item) {
-        grid[y][x] = item;
+        if (y >= 0 && y < grid.length && x >= 0 && x < grid[y].length) {
+            grid[y][x] = item;
+        }
     }
 
     /**
