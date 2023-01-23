@@ -30,7 +30,7 @@ public class Portal extends InteractiveObject
             LevelWorld lw = (LevelWorld)getWorld();
             
             int currentLevel = lw.getLevel();
-            int lastLevel = Levels.LEVELS.length;
+            int lastLevel = Levels.LEVELS.length - 1;
             if (currentLevel == lastLevel) {
                 Greenfoot.setWorld(new EndWorld());
             } else {
