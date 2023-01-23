@@ -10,6 +10,7 @@ public class LevelSelect extends World
 {
     private final int SPACING = 20;
     private final int BUTTON_SIZE = 50;
+    private Label titleLabel;
     
     /**
      * Constructor for objects of class LevelSelect.
@@ -22,8 +23,12 @@ public class LevelSelect extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         
+        // Draw title
+        titleLabel = new Label("Select a level!", 40);
+        addObject(titleLabel, getWidth() / 2, 20);
+        
         // Draw grid of buttons
-        int level = 0, x = SPACING + BUTTON_SIZE / 2, y = SPACING + + BUTTON_SIZE / 2;
+        int level = 0, x = SPACING + BUTTON_SIZE / 2, y = SPACING + + BUTTON_SIZE / 2 + 40;
         while (level < Levels.LEVELS.length) {
             LevelButton b = new LevelButton(level, BUTTON_SIZE, (level <= WelcomeWorld.getLevelProgress()));
             addObject(b, x, y);
