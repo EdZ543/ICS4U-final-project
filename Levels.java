@@ -15,7 +15,7 @@ public class Levels
             "      P   ",
             "     ^    ",
             "   >>^  A ",
-            " S ^##    ",
+            " A ^##    ",
             "    ##    ",
             "  ####### ",
             "##########",
@@ -29,11 +29,6 @@ public class Levels
             " #>>  ",
             " #####",
         }
-    };
-    
-    public static final int[][] LEVEL_OFFSETS = {
-        {20, 20},
-        {20, 20},
     };
     
     public static final int[] CELL_WIDTHS = {

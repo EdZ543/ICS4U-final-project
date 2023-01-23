@@ -89,7 +89,13 @@ public class LevelWorld extends World
     public void setLevel(int level) {
         this.level = level;
         resetLevel();
-        renderLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+        
+        String[] levelArray = Levels.LEVELS[level];
+        int levelWidth = levelArray.length * Levels.CELL_WIDTHS[level];
+        int levelHeight = levelArray[0].length() * Levels.CELL_WIDTHS[level];
+        int offsetX = (getWidth() - levelWidth) / 2;
+        int offsetY = (getHeight() - levelHeight) / 2;
+        renderLevel(Levels.CELL_WIDTHS[level], offsetX, offsetY, Levels.LEVELS[level]);
 
         // Update user progress on gallery
         if (level > WelcomeWorld.getLevelProgress()) {
