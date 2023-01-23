@@ -21,6 +21,8 @@ public class LevelWorld extends World
 {
     private boolean falling = false; // Whether things are currently falling or not
     private GridItem[][] grid;
+    private int fruitsLeft = 0;
+    private Portal portal = null;
     private int cellWidth, gridXOffset, gridYOffset;
     private int level = 0;
     private int fallingTimer = 0; // Timer for updating falling objects
@@ -153,6 +155,7 @@ public class LevelWorld extends World
         this.gridYOffset = gridYOffset;
 
         grid = new GridItem[levelArray.length][levelArray[0].length()];
+        fruitsLeft = 0;
         int tailX = 0, tailY = 0;
 
         // Generate pieces
@@ -164,10 +167,12 @@ public class LevelWorld extends World
                         grid[y][x] = new Dirt(x, y);
                         break;
                     case 'P':
-                        grid[y][x] = new Portal(x, y);
+                        portal = new Portal(x, y);
+                        grid[y][x] = portal;
                         break;
                     case 'A':
                         grid[y][x] = new Apple(x, y);
+                        fruitsLeft++;
                         break;
                     case 'C':
                         grid[y][x] = new Crate(x, y);
@@ -363,5 +368,15 @@ public class LevelWorld extends World
      */
     public void changeGrid(int x, int y, GridItem item) {
         grid[y][x] = item;
+    }
+    
+    /**
+     * Decrease fruitsLeft count by 1, and activates portal if all are eaten
+     */
+    public void eatFruit() {
+        fruitsLeft--;
+        if (fruitsLeft == 0) {
+            portal.activate();
+        }
     }
 }

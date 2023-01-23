@@ -8,12 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Portal extends InteractiveObject
 {
+    private boolean active = false;
+    
     public Portal(int cellX, int cellY) {
         super(cellX, cellY);
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
         image = new GreenfootImage("images/portal.png");
+        image.setTransparency(50);
         image.scale(cellWidth, cellWidth);
         return image;
     }
@@ -23,7 +26,25 @@ public class Portal extends InteractiveObject
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
     public void collide(BirdSnakePiece birdSnakePiece) {
-        LevelWorld lw = (LevelWorld)getWorld();
-        lw.setLevel(lw.getLevel() + 1);
+        if (active) {
+            LevelWorld lw = (LevelWorld)getWorld();
+            
+            int currentLevel = lw.getLevel();
+            int lastLevel = Levels.LEVELS.length;
+            if (currentLevel == lastLevel) {
+                Greenfoot.setWorld(new EndWorld());
+            } else {
+                lw.setLevel(lw.getLevel() + 1);
+            }
+        }
+    }
+    
+    /**
+     * Set portal to active
+     */
+    public void activate() {
+        active = true;
+        image.setTransparency(255);
+        setImage(image);
     }
 }
