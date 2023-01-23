@@ -77,6 +77,11 @@ public abstract class GridItem extends Actor
     public void slideAct() {
         if(sliding) {
             LevelWorld lw = (LevelWorld)getWorld();
+            if(this instanceof BirdSnakePiece && lw.getBirdSnakeHead().isDying()){
+                setCellXY(cellX, cellY);  // reset location of the piece so that it aligns with the grid when dying (i.e. no weird offset)
+                return;
+            }
+            
             // Determine direction of sliding
             int sX = lw.getCoordinateX(slideToCellX);
             int sY = lw.getCoordinateY(slideToCellY);

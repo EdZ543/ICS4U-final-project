@@ -241,6 +241,7 @@ public class BirdSnakeHead extends BirdSnakePiece
      */
     private void addNewPiece(BirdSnakePiece piece) {
         bodyPieces.add(piece);
+        
         LevelWorld lw = (LevelWorld)getWorld();
         
         lw.changeGrid(piece.getCellX(),piece.getCellY(), piece);

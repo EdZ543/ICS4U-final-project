@@ -3,12 +3,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class BirdSnakePiece here.
  * 
  * @author Caden Chan
- * @version 2023.01.20
+ * @version 2023.01.23
  */
 public class BirdSnakePiece extends Block
 {
     /**
-     * Independant piece. Used for the BirdSnakeHead subclass
+     * BirdSnakePiece constructor
      * @param cellX                 The x-position of the piece
      * @param cellY                 The y-position of the piece
      */
@@ -20,8 +20,10 @@ public class BirdSnakePiece extends Block
         return false;
     }
     protected GreenfootImage drawImage(int cellWidth) {
+        LevelWorld lw = (LevelWorld)getWorld();
         image = new GreenfootImage("temp/birdsnakepiece1.png");
-        image.scale(cellWidth+1, cellWidth+1);
+        
+        image.scale(cellWidth, cellWidth);
         return image;
     }
     public void act() {
@@ -129,4 +131,10 @@ public class BirdSnakePiece extends Block
         }
         return ' ';
     }
+    
+    // public void setAltColor(int cellWidth) {
+        // image = new GreenfootImage("temp/birdsnakepiece1.png");
+        // image.scale(cellWidth, cellWidth);
+        // setImage(image);
+    // }
 }

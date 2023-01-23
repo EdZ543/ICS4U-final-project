@@ -24,6 +24,7 @@ public class Spike extends InteractiveObject
      */
     public void collide(BirdSnakePiece birdSnakePiece) {
         LevelWorld lw = (LevelWorld)getWorld();
-        lw.setLevel(lw.getLevel());
+        // lw.setLevel(lw.getLevel());
+        lw.getBirdSnakeHead().startDying();
     }
 }

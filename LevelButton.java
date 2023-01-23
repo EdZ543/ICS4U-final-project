@@ -36,4 +36,8 @@ public class LevelButton extends UIButton
     public void clicked() {
         if (active) Greenfoot.setWorld(new LevelWorld(level));
     }
+    
+    public void setActive(boolean a) {
+        active = a;
+    }
 }
