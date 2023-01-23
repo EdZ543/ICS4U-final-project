@@ -14,7 +14,7 @@ public class BirdSnakePiece extends Block
      */
     public BirdSnakePiece(int cellX, int cellY) {
         super(cellX, cellY);
-        speed = 5;
+        speed = 8;
     }
     public boolean push(int xOffset, int yOffset) {
         return false;
