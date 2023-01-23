@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * - Images
  *   - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
  *   - bg.png:
+ *   - restart-button.png: from https://www.freeiconspng.com/img/12293 by Ahkâm
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * - Audio
  * 
@@ -29,6 +30,11 @@ public class LevelWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
+        
+        // Put reset button
+        RestartButton rb = new RestartButton();
+        addObject(rb, 1170, 28);
+        
         setPaintOrder(Outline.class, Foliage.class);
         setLevel(level);
     }
@@ -83,7 +89,20 @@ public class LevelWorld extends World
      */
     public void setLevel(int level) {
         this.level = level;
+        resetLevel();
         renderLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+    }
+    
+    /**
+     * Destroys current level
+     */
+    public void resetLevel() {
+        if (grid == null) return;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] != null) removeObject(grid[i][j]);
+            }
+        }
     }
     
     /**

@@ -90,4 +90,15 @@ public abstract class UIButton extends Actor
             setImage(inactiveImage);
         }
     }
+    
+    /**
+     * Change the button's image
+     */
+    public void changeImage(GreenfootImage image) {
+        this.image = image;
+        this.clickedImage = clickedImage;
+        this.hoverImage = hoverImage;
+        this.inactiveImage = inactiveImage;
+        setImage(image);
+    }
 }
