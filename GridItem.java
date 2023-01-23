@@ -31,6 +31,17 @@ public abstract class GridItem extends Actor
         setImage(image);
     }
     
+    /**
+     * Returns whether this item should currently be falling
+     * 
+     * @return      should this item be falling
+     */
+    public abstract boolean shouldFall();
+    
+    /**
+     * Create the GridItem's image, based on a given cellWidth
+     * @param cellWidth         the width of the grid's cells
+     */
     protected abstract GreenfootImage drawImage(int cellWidth);
 
     /**
@@ -170,9 +181,4 @@ public abstract class GridItem extends Actor
         LevelWorld lw = (LevelWorld)getWorld();
         return lw.getItem(getCellX(), getCellY() + 1);
     }
-    
-    /**
-     * Returns whether this item should currently be falling
-     */
-    public abstract boolean shouldFall();
 }

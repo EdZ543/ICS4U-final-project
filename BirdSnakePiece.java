@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class BirdSnakePiece extends Block
 {
     private BirdSnakeHead headPiece;
-    private BirdSnakePiece followPiece;
-    protected char facingDirection;
     int actCount;
     /**
      * Independant piece. Used for the BirdSnakeHead subclass
@@ -19,20 +17,7 @@ public class BirdSnakePiece extends Block
     public BirdSnakePiece(int cellX, int cellY) {
         super(cellX, cellY);
         headPiece = null;
-        followPiece = null;
         speed = 5;
-    }
-    /**
-     * @param cellX                 The x-position of the piece
-     * @param cellY                 The y-position of the piece
-     * @param facingDirection       The direction that this piece faces
-     */
-    public BirdSnakePiece(int cellX, int cellY, char facingDirection) {
-        super(cellX, cellY);
-        headPiece = null;
-        followPiece = null;
-        speed = 5;
-        setFacingDirection(facingDirection);
     }
     public boolean push(int xOffset, int yOffset) {
         return false;
@@ -49,24 +34,23 @@ public class BirdSnakePiece extends Block
         super.addedToWorld(w);
     }
     
-    // public void onSlideFinished() {
-        // if(followPiece != null) {
-            // char a = directionToAdjacentPiece(followPiece);
-            // setFacingDirection(a);
-        // }
-    // }
+    /**
+     * @param head          Assign a head for this piece
+     */
     public void setHeadPiece(BirdSnakeHead head) {
         headPiece = head;
     }
     
+    /**
+     * @return BirdSnakeHead        the head piece to which this piece belongs
+     */
     public BirdSnakeHead getHeadPiece() {
         return headPiece;
     }
-    public void setFollowPiece(BirdSnakePiece piece) {
-        followPiece = piece;
-        facingDirection = directionToAdjacentPiece(followPiece);
-    }
     
+    /**
+     * @return boolean      whether or not this piece should be falling
+     */
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
         GridItem below = getItemBelow();
@@ -75,26 +59,42 @@ public class BirdSnakePiece extends Block
         return true;
     }
     
+    /**
+     * @return boolean      Is the piece able to move rightwards
+     */
     public boolean canMoveRight() {
         LevelWorld lw = (LevelWorld)getWorld();
         if(cellX >= lw.getGridXLength()-1)return false;
         return !(getItemRight() instanceof Block);
     }
-    
+    /**
+     * @return boolean      Is the piece able to move leftwards
+     */
     public boolean canMoveLeft() {
         if(getCellX() <= 0) return false;
         return !(getItemLeft() instanceof Block);
     }
-    
+    /**
+     * @return boolean      Is the piece able to move upwards
+     */
     public boolean canMoveUp() {
         if(getCellY() <= 0) return false;
         return !(getItemAbove() instanceof Block);
     }
+    /**
+     * @return boolean      Is the piece able to move downwards
+     */
     public boolean canMoveDown() {
         LevelWorld lw = (LevelWorld)getWorld();
         if(cellY >= lw.getGridYLength()-1) return false;
         return !(getItemBelow() instanceof Block);
     }
+    
+    /**
+     * Move piece to a desired cell, given an x and y offset
+     * @param xOffset       the number of cells the piece should move, in the x-direction
+     * @param yOffset       the number of cells the piece should move, in the y-direction
+     */
     public void movePiece(int xOffset, int yOffset) {
         startSlideToTargetCell(getCellX() + xOffset, getCellY() + yOffset, speed);
     }
@@ -103,39 +103,13 @@ public class BirdSnakePiece extends Block
      * @return char      The direction that the BirdSnakePiece is facing
      */
     public char getFacingDirection() {
-        if(headPiece == null) return facingDirection;
         int idx = headPiece.getPieces().indexOf(this);
         if(idx == 0) {
             return directionToAdjacentPiece(headPiece);
         }
         return directionToAdjacentPiece(headPiece.getPieces().get(idx-1));
     }
-    /**
-     * @param d         The direction to make the BirdSnake face.
-     */
-    public void setFacingDirection(char d) {
-        facingDirection = d;
-        updateSprite(facingDirection);
-    }
-    /**
-     * Update the head's sprite
-     */
-    public void updateSprite(char d) {
-        switch(d) {
-            case 'u':
-                setRotation(270);
-                break;
-            case 'd':
-                setRotation(90);
-                break;
-            case 'l':
-                setRotation(180);
-                break;
-            case 'r':
-                setRotation(0);
-                break;
-        }
-    }
+    
     /**
      * Return the offset that is needed to move in a certain direction.
      * Valid directions are:
