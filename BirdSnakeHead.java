@@ -66,7 +66,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         // Handle keys
         if(clickCldwn>0) {
             clickCldwn--;
-        } else if(!sliding){
+        } else if(!snakeIsSliding()){
             boolean up = (Greenfoot.isKeyDown("w") || Greenfoot.isKeyDown("up")) && canMoveUp();
             boolean down = (Greenfoot.isKeyDown("s") || Greenfoot.isKeyDown("down")) && canMoveDown();
             boolean left = (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("left")) && canMoveLeft();
