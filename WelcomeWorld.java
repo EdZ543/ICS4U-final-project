@@ -11,6 +11,8 @@ public class WelcomeWorld extends World
     private StartButton startBtn;
     private Label titleLabel, tempLabel;
     private GreenfootImage bg;
+    private GreenfootSound music;
+    
     /**
      * Constructor for objects of class WelcomeWorld.
      * 
@@ -27,5 +29,16 @@ public class WelcomeWorld extends World
         startBtn = new StartButton();
         addObject(startBtn, getWidth()/2, getHeight()-100);
         
+        // Add music
+        music = new GreenfootSound("sounds/background-music.mp3");
+        music.setVolume(20);
+    }
+    
+    public void started() {
+        music.playLoop();
+    }
+    
+    public void stopped() {
+        music.stop();
     }
 }

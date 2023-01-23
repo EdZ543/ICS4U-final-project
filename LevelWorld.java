@@ -11,6 +11,7 @@ import java.util.ArrayList;
  *   - restart-button.png: from https://www.freeiconspng.com/img/12293 by Ahkâm
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * - Audio
+ *   - background music: from https://omori.bandcamp.com/track/lets-get-together-now-2 by omocat
  * 
  * 
  * @author Caden Chan, Eddie Zhuang
