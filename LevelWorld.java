@@ -91,8 +91,8 @@ public class LevelWorld extends World
         resetLevel();
         
         String[] levelArray = Levels.LEVELS[level];
-        int levelWidth = levelArray.length * Levels.CELL_WIDTHS[level];
-        int levelHeight = levelArray[0].length() * Levels.CELL_WIDTHS[level];
+        int levelHeight = levelArray.length * Levels.CELL_WIDTHS[level];
+        int levelWidth = levelArray[0].length() * Levels.CELL_WIDTHS[level];
         int offsetX = (getWidth() - levelWidth) / 2;
         int offsetY = (getHeight() - levelHeight) / 2;
         renderLevel(Levels.CELL_WIDTHS[level], offsetX, offsetY, Levels.LEVELS[level]);
