@@ -10,6 +10,8 @@ public class StartButton extends UIButton
 {
     /**
      * Button used to start the simulation
+     * 
+     * @param levelProgress The last level the player was able to reach
      */
     public StartButton() {
         // Preset images
@@ -23,7 +25,7 @@ public class StartButton extends UIButton
      * When startButton is clicked, start the simulation.
      */
     public void clicked() {
-        Greenfoot.setWorld(new LevelWorld());
+        Greenfoot.setWorld(new LevelSelect());
     }
     public void checkHover() {
         super.checkHover();

@@ -9,6 +9,7 @@ import java.util.ArrayList;
  *   - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
  *   - bg.png:
  *   - restart-button.png: from https://www.freeiconspng.com/img/12293 by Ahkâm
+ *   - level-select-button.png from http://clipart-library.com/clipart/571254.htm by Clipart Library
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * - Audio
  *   - background music: from https://omori.bandcamp.com/track/lets-get-together-now-2 by omocat
@@ -29,41 +30,37 @@ public class LevelWorld extends World
     private int fallingDelay = 30; // Delay between each downward movement of falling objects
     private BirdSnakeHead birdSnakeHead;
 
-    public LevelWorld()
+    /**
+     * Constructor
+     * 
+     * @param level The first level to load
+     */
+    public LevelWorld(int level)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
-        
+
         // Put reset button
         RestartButton rb = new RestartButton();
         addObject(rb, 1170, 28);
         
+        // Put level select button
+        SelectLevelButton slb = new SelectLevelButton();
+        addObject(slb, 1048, 28);
+
         setPaintOrder(Outline.class, Foliage.class);
-        setLevel(level);
+        this.level = level;
+        setLevel(this.level);
     }
-    
+
     public void act() {
         if (falling) {
             if (fallingTimer % fallingDelay == 0) {
                 ArrayList<GridItem> toFall = new ArrayList<GridItem>();
-                for (int y = 0; y < grid.length; y++) {
-                    for (int x = 0; x < grid[y].length; x++) {
-                        if(grid[y][x] == null) continue;
-                        if (grid[y][x] instanceof BirdSnakeHead) {
-                            BirdSnakeHead head = (BirdSnakeHead)grid[y][x];
-                            if (head.snakeShouldFall()) {
-                                for(BirdSnakePiece p : head.getPieces()) {
-                                    toFall.add(p);
-                                }
-                                toFall.add(grid[y][x]);
-                            } 
-                        // } else if (grid[y][x] instanceof BirdSnakePiece) {
-                           // BirdSnakeHead head = ((BirdSnakePiece)grid[y][x]).getHeadPiece();
-                           // System.out.println(head.snakeShouldFall());
-                           // if (head.snakeShouldFall()) toFall.add(grid[y][x]);
-                        // } else if (grid[y][x].shouldFall()) {
-                            // toFall.add(grid[y][x]);
-                        }
+                if (birdSnakeHead.snakeShouldFall()) {
+                    toFall.add(birdSnakeHead);
+                    for(BirdSnakePiece p : birdSnakeHead.getPieces()) {
+                        toFall.add(p);
                     }
                 }
 
@@ -89,8 +86,18 @@ public class LevelWorld extends World
         this.level = level;
         resetLevel();
         renderLevel(Levels.CELL_WIDTHS[level], Levels.LEVEL_OFFSETS[level][0], Levels.LEVEL_OFFSETS[level][1], Levels.LEVELS[level]);
+
+        // Update user progress on gallery
+        if (level > WelcomeWorld.getLevelProgress()) {
+            WelcomeWorld.setLevelProgress(level);
+            if (UserInfo.isStorageAvailable()) {
+                UserInfo myInfo = UserInfo.getMyInfo();
+                myInfo.setScore(level);
+                myInfo.store();  // write back to server
+            }
+        }
     }
-    
+
     /**
      * Destroys current level
      */
@@ -102,7 +109,7 @@ public class LevelWorld extends World
             }
         }
     }
-    
+
     /**
      * Returns the current level number
      */
@@ -177,7 +184,7 @@ public class LevelWorld extends World
                         break;
                 }
                 if (grid[y][x] != null) addObject(grid[y][x], 0, 0);
-                
+
                 // Add snake pieces
                 if (isSnakeBlock(levelArray, x, y)) {
                     grid[y][x] = new BirdSnakePiece(x, y);
@@ -329,19 +336,19 @@ public class LevelWorld extends World
     public int getCellWidth() {
         return cellWidth;
     }
-    
+
     public boolean isXOutOfBounds(int x) {
         return x < 0 || x >= getGridXLength();
     }
-    
+
     public boolean isXOutOfBounds(String[] levelArray, int x) {
         return x < 0 || x >= levelArray[0].length();
     }
-    
+
     public boolean isYOutOfBounds(int y) {
         return y < 0 || y >= getGridYLength();
     }
-    
+
     public boolean isYOutOfBounds(String[] levelArray, int y) {
         return y < 0 || y >= levelArray.length;
     }
@@ -360,14 +367,14 @@ public class LevelWorld extends World
     public boolean getFalling() {
         return falling;
     }
-    
+
     /**
      * Alters the grid array
      */
     public void changeGrid(int x, int y, GridItem item) {
         grid[y][x] = item;
     }
-    
+
     /**
      * Decrease fruitsLeft count by 1, and activates portal if all are eaten
      */
@@ -377,7 +384,7 @@ public class LevelWorld extends World
             portal.activate();
         }
     }
-    
+
     public BirdSnakeHead getBirdSnakeHead() {
         return birdSnakeHead;
     }
