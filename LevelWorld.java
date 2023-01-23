@@ -2,7 +2,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 
 /**
- * The main game world.
+ * This is a 2D grid-based puzzle game. Its mechanics can be likened to that of the arcade game Snake, but with gravity.
+ * Use WASD or the arrow keys to control the bird snake. Collecting fruits causes you to grow.
+ * Collect all fruits in a level and enter the portal to continue to the next level.
  * 
  * Credits
  * - Images

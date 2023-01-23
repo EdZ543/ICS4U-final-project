@@ -20,6 +20,6 @@ public class EndWorld extends World
         GreenfootImage bg = new GreenfootImage("temp/bg.png");
         setBackground(bg);
         Label titleLabel = new Label("You Win!", 80);
-        addObject(titleLabel, getWidth()/2, 100);
+        addObject(titleLabel, getWidth() / 2, getHeight() / 2);
     }
 }
