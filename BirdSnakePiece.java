@@ -44,6 +44,7 @@ public class BirdSnakePiece extends Block
         GridItem below = getItemBelow();
         if(below == null) return true;
         if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
+        if(below instanceof Fruit) return false; // Interesting mechanic: birdsnake can sit on fruits
         return true;
     }
     
@@ -127,12 +128,5 @@ public class BirdSnakePiece extends Block
             } 
         }
         return ' ';
-    }
-    
-    public void setColor() {
-        GreenfootImage hi = new GreenfootImage(50, 50);
-        hi.setColor(Color.RED);
-        hi.fill();
-        setImage(hi);
     }
 }
