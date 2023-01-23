@@ -13,6 +13,7 @@ public class WelcomeWorld extends World
     private GreenfootImage bg;
     private GreenfootSound music;
     private static int levelProgress = 0;
+    private String userName = "player";
 
     /**
      * Constructor for objects of class WelcomeWorld.
@@ -21,10 +22,18 @@ public class WelcomeWorld extends World
     public WelcomeWorld()
     {
         super(1200, 800, 1);
+        
+        // Check level progress and userName from UserInfo
+        if (UserInfo.isStorageAvailable()) {
+            UserInfo myInfo = UserInfo.getMyInfo();
+            levelProgress = myInfo.getScore();
+            userName = myInfo.getUserName();
+        }
+        
         bg = new GreenfootImage("temp/bg.png");
         setBackground(bg);
         titleLabel = new Label("BirdSnake!", 80);
-        tempLabel = new Label("(temporary welcome screen)", 30);
+        tempLabel = new Label("Hello " + userName + ", you've gotten as far as level " + levelProgress, 30);
         addObject(titleLabel, getWidth()/2, 100);
         addObject(tempLabel, getWidth()/2, 150);
 
@@ -32,11 +41,6 @@ public class WelcomeWorld extends World
         music = new GreenfootSound("sounds/background-music.mp3");
         music.setVolume(20);
 
-        // Check level progress from UserInfo
-        if (UserInfo.isStorageAvailable()) {
-            UserInfo myInfo = UserInfo.getMyInfo();
-            levelProgress = myInfo.getScore();
-        }
         startBtn = new StartButton();
         addObject(startBtn, getWidth()/2, getHeight()-100);
     }
