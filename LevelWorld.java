@@ -43,7 +43,7 @@ public class LevelWorld extends World
         // Put reset button
         RestartButton rb = new RestartButton();
         addObject(rb, 1170, 28);
-        
+
         // Put level select button
         SelectLevelButton slb = new SelectLevelButton();
         addObject(slb, 1048, 28);
@@ -54,6 +54,10 @@ public class LevelWorld extends World
     }
 
     public void act() {
+        if (!birdSnakeHead.snakeIsSliding()) {
+            checkFalling();
+        }
+
         if (falling) {
             if (fallingTimer % fallingDelay == 0) {
                 ArrayList<GridItem> toFall = new ArrayList<GridItem>();
@@ -169,8 +173,8 @@ public class LevelWorld extends World
                         grid[y][x] = new Dirt(x, y);
                         break;
                     case 'P':
-                        portal = new Portal(x, y);
-                        grid[y][x] = portal;
+                        grid[y][x] = new Portal(x, y);
+                        portal = (Portal)grid[y][x];
                         break;
                     case 'A':
                         grid[y][x] = new Apple(x, y);
@@ -222,6 +226,11 @@ public class LevelWorld extends World
                         break;
                 }
             }
+        }
+
+        // Edge case: no fruits
+        if (fruitsLeft == 0) {
+            portal.activate();
         }
 
         // Join bird snake together

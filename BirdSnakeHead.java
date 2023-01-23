@@ -28,6 +28,14 @@ public class BirdSnakeHead extends BirdSnakePiece
         clickCldwn = 0;
     }
     
+    public boolean snakeIsSliding() {
+        if (sliding) return true;
+        for (BirdSnakePiece p : bodyPieces) {
+            if (p.isSliding()) return true;
+        }
+        return false;
+    }
+    
     public void addedToWorld(World w) {
         super.addedToWorld(w);
         
@@ -39,8 +47,6 @@ public class BirdSnakeHead extends BirdSnakePiece
     }
     public void act()
     {
-        yVal.setValue(getCellY());
-        yVal.setLocation(getX(), getY());
         LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
         // Handle falling off
@@ -261,5 +267,4 @@ public class BirdSnakeHead extends BirdSnakePiece
     public ArrayList<BirdSnakePiece> getPieces() {
         return bodyPieces;
     }
-    
 }

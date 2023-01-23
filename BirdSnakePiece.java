@@ -7,7 +7,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BirdSnakePiece extends Block
 {
-    Label yVal = new Label("0", 20);
     /**
      * Independant piece. Used for the BirdSnakeHead subclass
      * @param cellX                 The x-position of the piece
@@ -26,8 +25,6 @@ public class BirdSnakePiece extends Block
         return image;
     }
     public void act() {
-        yVal.setValue(getCellY());
-        yVal.setLocation(getX(), getY());
         LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
         InteractiveObject obj = (InteractiveObject)getOneIntersectingObject(InteractiveObject.class);
@@ -37,7 +34,6 @@ public class BirdSnakePiece extends Block
     }
     public void addedToWorld(World w) {
         super.addedToWorld(w);
-        w.addObject(yVal, 0, 0);
     }
     
     /**

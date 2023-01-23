@@ -88,8 +88,6 @@ public abstract class GridItem extends Actor
             if(Math.abs(sX-getX()) <= speed && Math.abs(sY-getY()) <= speed) {
                 // LevelWorld lw = (LevelWorld)getWorld();
                 setCellXY(slideToCellX, slideToCellY);
-                lw.checkFalling();
-                onSlideFinished();
                 sliding = false;
             }
         }
