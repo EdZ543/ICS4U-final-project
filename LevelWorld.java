@@ -112,6 +112,9 @@ public class LevelWorld extends World
      * Destroys current level
      */
     public void resetLevel() {
+        removeObject(birdSnakeHead);
+        removeObject(portal);
+        
         if (grid == null) return;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
