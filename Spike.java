@@ -6,31 +6,24 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Spike extends Block
+public class Spike extends InteractiveObject
 {
-    
     public Spike(int cellX, int cellY) {
         super(cellX, cellY);
     }
-    /**
-     * Act - do whatever the Spike wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
-    }
+    
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage(cellWidth, cellWidth);
-        image.setColor(Color.RED);
-        image.fill();
+        image = new GreenfootImage("images/spike.png");
+        image.scale(cellWidth, cellWidth);
         return image;
     }
-    public boolean push(int offsetX, int offsetY) {
-        return false;
-    }
-    public boolean shouldFall() {
-        return false;
-    }
     
+    /**
+     * What happens when birdsnake hits this object
+     * @param birdSnakePiece         The BirdSnakePiece that is touching this object
+     */
+    public void collide(BirdSnakePiece birdSnakePiece) {
+        LevelWorld lw = (LevelWorld)getWorld();
+        lw.setLevel(lw.getLevel());
+    }
 }
