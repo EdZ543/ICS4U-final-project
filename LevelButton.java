@@ -28,7 +28,7 @@ public class LevelButton extends UIButton
         image.fill();
         image.setFont(new Font(size));
         image.setColor(Color.WHITE);
-        image.drawString(Integer.toString(level), 5, size - 5);
+        image.drawString(Integer.toString(level+1), 5, size - 5);
         if (!active) image.setTransparency(50);
         changeImage(image);
     }

@@ -39,6 +39,11 @@ public class Portal extends InteractiveObject
             int lastLevel = Levels.LEVELS.length - 1;
             if (currentLevel == lastLevel) {
                 Greenfoot.setWorld(new EndWorld());
+                if (UserInfo.isStorageAvailable()) {
+                    UserInfo myInfo = UserInfo.getMyInfo();
+                    myInfo.setScore(lastLevel+1);
+                    myInfo.store();  // write back to server
+                }
             } else {
                 lw.setLevel(lw.getLevel() + 1);
             }

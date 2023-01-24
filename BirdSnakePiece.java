@@ -53,7 +53,7 @@ public class BirdSnakePiece extends Block
     
     
     /**
-     * Move piece to a desired cell, given an x and y offset
+     * Move piece to a desired cell, given an x and y ofset
      * @param xOffset       the number of cells the piece should move, in the x-direction
      * @param yOffset       the number of cells the piece should move, in the y-direction
      */

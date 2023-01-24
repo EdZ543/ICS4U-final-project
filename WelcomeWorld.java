@@ -9,11 +9,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class WelcomeWorld extends World
 {
     private StartButton startBtn;
-    private Label titleLabel, tempLabel;
     private GreenfootImage bg;
     private static GreenfootSound music;
     private static int levelProgress = 0;
-    private String userName = "player";
+    private Label scoreDisplay;
+    private String userName = "";
+    private PulsingImage title;
+    private SlidingImage playLabel;
 
     /**
      * Constructor for objects of class WelcomeWorld.
@@ -33,10 +35,19 @@ public class WelcomeWorld extends World
         // Draw text and background
         bg = new GreenfootImage("temp/bg.png");
         setBackground(bg);
-        titleLabel = new Label("BirdSnake!", 80);
-        tempLabel = new Label("Hello " + userName + ", you've gotten as far as level " + levelProgress, 30);
-        addObject(titleLabel, getWidth()/2, 100);
-        addObject(tempLabel, getWidth()/2, 150);
+        
+        title =  new PulsingImage("title.png", 1.9, 1.1);
+        addObject(title, getWidth()/2, 150);
+        
+        playLabel = new SlidingImage("playicon.png", 0, -30, 1);
+        addObject(playLabel, getWidth()/2+10, 600);
+        if(Levels.LEVELS.length <= levelProgress) {
+            scoreDisplay = new Label("Hello " + userName + ", you beat Birdsnake!", 40, "Chalkboard");
+        } else {
+            scoreDisplay = new Label("Hello " + userName + ", you are at level " + (levelProgress+1), 30, "Chalkboard");
+        }
+        // addObject(titleLabel, getWidth()/2, 100);
+        addObject(scoreDisplay, getWidth()/2, 250);
 
         // Add music
         music = new GreenfootSound("sounds/background-music.mp3");

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 /**
  * This is a 2D grid-based puzzle game. Its mechanics can be likened to that of the arcade game Snake, but with gravity.
- * Use WASD or the arrow keys to control the bird snake. Collecting fruits causes you to grow.
+ * Use WASD or the arrow keys to control the bird snake. Collecting fruits causes you to grow. Avoid spikes at all cost!
  * Collect all fruits in a level and enter the portal to continue to the next level.
  * 
  * Credits
@@ -109,6 +109,7 @@ public class LevelWorld extends World
         int offsetY = (getHeight() - levelHeight) / 2;
         renderLevel(Levels.CELL_WIDTHS[level], offsetX, offsetY, Levels.LEVELS[level]);
         birdSnakeHead.resetSnakeColours(cellWidth);
+        
         // Update user progress on gallery
         if (level > WelcomeWorld.getLevelProgress()) {
             WelcomeWorld.setLevelProgress(level);
