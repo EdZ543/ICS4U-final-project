@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Button for selecting a level to play.
  * 
  * @author Eddie Zhuang
- * @version (a version number or a date)
+ * @version Jan. 24, 2023
  */
 public class LevelButton extends UIButton
 {
@@ -33,10 +33,18 @@ public class LevelButton extends UIButton
         changeImage(image);
     }
     
+    /**
+     * Creates a game world with the associated level.
+     */
     public void clicked() {
         if (active) Greenfoot.setWorld(new LevelWorld(level));
     }
     
+    /**
+     * Sets whether the button is active.
+     * 
+     * @param a Whether the button should be active
+     */
     public void setActive(boolean a) {
         active = a;
     }

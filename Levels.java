@@ -2,7 +2,7 @@
  * Arrays of all levels in the game
  * 
  * @author Eddie Zhuang, Caden Chan
- * @version (a version number or a date)
+ * @version Jan. 24, 2023
  */
 public class Levels  
 {
@@ -130,6 +130,7 @@ public class Levels
         }
     };
     
+    // The size that the cells should be for each level
     public static final int[] CELL_WIDTHS = {
         50,
         50,
