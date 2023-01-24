@@ -4,12 +4,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Goal of each level, lets bird snake go to the next level. All fruits must be eaten before it opens.
  * 
  * @author Eddie Zhuang
- * @version (a version number or a date)
+ * @version Jan. 24, 2023
  */
 public class Portal extends InteractiveObject
 {
-    private boolean active = false;
+    private boolean active = false; // Whether all fruits are eaten and the bird can enter the portal
     
+    /**
+     * Class constructor.
+     * 
+     * @param cellX The x-coordinate in the grid
+     * @param cellY The y-coordinate in the grid
+     */
     public Portal(int cellX, int cellY) {
         super(cellX, cellY);
     }

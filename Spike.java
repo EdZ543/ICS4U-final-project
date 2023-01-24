@@ -1,13 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Spike here.
+ * A dangerous block that annihalates the bird snake on contact.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Eddie Zhuang
+ * @version Jan. 24, 2023
  */
 public class Spike extends InteractiveObject
 {
+    /**
+     * Class constructor.
+     * 
+     * @param cellX The x-coordinate in the grid
+     * @param cellY The y-coordinate in the grid
+     */
     public Spike(int cellX, int cellY) {
         super(cellX, cellY);
     }

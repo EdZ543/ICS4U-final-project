@@ -4,10 +4,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A consumable food.
  * 
  * @author Eddie Zhuang
- * @version (a version number or a date)
+ * @version Jan. 24, 2023
  */
 public abstract class Fruit extends InteractiveObject
 {
+    /**
+     * Class constructor.
+     * 
+     * @param cellX The object's X position
+     * @param cellY The object's Y position
+     */
     public Fruit(int cellX, int cellY) {
         super(cellX, cellY);
     }

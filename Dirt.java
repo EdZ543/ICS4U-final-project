@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The most basic block, a static square
  * 
- * @author Eddie Zhuang 
- * @version (a version number or a date)
+ * @author Eddie Zhuang, Caden Chan
+ * @version Jan. 24, 2023
  */
 public class Dirt extends Block
 {
@@ -52,6 +52,7 @@ public class Dirt extends Block
     public boolean push(int offsetX, int offsetY) {
         return false;
     }
+    
     /**
      * Fill in unwanted empty spaces between dirt blocks
      */

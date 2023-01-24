@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * An item that is locked into a grid
  * 
- * @author Eddie Zhuang
- * @version (a version number or a date)
+ * @author Eddie Zhuang, Caden Chan
+ * @version Jan. 24, 2023
  */
 public abstract class GridItem extends Actor
 {
@@ -13,6 +13,7 @@ public abstract class GridItem extends Actor
     protected boolean sliding;
     protected int slideToCellX, slideToCellY;
     protected int speed;
+    
     /**
      * GridItem constructor
      * @param cellX The x position of the item

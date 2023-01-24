@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * The most basic fruit. It causes the bird snake's length to increase by 1.
+ * Fruit that causes the bird snake's length to increase by 1.
  * 
  * @author Eddie Zhuang
- * @version (a version number or a date)
+ * @version Jan. 24, 2023
  */
 public class Apple extends Fruit
 {
@@ -40,6 +40,11 @@ public class Apple extends Fruit
         lw.eatFruit();
     }
     
+    /**
+     * Whether the object should fall currently
+     * 
+     * @return boolean Whether the object should fall currently
+     */
     public boolean shouldFall() {
         return false;
     }
