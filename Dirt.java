@@ -56,7 +56,6 @@ public class Dirt extends Block
      * Fill in unwanted empty spaces between dirt blocks
      */
     public void addFiller() {
-        System.out.println(getItemBelow());
         if(getItemBelow() instanceof Dirt) {
             Filler filler = new Filler(this, 0, getImage().getWidth()/2-4);
             getWorld().addObject(filler, 0, 0);
