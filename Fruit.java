@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Fruit extends InteractiveObject
 {
+    private int rotateCount;
     /**
      * Class constructor.
      * 
@@ -16,6 +17,7 @@ public abstract class Fruit extends InteractiveObject
      */
     public Fruit(int cellX, int cellY) {
         super(cellX, cellY);
+        rotateCount = 0;
     }
     
     /**
@@ -23,4 +25,9 @@ public abstract class Fruit extends InteractiveObject
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
      */
     public abstract void collide(BirdSnakePiece birdSnakePiece);
+    
+    public void act() {
+        setRotation(rotateCount);
+        rotateCount += 3;
+    }
 }
