@@ -50,7 +50,7 @@ public class LevelWorld extends World
         SelectLevelButton slb = new SelectLevelButton();
         addObject(slb, 1048, 28);
 
-        setPaintOrder(Outline.class, Foliage.class, Block.class, InteractiveObject.class, Filler.class);
+        setPaintOrder(Foliage.class, Block.class, InteractiveObject.class, Filler.class);
         this.level = level;
         setLevel(this.level);
     }
