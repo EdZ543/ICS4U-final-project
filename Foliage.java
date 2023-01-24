@@ -10,7 +10,7 @@ public class Foliage extends Actor
 {
     private Dirt origin;
     private String type;
-    private int xOffset, yOffset;   // xOffset and yOffset depends on type of foliage
+    protected int xOffset, yOffset;   // xOffset and yOffset depends on type of foliage
     GreenfootImage image;
     /**
      * @param origin        Foliage positioned relative to the center of this Dirt block
@@ -47,6 +47,10 @@ public class Foliage extends Actor
             image.scale((int)(lw.getCellWidth()*1.2), (int)(lw.getCellWidth()/2));
             xOffset = 0;
             yOffset = -18;
+        } else if(type.equals("filler")) { // 170 131 86
+            image = new GreenfootImage(lw.getCellWidth(), 8);
+            image.setColor(new Color(170, 131, 86));
+            image.fill();
         }
     }
 }

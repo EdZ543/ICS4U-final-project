@@ -11,7 +11,7 @@ public class WelcomeWorld extends World
     private StartButton startBtn;
     private Label titleLabel, tempLabel;
     private GreenfootImage bg;
-    private GreenfootSound music;
+    private static GreenfootSound music;
     private static int levelProgress = 0;
     private String userName = "player";
 
@@ -51,6 +51,10 @@ public class WelcomeWorld extends World
 
     public void stopped() {
         music.stop();
+    }
+    
+    public static GreenfootSound getMusic() {
+        return music;
     }
     
     public static int getLevelProgress() {

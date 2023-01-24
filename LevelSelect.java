@@ -42,4 +42,11 @@ public class LevelSelect extends World
             level++;
         }
     }
+    public void started() {
+        WelcomeWorld.getMusic().playLoop();
+    }
+
+    public void stopped() {
+        WelcomeWorld.getMusic().stop();
+    }
 }

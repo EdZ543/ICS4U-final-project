@@ -41,7 +41,7 @@ public class LevelWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
-
+        setBackground(new GreenfootImage("temp/bg.png"));
         // Put reset button
         RestartButton rb = new RestartButton();
         addObject(rb, 1170, 28);
@@ -50,7 +50,7 @@ public class LevelWorld extends World
         SelectLevelButton slb = new SelectLevelButton();
         addObject(slb, 1048, 28);
 
-        setPaintOrder(Outline.class, Foliage.class);
+        setPaintOrder(Outline.class, Foliage.class, Block.class, InteractiveObject.class, Filler.class);
         this.level = level;
         setLevel(this.level);
     }
@@ -82,6 +82,13 @@ public class LevelWorld extends World
             fallingTimer++;
         }
     }
+    public void started() {
+        WelcomeWorld.getMusic().playLoop();
+    }
+
+    public void stopped() {
+        WelcomeWorld.getMusic().stop();
+    }
 
     /**
      * Changes the level
@@ -98,7 +105,7 @@ public class LevelWorld extends World
         int offsetX = (getWidth() - levelWidth) / 2;
         int offsetY = (getHeight() - levelHeight) / 2;
         renderLevel(Levels.CELL_WIDTHS[level], offsetX, offsetY, Levels.LEVELS[level]);
-
+        birdSnakeHead.resetSnakeColours(cellWidth);
         // Update user progress on gallery
         if (level > WelcomeWorld.getLevelProgress()) {
             WelcomeWorld.setLevelProgress(level);
@@ -238,7 +245,9 @@ public class LevelWorld extends World
                 }
             }
         }
-
+        // Fill in unwanted empty spaces between dirt blocks
+        addDirtFiller();
+        
         // Edge case: no fruits
         if (fruitsLeft == 0) {
             portal.activate();
@@ -286,7 +295,7 @@ public class LevelWorld extends World
      */
     public GridItem getItem(int cellX, int cellY) {
         // check if desired x and y values are out of bounds
-        if(isXOutOfBounds(cellX) ||isYOutOfBounds(cellY)) return null;
+        if(isXOutOfBounds(cellX) || isYOutOfBounds(cellY)) return null;
         return grid[cellY][cellX];
     }
 
@@ -409,5 +418,17 @@ public class LevelWorld extends World
 
     public BirdSnakeHead getBirdSnakeHead() {
         return birdSnakeHead;
+    }
+    /**
+     * Fill in unwanted empty spaces between dirt blocks
+     */
+    public void addDirtFiller() {
+        for(int i=0;i<grid.length;i++) {
+            for(int j=0;j<grid[i].length;j++) {
+                if(grid[i][j] instanceof Dirt) {
+                    ((Dirt)grid[i][j]).addFiller();
+                }
+            }
+        }
     }
 }

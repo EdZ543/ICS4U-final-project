@@ -52,4 +52,18 @@ public class Dirt extends Block
     public boolean push(int offsetX, int offsetY) {
         return false;
     }
+    /**
+     * Fill in unwanted empty spaces between dirt blocks
+     */
+    public void addFiller() {
+        System.out.println(getItemBelow());
+        if(getItemBelow() instanceof Dirt) {
+            Filler filler = new Filler(this, 0, getImage().getWidth()/2-4);
+            getWorld().addObject(filler, 0, 0);
+        }
+        if(getItemAbove() instanceof Dirt) {
+            Filler filler = new Filler(this, 0, -getImage().getWidth()/2+4);
+            getWorld().addObject(filler, 0, 0);
+        }
+    }
 }

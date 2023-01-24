@@ -246,6 +246,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         
         lw.changeGrid(piece.getCellX(),piece.getCellY(), piece);
         getWorld().addObject(piece, 0, 0);
+        
     }
     /**
      * Add piece to the end of the BirdSnake
@@ -267,5 +268,13 @@ public class BirdSnakeHead extends BirdSnakePiece
     
     public ArrayList<BirdSnakePiece> getPieces() {
         return bodyPieces;
+    }
+    public void resetSnakeColours(int cellWidth) {
+        GreenfootImage image;
+        for(int i=0;i<bodyPieces.size();i++) {
+            image = new GreenfootImage("temp/birdsnakepiece" + i%2 + ".png");
+            image.scale(cellWidth, cellWidth);
+            bodyPieces.get(i).setImage(image);
+        }
     }
 }
