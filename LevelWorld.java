@@ -33,7 +33,7 @@ public class LevelWorld extends World
     private BirdSnakeHead birdSnakeHead;
 
     /**
-     * Constructor
+     * The constructor.
      * 
      * @param level The first level to load
      */
@@ -56,13 +56,16 @@ public class LevelWorld extends World
     }
 
     public void act() {
+        // Check if things need to fall
         if (!birdSnakeHead.snakeIsSliding()) {
             checkFalling();
         }
 
+        // Make things fall
         if (falling) {
             if (fallingTimer % fallingDelay == 0) {
                 ArrayList<GridItem> toFall = new ArrayList<GridItem>();
+                // Make bird snake fall
                 if (birdSnakeHead.snakeShouldFall()) {
                     toFall.add(birdSnakeHead);
                     for(BirdSnakePiece p : birdSnakeHead.getPieces()) {
@@ -134,6 +137,8 @@ public class LevelWorld extends World
 
     /**
      * Returns the current level number
+     * 
+     * @return int The current level
      */
     public int getLevel() {
         return level;
@@ -142,10 +147,10 @@ public class LevelWorld extends World
     /**
      * Checks whether a character is a bird snake character, for level generation
      * 
-     * @param levelArray The level array
+     * @param   levelArray The level array
      * @param x The x position being checked
      * @param y the y position being checked
-     * @return Whether the character is >, <, ^, v
+     * @return  Whether the character is >, <, ^, v
      */
     private boolean isSnakeBlock(String[] levelArray, int x, int y) {
         if (isYOutOfBounds(levelArray, y) || isXOutOfBounds(levelArray, x)) return false;
@@ -156,9 +161,10 @@ public class LevelWorld extends World
     /**
      * Checks whether a character is the tail of the bird snake
      * 
-     * @param levelArray The level array
+     * @param   levelArray The level array
      * @param x The x position being checked
      * @param y the y position being checked
+     * @return  boolean Whether the item is the bird snake tail
      */
     private boolean isTail(String[] levelArray, int x, int y) {
         if (x - 1 >= 0 && levelArray[y].charAt(x - 1) == '>') return false;
@@ -169,9 +175,12 @@ public class LevelWorld extends World
     }
 
     /**
-     * Builds the world based on a 2D array representation
+     * Builds the world based on a String array representation
      * 
-     * @param levelArray The 2D array
+     * @param cellWidth     The cell width
+     * @param gridXOffset   The x position to start the grid
+     * @param gridYOffset   The y position to start the grid
+     * @param levelArray    The String array representation
      */
     public void renderLevel(int cellWidth, int gridXOffset, int gridYOffset, String[] levelArray) {
         this.cellWidth = cellWidth;
@@ -197,9 +206,6 @@ public class LevelWorld extends World
                     case 'A':
                         grid[y][x] = new Apple(x, y);
                         fruitsLeft++;
-                        break;
-                    case 'C':
-                        grid[y][x] = new Crate(x, y);
                         break;
                     case 'S':
                         grid[y][x] = new Spike(x, y);
@@ -260,18 +266,20 @@ public class LevelWorld extends World
     /**
      * Recursive method to add all bird snake pieces to the head's arraylist.
      * 
-     * @param x The x position of the piece in the grid
-     * @param y The y position of the piece in the grid
+     * @param x The x position of the bird snake piece in the grid
+     * @param y The y position of the bird snake piece in the grid
      */
     private void connectBird(int x, int y) {
         String[] levelArray = Levels.LEVELS[level];
 
+        // Add piece to head's array
         if (grid[y][x] != birdSnakeHead) {
             birdSnakeHead.addPiece((BirdSnakePiece)grid[y][x]);
         }
 
         addObject(grid[y][x], 0, 0);
 
+        // Recursively call on whatever piece this one is pointing at
         switch (levelArray[y].charAt(x)) {
             case '<':
                 if (isSnakeBlock(levelArray, x - 1, y)) connectBird(x - 1, y);
@@ -289,6 +297,8 @@ public class LevelWorld extends World
     }
 
     /**
+     * Returns an item from the 2d grid
+     * 
      * @param cellX             The x-position, in cells, of the item
      * @param cellY             The y-position, in cells, of the item
      * @return GridItem         The item at the position; returns null if no item exists there.
@@ -300,7 +310,8 @@ public class LevelWorld extends World
     }
 
     /**
-     * Assumes that the 2-d array creates a perfect square shape
+     * Returns the width of the grid in cells
+     * 
      * return int       Number of columns in the grid (# of cells per row)
      */
     public int getGridXLength() {
@@ -308,7 +319,8 @@ public class LevelWorld extends World
     }
 
     /**
-     * Assumes that the 2-d array creates a perfect square shape
+     * Returns the height of the grid in cells
+     * 
      * return int       Number of rows in the grid (# of cells per column)
      */
     public int getGridYLength() {
@@ -328,6 +340,8 @@ public class LevelWorld extends World
      */
 
     /**
+     * Gets grid coordinate based on world coordinate
+     * 
      * @param cellNumber        row number pertaining to the grid
      * @return int              x-coordinate in Greenfoot world pertaining to given row number
      */
@@ -336,6 +350,8 @@ public class LevelWorld extends World
     }
 
     /**
+     * Gets grid coordinate based on world coordinate
+     * 
      * @param coordinate        x-coordinate in the Greenfoot world
      * @return int              row number where the x-coordinate is located
      */
@@ -344,6 +360,8 @@ public class LevelWorld extends World
     }
 
     /**
+     * Gets world coordinate based on grid coordinate
+     * 
      * @param cellNumber        column number pertaining to the grid
      * @return int              y-coordinate in Greenfoot world pertaining to given column number
      */
@@ -352,6 +370,8 @@ public class LevelWorld extends World
     }
 
     /**
+     * Gets world coordinate based on grid coordinate
+     * 
      * @param coordinate        y-coordinate in the Greenfoot world
      * @return int              column number where the y-coordinate is located
      */
@@ -360,24 +380,52 @@ public class LevelWorld extends World
     }
 
     /**
+     * Gets the current cell size
+     * 
      * @return int          Cell width
      */
     public int getCellWidth() {
         return cellWidth;
     }
 
+    /**
+     * Checks whether an x-coordinate is out of bounds
+     * 
+     * @param x         The x-coordinate
+     * @return boolean  Whether the x-coordinate is out of bounds
+     */
     public boolean isXOutOfBounds(int x) {
         return x < 0 || x >= getGridXLength();
     }
 
+    /**
+     * Checks whether an x-coordinate is out of bounds
+     * 
+     * @param levelArray    The String array representation of the level
+     * @param x             the x-coordinate
+     * @return boolean      Whether the x-coordinate is out of bounds
+     */
     public boolean isXOutOfBounds(String[] levelArray, int x) {
         return x < 0 || x >= levelArray[0].length();
     }
 
+    /**
+     * Checks whether an y-coordinate is out of bounds
+     * 
+     * @param y         The y-coordinate
+     * @return boolean  Whether the y-coordinate is out of bounds
+     */
     public boolean isYOutOfBounds(int y) {
         return y < 0 || y >= getGridYLength();
     }
 
+    /**
+     * Checks whether a y-coordinate is out of bounds
+     * 
+     * @param levelArray    The String array representation of the level
+     * @param y             the y-coordinate
+     * @return boolean      Whether the y-coordinate is out of bounds
+     */
     public boolean isYOutOfBounds(String[] levelArray, int y) {
         return y < 0 || y >= levelArray.length;
     }
@@ -392,6 +440,8 @@ public class LevelWorld extends World
 
     /**
      * Returns whether or not things are falling in the world
+     * 
+     * @return boolean Whether or not things are falling in the world
      */
     public boolean getFalling() {
         return falling;
