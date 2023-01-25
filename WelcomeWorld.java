@@ -12,7 +12,7 @@ public class WelcomeWorld extends World
     private GreenfootImage bg;
     private static GreenfootSound music;
     private static int levelProgress = 0;
-    private Label scoreDisplay;
+    private Label scoreDisplay, greeting;
     private String userName = "";
     private PulsingImage title;
     private SlidingImage playLabel;
@@ -28,26 +28,36 @@ public class WelcomeWorld extends World
         // Check level progress and userName from UserInfo
         if (UserInfo.isStorageAvailable()) {
             UserInfo myInfo = UserInfo.getMyInfo();
-            levelProgress = myInfo.getScore();
+            levelProgress = 4;
             userName = myInfo.getUserName();
         }
         
         // Draw text and background
         bg = new GreenfootImage("bg0.png");
+        GreenfootImage white = new GreenfootImage(1200, 800);
+        white.setTransparency(90);
+        white.setColor(Color.WHITE);
+        white.fill();
+        bg.drawImage(white, 0, 0);
         setBackground(bg);
         
         title =  new PulsingImage("title.png", 1.9, 1.1);
-        addObject(title, getWidth()/2, 150);
+        addObject(title, getWidth()/2, 170);
         
         playLabel = new SlidingImage("playicon.png", 0, -30, 1);
         addObject(playLabel, getWidth()/2+10, 600);
+        
+        greeting = new Label("Hello there " + userName + "!", 40, "Segoe Print");
+        greeting.setFillColor(new Color(40, 40, 40));
+        addObject(greeting, getWidth()/2, 300);
         if(Levels.LEVELS.length <= levelProgress) {
-            scoreDisplay = new Label("Hello " + userName + ", you beat Birdsnake!", 40, "Chalkboard");
+            scoreDisplay = new Label("You have beaten Birdsnake!", 30, "Segoe Print");
         } else {
-            scoreDisplay = new Label("Hello " + userName + ", you are at level " + (levelProgress+1), 30, "Chalkboard");
+            scoreDisplay = new Label("You have made it to level: " + (levelProgress+1), 30, "Segoe Print");
         }
+        scoreDisplay.setFillColor(new Color(40, 40, 40));
         // addObject(titleLabel, getWidth()/2, 100);
-        addObject(scoreDisplay, getWidth()/2, 250);
+        addObject(scoreDisplay, getWidth()/2, 350);
 
         // Add music
         music = new GreenfootSound("sounds/background-music.mp3");

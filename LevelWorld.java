@@ -8,10 +8,11 @@ import java.util.ArrayList;
  * 
  * Credits
  * - Images
- *   - portal.png: From https://pbs.twimg.com/media/CS4f2mqWsAAbMcR.png, by Apple
+ *   - portal.png: https://www.istockphoto.com/vector/vector-rainbow-vortex-background-gm685836790-126093415
  *   - bg.png:
  *   - restart-button.png: from https://www.freeiconspng.com/img/12293 by Ahkâm
  *   - level-select-button.png from http://clipart-library.com/clipart/571254.htm by Clipart Library
+ *   - home-button.png: from https://www.shutterstock.com/image-vector/vector-button-home-on-white-background-239697991
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * - Audio
  *   - background music: from https://omori.bandcamp.com/track/lets-get-together-now-2 by omocat
@@ -41,16 +42,21 @@ public class LevelWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
-        setBackground(new GreenfootImage("bg0.png"));
+        setBackground(new GreenfootImage("bg2.png"));
+        
+        // Put home button
+        HomeButton hb = new HomeButton();
+        addObject(hb, 1140, 50);
+        
         // Put reset button
         RestartButton rb = new RestartButton();
-        addObject(rb, 1170, 28);
+        addObject(rb, 1065, 50);
 
         // Put level select button
         SelectLevelButton slb = new SelectLevelButton();
-        addObject(slb, 1048, 28);
+        addObject(slb, 925, 50);
 
-        setPaintOrder(Foliage.class, Block.class, InteractiveObject.class, Filler.class);
+        setPaintOrder(AnimatedImage.class, Foliage.class, Block.class, InteractiveObject.class, Filler.class);
         this.level = level;
         setLevel(this.level);
     }
@@ -126,7 +132,8 @@ public class LevelWorld extends World
      */
     public void resetLevel() {
         removeObject(birdSnakeHead);
-        removeObject(portal);
+        // removeObject(portal);
+        if(portal !=null) portal.removeFromWorld();
 
         if (grid == null) return;
         for (int i = 0; i < grid.length; i++) {
