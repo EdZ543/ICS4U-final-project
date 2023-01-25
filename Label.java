@@ -9,7 +9,7 @@ import java.awt.Font;
  * in Greenfoot.  If you keep a reference to the Label then you can change the text it
  * displays.  
  *
- * @author Amjad Altadmri, modified by Caden Chan to include other font styles and better dimensions with java.awt
+ * @author Amjad Altadmri, modified (most of it) by Caden Chan to include other font styles and better dimensions with java.awt
  * @version 1.1
  */
 public class Label extends Actor
@@ -28,7 +28,7 @@ public class Label extends Actor
      */
     public Label(int value, int fontSize)
     {
-        this(Integer.toString(value), fontSize, "Times");
+        this(Integer.toString(value), fontSize, "");
         
     }
     
@@ -37,7 +37,7 @@ public class Label extends Actor
      */
     public Label(String value, int fontSize)
     {
-        this(value, fontSize, "Times");
+        this(value, fontSize, "");
     }
     
     public Label(int value, int fontSize, String fontStyle) {
@@ -100,5 +100,11 @@ public class Label extends Actor
         image.drawString(value, 0, (int)(fontSize));
         
         setImage(image);
+    }
+    
+    public static int textPixelWidth(String text, String fontStyle, int fontSize) {
+        Graphics g = new GreenfootImage(1,1).getAwtImage().createGraphics();
+        FontMetrics fm = g.getFontMetrics(new Font(fontStyle, Font.PLAIN, fontSize));
+        return fm.stringWidth(text);        
     }
 }
