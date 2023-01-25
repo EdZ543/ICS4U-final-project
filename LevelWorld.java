@@ -9,7 +9,9 @@ import java.util.ArrayList;
  * Credits
  * - Images
  *   - portal.png: https://www.istockphoto.com/vector/vector-rainbow-vortex-background-gm685836790-126093415
- *   - bg.png:
+ *   - bg0.png: https://www.freepik.com/premium-vector/sky-cloud-daily-illustration-with-cartoon-cirrus-cumulus-white-clouds-rays-sun-illustration_16607917.htm
+ *   - bg1.png: https://pressstart.vip/assets
+ *   - bg2.png: https://wallpaperaccess.com/2d-landscape
  *   - restart-button.png: from https://www.freeiconspng.com/img/12293 by Ahkâm
  *   - level-select-button.png from http://clipart-library.com/clipart/571254.htm by Clipart Library
  *   - home-button.png: from https://www.shutterstock.com/image-vector/vector-button-home-on-white-background-239697991
@@ -153,10 +155,15 @@ public class LevelWorld extends World
      * Destroys current level
      */
     public void resetLevel() {
+        if(birdSnakeHead != null) {
+            for(BirdSnakePiece piece : birdSnakeHead.getPieces()) {
+                removeObject(piece);
+            }
+        }
         removeObject(birdSnakeHead);
         // removeObject(portal);
         if(portal !=null) portal.removeFromWorld();
-
+        
         if (grid == null) return;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {

@@ -21,7 +21,7 @@ public class BirdSnakePiece extends Block
     }
     protected GreenfootImage drawImage(int cellWidth) {
         LevelWorld lw = (LevelWorld)getWorld();
-        image = new GreenfootImage("temp/birdsnakepiece" + (lw.getBirdSnakeHead().getPieces().size()+1)%2 + ".png");
+        image = new GreenfootImage("birdsnakepiece" + (lw.getBirdSnakeHead().getPieces().size()+1)%2 + ".png");
         
         image.scale(cellWidth, cellWidth);
         return image;

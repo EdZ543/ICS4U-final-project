@@ -15,7 +15,7 @@ public class StartButton extends UIButton
      */
     public StartButton() {
         // Preset images
-        super(new GreenfootImage("temp/playbtn.png"), null, new GreenfootImage("temp/playbtn-hover.png"), null);
+        super(new GreenfootImage("playbtn.png"), null, new GreenfootImage("playbtn-hover.png"), null);
         clickSound = new GreenfootSound("buttonhappy.mp3");
         clickSound.setVolume(30);
     }

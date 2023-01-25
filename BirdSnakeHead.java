@@ -57,7 +57,7 @@ public class BirdSnakeHead extends BirdSnakePiece
         
     }
     protected GreenfootImage drawImage(int cellWidth) {
-        image = new GreenfootImage("temp/birdsnakehead.png");
+        image = new GreenfootImage("birdsnakehead.png");
         image.scale(cellWidth, cellWidth);
         return image;
     }
@@ -295,7 +295,7 @@ public class BirdSnakeHead extends BirdSnakePiece
     public void resetSnakeColours(int cellWidth) {
         GreenfootImage image;
         for(int i=0;i<bodyPieces.size();i++) {
-            image = new GreenfootImage("temp/birdsnakepiece" + i%2 + ".png");
+            image = new GreenfootImage("birdsnakepiece" + i%2 + ".png");
             image.scale(cellWidth, cellWidth);
             bodyPieces.get(i).setImage(image);
         }
