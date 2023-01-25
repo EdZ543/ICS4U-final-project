@@ -13,11 +13,13 @@ public abstract class AnimatedImage extends Actor
     protected String filePath;
     public AnimatedImage(String filePath) {
         this.filePath = filePath;
+        if(filePath == null) return;
         image = new GreenfootImage(filePath);
         setImage(image);
     }
     public AnimatedImage(String filePath, int width, int height) {
         this.filePath = filePath;
+        if(filePath == null) return;
         image = new GreenfootImage(filePath);
         image.scale(width, height);
         setImage(image);

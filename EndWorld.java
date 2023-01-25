@@ -16,7 +16,7 @@ public class EndWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
-        GreenfootImage bg = new GreenfootImage("temp/bg.png");
+        GreenfootImage bg = new GreenfootImage("bg0.png");
         setBackground(bg);
         Label titleLabel = new Label("You Win!", 80);
         addObject(titleLabel, getWidth() / 2, getHeight() / 2);
