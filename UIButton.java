@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class UIButton extends Actor
 {
     protected GreenfootImage image, clickedImage, hoverImage, inactiveImage;
+    protected GreenfootSound clickSound;
     protected int clickCount;
     protected boolean active = true;
     public abstract void clicked();

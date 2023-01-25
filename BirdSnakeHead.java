@@ -17,6 +17,9 @@ public class BirdSnakeHead extends BirdSnakePiece
     private final int DEATH_TIME = 45;
     private char facingDirection;
     private ArrayList<BirdSnakePiece> bodyPieces;
+    private GreenfootSound dyingSound;
+    private GreenfootSound[] moveSoundAs, moveSoundBs;
+    private int moveSoundIndex;
     /**
      * @param cellX         The x-position of the head
      * @param cellY         The y-position of the head
@@ -26,6 +29,19 @@ public class BirdSnakeHead extends BirdSnakePiece
         setFacingDirection(facingDirection);
         bodyPieces = new ArrayList<BirdSnakePiece>();
         clickCldwn = 0;
+        dyingSound = new GreenfootSound("dead.wav");
+        dyingSound.setVolume(90);
+        moveSoundAs = new GreenfootSound[5];
+        for(int i=0;i<moveSoundAs.length;i++) {
+            moveSoundAs[i] = new GreenfootSound("woosh0.wav");
+            moveSoundAs[i].setVolume(70);
+        }
+        moveSoundBs = new GreenfootSound[5];
+        for(int i=0;i<moveSoundBs.length;i++) {
+            moveSoundBs[i] = new GreenfootSound("woosh1.wav");
+            moveSoundBs[i].setVolume(60);
+        }
+        moveSoundIndex = 0;
     }
     
     public boolean snakeIsSliding() {
@@ -73,6 +89,12 @@ public class BirdSnakeHead extends BirdSnakePiece
             boolean right = (Greenfoot.isKeyDown("d") || Greenfoot.isKeyDown("right")) && canMoveRight();
             boolean acted = up || down || left || right;
             if(acted) {
+                if(Greenfoot.getRandomNumber(2) == 0) {
+                    moveSoundAs[moveSoundIndex].play();
+                } else {
+                    moveSoundBs[moveSoundIndex].play();
+                }
+                moveSoundIndex = (moveSoundIndex+1)%moveSoundAs.length;
                 shiftPieces();
                 clickCldwn = COOLDOWN;
             } 
@@ -196,6 +218,7 @@ public class BirdSnakeHead extends BirdSnakePiece
      */
     public void startDying() {
         dying = true;
+        dyingSound.play();
     }
     public boolean isDying() {
         return dying;

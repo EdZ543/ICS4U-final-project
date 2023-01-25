@@ -16,7 +16,14 @@ import java.util.ArrayList;
  *   - All other sprites created by Caden Chan, with inspiration from the original game, SnakeBird, by Noumenon Games.
  * - Audio
  *   - background music: from https://omori.bandcamp.com/track/lets-get-together-now-2 by omocat
- * 
+ *   - dead.wav:            https://soundbible.com/1079-Bir-Poop-Splat.html
+ *   - woosh0.wav:          https://pixabay.com/sound-effects/whoosh-6316/
+ *   - woosh1.wav:          https://pixabay.com/sound-effects/clean-fast-swooshaiff-14784/
+ *   - portal.wav:          https://soundbible.com/1686-Appear.html
+ *   - collect.wav:         https://mixkit.co/free-sound-effects/coin/ ; "Fairy arcade sparkle"
+ *   - win.wav:             https://mixkit.co/free-sound-effects/coin/ ; "magical coin win"
+ *   - buttonhappy.mp3:     https://pixabay.com/sound-effects/decidemp3-14575/
+ *   - button.mp3:          https://pixabay.com/sound-effects/click-21156/
  * 
  * @author Caden Chan, Eddie Zhuang
  * @version 2023.01.22
@@ -32,7 +39,9 @@ public class LevelWorld extends World
     private int fallingTimer = 0; // Timer for updating falling objects
     private int fallingDelay = 30; // Delay between each downward movement of falling objects
     private BirdSnakeHead birdSnakeHead;
-
+    private GreenfootSound winSound;
+    private GreenfootSound[] eatSounds;
+    private int eatSoundIdx;
     /**
      * The constructor.
      * 
@@ -55,7 +64,19 @@ public class LevelWorld extends World
         // Put level select button
         SelectLevelButton slb = new SelectLevelButton();
         addObject(slb, 925, 50);
-
+        
+        // Initialize win sound
+        winSound = new GreenfootSound("win.wav");
+        winSound.setVolume(80);
+        
+        // Initialize eat sounds
+        eatSounds = new GreenfootSound[8];
+        for(int i=0;i<eatSounds.length;i++) {
+            eatSounds[i] = new GreenfootSound("collect.wav");
+            eatSounds[i].setVolume(75);
+        }
+        eatSoundIdx = 0;
+        
         setPaintOrder(AnimatedImage.class, Foliage.class, Block.class, InteractiveObject.class, Filler.class);
         this.level = level;
         setLevel(this.level);
@@ -469,6 +490,8 @@ public class LevelWorld extends World
      * Decrease fruitsLeft count by 1, and activates portal if all are eaten
      */
     public void eatFruit() {
+        eatSounds[eatSoundIdx].play();
+        eatSoundIdx = (eatSoundIdx+1)%eatSounds.length;
         fruitsLeft--;
         if (fruitsLeft == 0) {
             portal.activate();
@@ -489,5 +512,11 @@ public class LevelWorld extends World
                 }
             }
         }
+    }
+    /**
+     * Level cleared sound
+     */
+    public void playWinSound() {
+        winSound.play();
     }
 }

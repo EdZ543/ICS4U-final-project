@@ -17,6 +17,8 @@ public class SelectLevelButton extends UIButton
         // Sets the button image
         changeImage(new GreenfootImage("images/level-select-button.png"));
         changeHoverImage(new GreenfootImage("images/level-select-button-hover.png"));
+        clickSound = new GreenfootSound("button.mp3");
+        clickSound.setVolume(30);
     }
     
     /**
@@ -26,5 +28,6 @@ public class SelectLevelButton extends UIButton
         LevelWorld lw = (LevelWorld)getWorld();
         int level = lw.getLevel();
         Greenfoot.setWorld(new LevelSelect());
+        clickSound.play();
     }
 }

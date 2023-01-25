@@ -11,7 +11,7 @@ public class Portal extends InteractiveObject
     private boolean active = false; // Whether all fruits are eaten and the bird can enter the portal
     private PulsingImage pulsingPortal;
     private int rotateCount, rotateSpeed=3;
-    
+    private GreenfootSound activateSound;
     /**
      * Class constructor.
      * 
@@ -20,6 +20,8 @@ public class Portal extends InteractiveObject
      */
     public Portal(int cellX, int cellY) {
         super(cellX, cellY);
+        activateSound = new GreenfootSound("portal.wav");
+        activateSound.setVolume(30);
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
@@ -42,7 +44,7 @@ public class Portal extends InteractiveObject
     public void collide(BirdSnakePiece birdSnakePiece) {
         if (active) {
             LevelWorld lw = (LevelWorld)getWorld();
-            
+            lw.playWinSound();
             int currentLevel = lw.getLevel();
             int lastLevel = Levels.LEVELS.length - 1;
             if (currentLevel == lastLevel) {
@@ -55,6 +57,7 @@ public class Portal extends InteractiveObject
             } else {
                 lw.setLevel(lw.getLevel() + 1);
             }
+            
         }
     }
     
@@ -63,6 +66,7 @@ public class Portal extends InteractiveObject
      */
     public void activate() {
         active = true;
+        activateSound.play();
         rotateCount = 0;
         // make invisible, then add PulsatingImage to cover it => portal animation
         image.setTransparency(0);
@@ -73,6 +77,7 @@ public class Portal extends InteractiveObject
      * Remove this portal and its animated image
      */
     public void removeFromWorld() {
+        activateSound.stop();
         if(pulsingPortal.getWorld() != null) {
             getWorld().removeObject(pulsingPortal);
         }

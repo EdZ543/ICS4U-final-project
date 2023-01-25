@@ -12,7 +12,8 @@ public class HomeButton extends UIButton
         super(null);
         changeImage(new GreenfootImage("home-button.png"));
         changeHoverImage(new GreenfootImage("home-button-hover.png"));
-        
+        clickSound = new GreenfootSound("button.mp3");
+        clickSound.setVolume(30);
     }
     
     /**
@@ -20,5 +21,6 @@ public class HomeButton extends UIButton
      */
     public void clicked() {
         Greenfoot.setWorld(new WelcomeWorld());
+        clickSound.play();
     }
 }

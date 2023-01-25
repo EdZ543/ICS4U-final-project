@@ -23,6 +23,8 @@ public class LevelButton extends UIButton
         this.level = level;
         this.active = active;
         drawImage(active, size);
+        clickSound = new GreenfootSound("buttonhappy.mp3");
+        clickSound.setVolume(30);
     }
     
     public void drawImage(boolean active, int size) {
@@ -56,6 +58,7 @@ public class LevelButton extends UIButton
      */
     public void clicked() {
         if (active) Greenfoot.setWorld(new LevelWorld(level));
+        clickSound.play();
     }
     
     // /**
