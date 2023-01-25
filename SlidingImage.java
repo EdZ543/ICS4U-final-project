@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SlidingImage here.
+ * Image that slides back and forth
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Caden Chan
+ * @version 2023.01.24
  */
 public class SlidingImage extends AnimatedImage
 {
@@ -12,6 +12,12 @@ public class SlidingImage extends AnimatedImage
     private int offsetX, offsetY;
     private int speed;
     private boolean goBack;
+    /**
+     * @param filePath          image's file path
+     * @param offsetX           total x-movement
+     * @param offsetY           total y-movement
+     * @param speed             sliding speed
+     */
     public SlidingImage(String filePath, int offsetX, int offsetY, int speed) {
         super(filePath);
         this.offsetX = offsetX;
@@ -19,6 +25,14 @@ public class SlidingImage extends AnimatedImage
         this.speed = speed;
         goBack = false;
     }
+    /**
+     * @param filePath          image's file path
+     * @param width             initial image width
+     * @param height            initial image height
+     * @param offsetX           total x-movement
+     * @param offsetY           total y-movement
+     * @param speed             sliding speed
+     */
     public SlidingImage(String filePath, int width, int height, int offsetX, int offsetY, int speed) {
         super(filePath, width, height);
         this.offsetX = offsetX;
@@ -30,6 +44,9 @@ public class SlidingImage extends AnimatedImage
         initialX = getX();
         initialY = getY();
     }
+    /**
+     * Animate sliding
+     */
     public void animate() {
         if(goBack) {
             turnTowards(initialX, initialY);
@@ -40,11 +57,11 @@ public class SlidingImage extends AnimatedImage
         // move(speed);
         for(int i = 0;i<speed;i++) {
             move(speed);
-            if(getX() == initialX+offsetX && getY() == initialY+offsetY) {
+            if(getX() == initialX+offsetX && getY() == initialY+offsetY) {  // if moved enough, start sliding back
                 goBack = true;
                 setRotation(0);
                 return;
-            } else if(getX() == initialX && getY() == initialY) {
+            } else if(getX() == initialX && getY() == initialY) {           // if moved back to initial position, restart sliding
                 goBack = false;
                 setRotation(0);
                 return;

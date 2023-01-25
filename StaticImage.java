@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class StaticImage here.
+ * A static image
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Caden Chan 
+ * @version 2023.01.24
  */
 public class StaticImage extends AnimatedImage
 {
