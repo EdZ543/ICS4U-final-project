@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Stack;
 import java.util.ArrayList;
 /**
- * Write a description of class BirdSnakeHead here.
+ * The BirdSnake's head. Responsible for the BirdSnake's movement
  * 
  * @author Caden Chan
- * @version 2023.01.20
+ * @version 2023.01.24
  */
 public class BirdSnakeHead extends BirdSnakePiece
 {
@@ -95,9 +95,11 @@ public class BirdSnakeHead extends BirdSnakePiece
                     moveSoundBs[moveSoundIndex].play();
                 }
                 moveSoundIndex = (moveSoundIndex+1)%moveSoundAs.length;
+                // Move the body pieces
                 shiftPieces();
                 clickCldwn = COOLDOWN;
             } 
+            // Move the head
             if(!snakeShouldFall()) {
                 if(right) {
                     setFacingDirection('r');
@@ -159,10 +161,16 @@ public class BirdSnakeHead extends BirdSnakePiece
         return !(getItemBelow() instanceof Block);
     }
     
+    /**
+     * @return char     the direction that the head is facing
+     */
     public char getFacingDirection() {
         return facingDirection;
     }
     
+    /**
+     * Set direction that the head is facing/moving
+     */
     public void setFacingDirection(char d) {
         facingDirection = d;
         updateSprite(facingDirection);
@@ -220,6 +228,9 @@ public class BirdSnakeHead extends BirdSnakePiece
         dying = true;
         dyingSound.play();
     }
+    /**
+     * @return          is the birdsnake dying
+     */
     public boolean isDying() {
         return dying;
     }
@@ -281,17 +292,17 @@ public class BirdSnakeHead extends BirdSnakePiece
         BirdSnakePiece piece = new BirdSnakePiece(last.getCellX(), last.getCellY());
         addNewPiece(piece);
     }
-    // /**
-     // * Remove piece
-     // */
-    // public void shrink() {
-        // if(bodyPieces.size() == 0) return;
-        // getWorld().removeObject(bodyPieces.remove(bodyPieces.size()-1));
-    // }
-    
+    /**
+     * Return body pieces (does not include head)
+     * @return ArrayList<BirdSnakePiece>            the body pieces
+     */
     public ArrayList<BirdSnakePiece> getPieces() {
         return bodyPieces;
     }
+    /**
+     * Alternate body colour pattern
+     * @param cellWidth         width of the grid's cells
+     */
     public void resetSnakeColours(int cellWidth) {
         GreenfootImage image;
         for(int i=0;i<bodyPieces.size();i++) {

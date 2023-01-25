@@ -102,6 +102,12 @@ public class Label extends Actor
         setImage(image);
     }
     
+    /**
+     * Measure the width taken up by a string of text, given a font style and font size
+     * @param text              text whose size is being measured
+     * @param fontStyle         font style name
+     * @param fontSize          font size
+     */
     public static int textPixelWidth(String text, String fontStyle, int fontSize) {
         Graphics g = new GreenfootImage(1,1).getAwtImage().createGraphics();
         FontMetrics fm = g.getFontMetrics(new Font(fontStyle, Font.PLAIN, fontSize));

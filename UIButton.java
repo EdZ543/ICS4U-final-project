@@ -99,6 +99,9 @@ public abstract class UIButton extends Actor
         this.image = image;
         setImage(image);
     }
+    /**
+     * Change the button's hover image
+     */
     public void changeHoverImage(GreenfootImage image) {
         this.hoverImage = image;
     }

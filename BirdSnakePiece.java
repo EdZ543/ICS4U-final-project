@@ -1,6 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
- * Write a description of class BirdSnakePiece here.
+ * BirdSnake's body pieces
+ * Follows other pieces, and the orders given by the BirdSnakeHead
  * 
  * @author Caden Chan
  * @version 2023.01.23
@@ -22,13 +23,13 @@ public class BirdSnakePiece extends Block
     protected GreenfootImage drawImage(int cellWidth) {
         LevelWorld lw = (LevelWorld)getWorld();
         image = new GreenfootImage("birdsnakepiece" + (lw.getBirdSnakeHead().getPieces().size()+1)%2 + ".png");
-        
         image.scale(cellWidth, cellWidth);
         return image;
     }
     public void act() {
         LevelWorld lw = (LevelWorld)getWorld();
         slideAct();
+        // Collision detection
         InteractiveObject obj = (InteractiveObject)getOneIntersectingObject(InteractiveObject.class);
         if(obj != null && obj.getCellX() == slideToCellX && obj.getCellY() == slideToCellY) {
             obj.collide(this);
@@ -44,8 +45,8 @@ public class BirdSnakePiece extends Block
     public boolean shouldFall() {
         LevelWorld lw = (LevelWorld)getWorld();
         GridItem below = getItemBelow();
-        if(below == null) return true;
-        if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;
+        if(below == null) return true;  // fall if nothing below it
+        if(!(below instanceof BirdSnakePiece) && below instanceof Block && !below.shouldFall()) return false;  // dont fall if on top of block
         if(below instanceof Fruit) return false; // Interesting mechanic: birdsnake can sit on fruits
         return true;
     }

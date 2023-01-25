@@ -1,7 +1,7 @@
 /**
  * Arrays of all levels in the game
  * 
- * @author Eddie Zhuang, Caden Chan
+ * @author Eddie Zhuang
  * @version Jan. 24, 2023
  */
 public class Levels  

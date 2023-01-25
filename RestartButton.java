@@ -23,8 +23,6 @@ public class RestartButton extends UIButton
             clickSounds[i].setVolume(40);
         }
         clickIndex = 0;
-        // clickSound = new GreenfootSound("button.mp3");
-        // clickSound.setVolume(40);
     }
     
     /**

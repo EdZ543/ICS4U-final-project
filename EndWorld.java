@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EndWorld extends World
 {
-    // private Label titleLabel;
     private HomeButton hb;
     private PulsingImage winMessage;
     /**
@@ -16,13 +15,10 @@ public class EndWorld extends World
      */
     public EndWorld()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
         GreenfootImage bg = new GreenfootImage("bg0.png");
         setBackground(bg);
         
-        // titleLabel = new Label("You Win!", 80, "Segoe Print");
-        // addObject(titleLabel, getWidth() / 2, getHeight() / 2);
         winMessage =  new PulsingImage("win-message.png", 1.9, 1.1);
         addObject(winMessage, getWidth()/2, 370);
         

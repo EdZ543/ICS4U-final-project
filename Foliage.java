@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Foliage here.
+ * Terrain foliage
  * 
  * @author Caden Chan
  * @version 2023.01.22
