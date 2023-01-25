@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Fruit extends InteractiveObject
 {
-    private int rotateCount;
+    private int rotateCount, rotateFactor, rotateSpeed;
     /**
      * Class constructor.
      * 
@@ -18,6 +18,8 @@ public abstract class Fruit extends InteractiveObject
     public Fruit(int cellX, int cellY) {
         super(cellX, cellY);
         rotateCount = 0;
+        rotateSpeed = Greenfoot.getRandomNumber(2) + 2;
+        rotateFactor = Greenfoot.getRandomNumber(2) == 0 ? -1 : 1;
     }
     
     /**
@@ -28,6 +30,6 @@ public abstract class Fruit extends InteractiveObject
     
     public void act() {
         setRotation(rotateCount);
-        rotateCount += 3;
+        rotateCount += rotateSpeed * rotateFactor;
     }
 }

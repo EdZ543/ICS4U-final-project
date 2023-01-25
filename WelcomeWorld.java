@@ -33,7 +33,7 @@ public class WelcomeWorld extends World
         }
         
         // Draw text and background
-        bg = new GreenfootImage("temp/bg.png");
+        bg = new GreenfootImage("bg0.png");
         setBackground(bg);
         
         title =  new PulsingImage("title.png", 1.9, 1.1);

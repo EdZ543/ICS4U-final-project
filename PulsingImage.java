@@ -19,10 +19,26 @@ public class PulsingImage extends AnimatedImage
      */
     public PulsingImage(String filePath, double speed, double pulseFactor) {
         super(filePath);
-        imageWidth = image.getWidth();
-        imageHeight = image.getHeight();
         this.speed = speed;
         this.pulseFactor = pulseFactor;
+        imageWidth = image.getWidth();
+        imageHeight = image.getHeight();
+        minWidth = imageWidth;
+        minHeight = imageHeight;
+    }
+    /**
+     * @param width
+     * @param height
+     * @param filePath          image's file path
+     * @param speed             speed of the pulsing
+     * @param pulseFactor       How much bigger the image should get, as a multiplicative factor; must be greater than 1.
+     */
+    public PulsingImage(String filePath, int width, int height, double speed, double pulseFactor) {
+        super(filePath, width, height);
+        this.speed = speed;
+        this.pulseFactor = pulseFactor;
+        imageWidth = image.getWidth();
+        imageHeight = image.getHeight();
         minWidth = imageWidth;
         minHeight = imageHeight;
     }

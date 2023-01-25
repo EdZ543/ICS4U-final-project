@@ -17,7 +17,7 @@ public class LevelSelect extends World
     public LevelSelect()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
+        super(1200, 800, 1);
         
         // Draw title
         // titleLabel = new Label("Select a level!", 40);

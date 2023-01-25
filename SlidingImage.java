@@ -19,6 +19,13 @@ public class SlidingImage extends AnimatedImage
         this.speed = speed;
         goBack = false;
     }
+    public SlidingImage(String filePath, int width, int height, int offsetX, int offsetY, int speed) {
+        super(filePath, width, height);
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+        this.speed = speed;
+        goBack = false;
+    }
     public void addedToWorld(World w) {
         initialX = getX();
         initialY = getY();

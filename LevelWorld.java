@@ -41,7 +41,7 @@ public class LevelWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1);
-        setBackground(new GreenfootImage("temp/bg.png"));
+        setBackground(new GreenfootImage("bg0.png"));
         // Put reset button
         RestartButton rb = new RestartButton();
         addObject(rb, 1170, 28);
