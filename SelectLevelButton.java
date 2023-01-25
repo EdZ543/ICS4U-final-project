@@ -15,9 +15,8 @@ public class SelectLevelButton extends UIButton
         super(null);
         
         // Sets the button image
-        GreenfootImage image = new GreenfootImage("images/level-select-button.png");
-        image.scale(150, 50); 
-        setImage(image);
+        changeImage(new GreenfootImage("images/level-select-button.png"));
+        changeHoverImage(new GreenfootImage("images/level-select-button-hover.png"));
     }
     
     /**

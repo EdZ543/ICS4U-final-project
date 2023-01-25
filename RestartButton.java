@@ -13,7 +13,9 @@ public class RestartButton extends UIButton
      */
     public RestartButton() {
         super(null);
-        changeImage(drawImage());
+        changeImage(new GreenfootImage("restart-button.png"));
+        changeHoverImage(new GreenfootImage("restart-button-hover.png"));
+        
     }
     
     /**
@@ -22,11 +24,5 @@ public class RestartButton extends UIButton
     public void clicked() {
         LevelWorld lw = (LevelWorld)getWorld();
         lw.setLevel(lw.getLevel());
-    }
-    
-    private GreenfootImage drawImage() {
-        GreenfootImage image = new GreenfootImage("images/restart-button.png");
-        image.scale(50, 50);
-        return image;
     }
 }
