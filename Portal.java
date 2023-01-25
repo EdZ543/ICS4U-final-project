@@ -3,12 +3,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Goal of each level, lets bird snake go to the next level. All fruits must be eaten before it opens.
  * 
- * @author Eddie Zhuang
+ * @author Eddie Zhuang, Caden Chan
  * @version Jan. 24, 2023
  */
 public class Portal extends InteractiveObject
 {
     private boolean active = false; // Whether all fruits are eaten and the bird can enter the portal
+    private PulsingImage pulsingPortal;
+    private int rotateCount, rotateSpeed=3;
     
     /**
      * Class constructor.
@@ -21,12 +23,17 @@ public class Portal extends InteractiveObject
     }
     
     protected GreenfootImage drawImage(int cellWidth) {
+        pulsingPortal = new PulsingImage("images/portal.png", cellWidth, cellWidth, 1, 2);
         image = new GreenfootImage("images/portal.png");
-        image.setTransparency(50);
-        image.scale(cellWidth, cellWidth);
+        image.setTransparency(100);
+        image.scale(cellWidth+10, cellWidth+10);
         return image;
     }
-    
+    public void act() {
+        super.act();
+        pulsingPortal.setRotation(rotateCount);
+        rotateCount += 4;
+    }
     /**
      * What happens when birdsnake hits this object
      * @param birdSnakePiece         The BirdSnakePiece that is touching this object
@@ -55,7 +62,15 @@ public class Portal extends InteractiveObject
      */
     public void activate() {
         active = true;
-        image.setTransparency(255);
+        rotateCount = 0;
+        image.setTransparency(0);
         setImage(image);
+        getWorld().addObject(pulsingPortal, getX(), getY());
+    }
+    public void removeFromWorld() {
+        if(pulsingPortal.getWorld() != null) {
+            getWorld().removeObject(pulsingPortal);
+        }
+        getWorld().removeObject(this);
     }
 }

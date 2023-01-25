@@ -64,7 +64,7 @@ public abstract class UIButton extends Actor
      * If user cursor is hovering over the button, change image to hoverImage
      */
     public void checkHover() {
-        if(hoverImage == null) return;
+        if(hoverImage == null || active == false) return;
         if(Greenfoot.mouseMoved(this)) {
             setImage(hoverImage);
         } else if(Greenfoot.mouseMoved(null)){
@@ -96,9 +96,9 @@ public abstract class UIButton extends Actor
      */
     public void changeImage(GreenfootImage image) {
         this.image = image;
-        this.clickedImage = clickedImage;
-        this.hoverImage = hoverImage;
-        this.inactiveImage = inactiveImage;
         setImage(image);
+    }
+    public void changeHoverImage(GreenfootImage image) {
+        this.hoverImage = image;
     }
 }

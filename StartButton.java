@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Start the simulation!
+ * Start the game!
  * 
  * @author Caden Chan 
  * @version 2022.11.21
