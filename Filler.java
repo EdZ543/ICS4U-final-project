@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Filler here.
+ * Fill gaps between grass block sprites
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Caden Chan
+ * @version 2023.01.22
  */
 public class Filler extends Foliage
 {

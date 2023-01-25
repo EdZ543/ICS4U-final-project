@@ -145,4 +145,16 @@ public class Levels
         50,
         50,
     };
+    public static final String[] BG_IMAGES = {
+        "bg0.png",
+        "bg0.png",
+        "bg0.png",
+        "bg1.png",
+        "bg1.png",
+        "bg1.png",
+        "bg1.png",
+        "bg2.png",
+        "bg2.png",
+        "bg2.png"
+    };
 }

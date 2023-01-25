@@ -109,6 +109,7 @@ public class LevelWorld extends World
         resetLevel();
 
         String[] levelArray = Levels.LEVELS[level];
+        setBackground(new GreenfootImage(Levels.BG_IMAGES[level]));
         int levelHeight = levelArray.length * Levels.CELL_WIDTHS[level];
         int levelWidth = levelArray[0].length() * Levels.CELL_WIDTHS[level];
         int offsetX = (getWidth() - levelWidth) / 2;

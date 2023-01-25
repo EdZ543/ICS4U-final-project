@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HomeButton here.
+ * Back to welcome screen.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Caden Chan
+ * @version 2023.01.24
  */
 public class HomeButton extends UIButton
 {

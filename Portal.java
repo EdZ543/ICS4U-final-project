@@ -31,6 +31,7 @@ public class Portal extends InteractiveObject
     }
     public void act() {
         super.act();
+        // rotate portal for better animated effect
         pulsingPortal.setRotation(rotateCount);
         rotateCount += 4;
     }
@@ -63,10 +64,14 @@ public class Portal extends InteractiveObject
     public void activate() {
         active = true;
         rotateCount = 0;
+        // make invisible, then add PulsatingImage to cover it => portal animation
         image.setTransparency(0);
         setImage(image);
         getWorld().addObject(pulsingPortal, getX(), getY());
     }
+    /**
+     * Remove this portal and its animated image
+     */
     public void removeFromWorld() {
         if(pulsingPortal.getWorld() != null) {
             getWorld().removeObject(pulsingPortal);

@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class Foliage here.
  * 
  * @author Caden Chan
- * @version (a version number or a date)
+ * @version 2023.01.22
  */
 public class Foliage extends Actor
 {
@@ -36,6 +36,7 @@ public class Foliage extends Actor
     private void setImageFromType() {
         int rand = Greenfoot.getRandomNumber(100);
         LevelWorld lw = (LevelWorld)getWorld();
+        // randomize grass sprite
         if(type.equals("grass")) {
             if(rand < 60) {
                 image = new GreenfootImage("grass0.png");
@@ -44,10 +45,10 @@ public class Foliage extends Actor
             } else {
                 image = new GreenfootImage("grass2.png");
             }
-            image.scale((int)(lw.getCellWidth()*1.2), (int)(lw.getCellWidth()/2));
+            image.scale((int)(lw.getCellWidth()*1.2), (int)(lw.getCellWidth()/2));  // scale image
             xOffset = 0;
             yOffset = -18;
-        } else if(type.equals("filler")) { // 170 131 86
+        } else if(type.equals("filler")) {
             image = new GreenfootImage(lw.getCellWidth(), 8);
             image.setColor(new Color(170, 131, 86));
             image.fill();

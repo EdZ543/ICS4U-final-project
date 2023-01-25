@@ -89,17 +89,6 @@ public class BirdSnakePiece extends Block
         }
         return pos;
     }
-    
-    
-    // /**
-     // * OPTIONAL: effect that gives visual feedback to the player, to show that they can't move in 
-     // * that direction, due to some sort of obstacle
-     // * @param targetCellX        The x-position that the BirdSnake is bumping into
-     // * @param targetCellY        The y-position that the BirdSnake is bumping into
-     // */
-    // public void bumpIntoCell(int targetCellX, int targetCellY) {
-        
-    // }
     /**
      * Compare this piece with an adjacent piece.
      * Example:
@@ -131,10 +120,4 @@ public class BirdSnakePiece extends Block
         }
         return ' ';
     }
-    
-    // public void setAltColor(int cellWidth) {
-        // image = new GreenfootImage("temp/birdsnakepiece1.png");
-        // image.scale(cellWidth, cellWidth);
-        // setImage(image);
-    // }
 }
