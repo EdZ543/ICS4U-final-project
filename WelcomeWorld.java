@@ -28,7 +28,7 @@ public class WelcomeWorld extends World
         // Check level progress and userName from UserInfo
         if (UserInfo.isStorageAvailable()) {
             UserInfo myInfo = UserInfo.getMyInfo();
-            levelProgress = 4;
+            levelProgress = myInfo.getScore();
             userName = myInfo.getUserName();
         }
         
@@ -56,7 +56,6 @@ public class WelcomeWorld extends World
             scoreDisplay = new Label("You have made it to level: " + (levelProgress+1), 30, "Segoe Print");
         }
         scoreDisplay.setFillColor(new Color(40, 40, 40));
-        // addObject(titleLabel, getWidth()/2, 100);
         addObject(scoreDisplay, getWidth()/2, 350);
 
         // Add music
